@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react'
-import ReactJson from 'react-json-view'
+import React from 'react'
+// import ReactJson from 'react-json-view'
 import { observer } from 'mobx-react'
 import {
     Table,
@@ -9,7 +9,7 @@ import {
     TableBody,
     TableCell,
     TableRow
-} from 'components/common/Table'
+} from '../../common/Table'
 import type { LogType } from 'state/domain/stores/Log'
 
 type Props = {
@@ -18,6 +18,9 @@ type Props = {
 
 @observer
 class LogTable extends React.Component<Props> {
+    componentDidMount() {
+        // const ReactJson = require('react-json-view');
+    }
     renderLogs() {
         return this.props.logs.map((log, index) => (
             <TableRow key={index}>

@@ -1,0 +1,70 @@
+$border-bottom: 1px solid lighten($grey-ghost, 15);
+
+.small-cell {
+  width: 5%;
+}
+
+.table {
+  width: 100%;
+  background: $white;
+  border-radius: $border-radius-md;
+  border-collapse: collapse;
+
+  @include breakpointMax($lg) {
+    &__head {
+      position: absolute;
+      width: 1px;
+      overflow: hidden;
+    }
+
+    &__row {
+      display: block;
+    }
+
+    &__cell {
+      display: block;
+      text-align: right !important;
+      padding: 20px 25px !important;
+      width: 100%;
+
+      &:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__row {
+    &:not(:last-child) {
+      border-bottom: $border-bottom;
+    }
+  }
+
+  &__head {
+    border-bottom: $border-bottom;
+  }
+
+  &__header {
+    text-transform: uppercase;
+    text-align: left;
+    padding: 20px 40px;
+
+    &--small {
+      @extend .small-cell
+    }
+  }
+
+  &__cell {
+    padding: 20px 40px;
+
+    &--center {
+      text-align: center;
+    }
+
+    &--small {
+      @extend .small-cell
+    }
+  }
+}

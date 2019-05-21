@@ -1,0 +1,33 @@
+.input {
+  position: relative;
+  padding-bottom: 18px;
+
+  &__label {
+    display: block;
+    color: $grey-ghost-dark;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    @include font-size-map((null: 14px));
+
+    &--error {
+      color: $red-cinnabar;
+    }
+  }
+
+  &__elem {
+    width: 100%;
+    font-weight: 100;
+    background-color: $white;
+    border: 1px solid $grey-ghost;
+    border-radius: $border-radius-sm;
+    padding: 8px 12px;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: $red-cinnabar;
+    @include font-size-map((null: 12px));
+  }
+}

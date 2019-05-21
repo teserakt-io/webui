@@ -1,0 +1,23 @@
+@mixin font-size-map($fs-map, $function: rem) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      @if $function == rem {
+        font-size: rem($fs-font-size);
+      } @else if $function == em {
+        font-size: em($fs-font-size);
+      } @else {
+        font-size: $fs-font-size;
+      }
+    } @else {
+      @include breakpointMin($fs-breakpoint) {
+        @if $function == rem {
+          font-size: rem($fs-font-size);
+        } @else if $function == em {
+          font-size: em($fs-font-size);
+        } @else {
+          font-size: $fs-font-size;
+        }
+      }
+    }
+  }
+}

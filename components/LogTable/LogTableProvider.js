@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
-import { Store } from 'state/Store'
-import LogTable from 'components/LogTable/UI/LogTable'
+import { Store } from '../../state/Store'
+import LogTable from './UI/LogTable'
 
 type Props = {
     store: Store

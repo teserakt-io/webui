@@ -1,6 +1,6 @@
 import Clients from './stores/Clients'
-import Topics from 'state/domain/stores/Topics'
-import Log from 'state/domain/stores/Log'
+import Topics from './stores/Topics'
+import Log from './stores/Log'
 
 class DomainStore {
     rootStore = null;

@@ -1,0 +1,153 @@
+$nav-offset: 130px;
+$nav-item-height: 64px;
+
+.sidenav {
+  width: 100%;
+  max-width: $nav-width;
+  height: 100%;
+  background: $blue-yankees;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-width 200ms ease-in-out;
+  z-index: z("default");
+  @include box-shadow(2px, 0px, 8px, rgba(0, 0, 0, 0.4));
+
+  @include breakpointMin($md) {
+    &:hover {
+      max-width: $nav-width + $nav-offset;
+      transition: max-width 350ms ease-in-out;
+    }
+
+    &:hover + main {
+      transform: translateX($nav-offset);
+      transition: 300ms ease-in-out;
+    }
+  }
+
+  @include breakpointMax($md) {
+    max-width: 100%;
+    width: 100%;
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    bottom: 0;
+    top: auto;
+    @include box-shadow(0, -1px, 8px, rgba(0, 0, 0, 0.4));
+  }
+
+  &__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    background: $red-cinnabar;
+    height: $nav-item-height;
+    transition: top 200ms linear;
+
+    @include breakpointMax($md) {
+      display: none;
+    }
+  }
+
+  &__logo {
+    width: auto;
+    height: auto;
+    padding: 34px 0 34px 15px;
+    border-bottom: 1px solid $blue-independence;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    @include breakpointMax($md) {
+      display: none;
+    }
+
+    img {
+      min-width: 140px;
+      max-width: 140px;
+      width: 100%;
+    }
+  }
+
+  &__nav {
+    @include breakpointMax($md) {
+      height: 100%;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+
+      @include breakpointMax($md) {
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        cursor: pointer;
+        color: $white;
+
+        @include breakpointMax($md) {
+          height: 100%;
+        }
+
+        li {
+          position: relative;
+          height: $nav-item-height;
+          border-bottom: 1px solid $blue-independence;
+          display: flex;
+          align-items: center;
+          padding-left: 25px;
+
+          @include breakpointMax($md) {
+            justify-content: center;
+            flex-direction: column;
+            min-width: 72px;
+            height: 100%;
+            border-bottom: none;
+            padding-left: 0;
+          }
+
+          &:hover {
+            background: $blue-independence;
+            transition: background 200ms linear;
+          }
+
+          span {
+            margin-left: 24px;
+
+            @include breakpointMax($md) {
+              margin-left: 0;
+              margin-top: 6px;
+              @include font-size-map((null: 12px));
+            }
+          }
+
+          svg {
+            min-width: 32px;
+            max-width: 32px;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  .nav {
+    &--active {
+      background: $blue-independence;
+
+      @include breakpointMax($md) {
+        border-bottom: 4px solid $red-cinnabar;
+      }
+    }
+  }
+}

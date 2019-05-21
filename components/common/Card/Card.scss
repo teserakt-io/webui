@@ -1,0 +1,110 @@
+.card-container {
+  display: inline-block;
+  width: 25%;
+  height: 120px;
+  padding: 5px;
+  vertical-align: top;
+
+  @include breakpointMax($md) {
+    width: 50%;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: $border-radius-md;
+  background-color: $grey-ghost;
+  overflow: hidden;
+  @include box-shadow(2px, 2px, 8px, rgba(0, 0, 0, 0.2));
+
+  @include breakpointMax($lg) {
+    justify-content: center;
+  }
+
+  &:hover:before {
+    width: 150%;
+    left: -20%;
+  }
+
+  &:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 45%;
+    height: 100%;
+    transform: skewX(18deg);
+    background-color: darken($grey-ghost, 10);
+    transition: all 200ms linear;
+  }
+
+  &--red {
+    background-color: $red-cinnabar;
+    &:before {
+      background-color: lighten($red-cinnabar, 10);
+    }
+  }
+
+  &--blue-dark {
+    background-color: $blue-yankees;
+    &:before {
+      background-color: lighten($blue-yankees, 10);
+    }
+  }
+
+  &--blue {
+    background-color: $blue-independence;
+    &:before {
+      background-color: lighten($blue-independence, 10);
+    }
+  }
+
+  &__icon {
+    align-self: center;
+    width: auto;
+    margin-right: 20px;
+    height: 100%;
+    opacity: 0.6;
+
+    @include breakpointMax($lg) {
+      display: none;
+    }
+  }
+
+  .info {
+    align-self: center;
+    margin-left: 20px;
+    z-index: z("default");
+
+    @include breakpointMax($lg) {
+      margin-left: 0;
+      text-align: center;
+    }
+
+    &__title {
+      @include font-size-map((null: 72px));
+      line-height: 1;
+      color: $white;
+
+      @include breakpointMax($lg) {
+        @include font-size-map((null: 42px));
+      }
+    }
+
+    &__desc {
+      display: block;
+      @include font-size-map((null: 14px));
+      color: $white;
+      opacity: 0.6;
+      font-weight: 100;
+
+      @include breakpointMax($lg) {
+        @include font-size-map((null: 12px));
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
-import { Store } from 'state/Store'
-import StatCards from '/components/StatCards/UI/StatCards'
+import { Store } from '../../state/Store'
+import StatCards from './UI/StatCards'
 
 type Props = {
     store: Store,
@@ -13,7 +13,7 @@ type Props = {
 class StatCardsProvider extends Component<Props> {
     render() {
         return (
-            <StatCards
+        <StatCards
                 topicsCount={this.props.store.domain.topics.countTopics()}
                 clientsCount={this.props.store.domain.clients.countClients()}/>
         )

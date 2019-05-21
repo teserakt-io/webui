@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ViewStore from '/state/view/ViewStore'
-import DomainStore from '/state/domain/DomainStore'
+import ViewStore from './view/ViewStore'
+import DomainStore from './domain/DomainStore'
 
 let store = null;
 

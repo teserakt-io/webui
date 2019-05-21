@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
 import StatCardsProvider from '../components/StatCards/StatCardsProvider'
 import LogTableProvider from '../components/LogTable/LogTableProvider'
+import Layout from "../components/layouts/Layout";
 
 class Dashboard extends Component {
     render() {
         return (
-            <React.Fragment>
-                <StatCardsProvider/>
-                <LogTableProvider/>
-            </React.Fragment>
+            <Layout>
+                <React.Fragment>
+                    <StatCardsProvider/>
+                    <LogTableProvider/>
+                </React.Fragment>
+            </Layout>
         )
     }
 }

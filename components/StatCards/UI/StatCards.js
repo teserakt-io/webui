@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '/components/common/Card/Card'
-import Icon from '/components/common/Icon/Icon'
+import Card from '../../common/Card/Card'
+import Icon from '../../common/Icon/Icon'
 // import { NavLink } from 'react-router-dom'
 // import routes from 'routes'
 
@@ -14,11 +14,11 @@ class StatCards extends React.Component<Props> {
         return (
             <React.Fragment>
                 {/*<NavLink to={routes.clients.path}>*/}
-                {/*    <Card*/}
-                {/*        red*/}
-                {/*        title={this.props.clientsCount}*/}
-                {/*        desc="Clients"*/}
-                {/*        icon={Icon.d.CLIENT}/>*/}
+                    <Card
+                        red
+                        title={this.props.clientsCount}
+                        desc="Clients"
+                        icon={Icon.d.CLIENT}/>
                 {/*</NavLink>*/}
                 {/*<NavLink to={routes.clients.path}>*/}
                 {/*    <Card*/}

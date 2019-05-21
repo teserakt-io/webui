@@ -1,0 +1,32 @@
+//@import "~normalize-scss";
+//@include normalize();
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-roboto;
+  font-size: $browser-context;
+  background-color: $bg;
+}
+
+main {
+  margin-left: $nav-width;
+  padding: 32px 64px 64px 64px;
+  transition: 300ms ease-in-out;
+
+  @include breakpointMax($md) {
+    padding: 16px 24px 24px 24px;
+    margin-left: 0;
+    margin-bottom: 72px;
+  }
+}
+
+h1 {
+  color: $blue-yankees;
+}
+
+.pointer {
+  cursor: pointer;
+}

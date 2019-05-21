@@ -1,4 +1,4 @@
-import Modal from 'state/view/stores/Modal'
+import Modal from './stores/Modal'
 
 class ViewStore {
     rootStore = null

@@ -1,0 +1,96 @@
+.btn {
+  border: none;
+  box-shadow: none;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  color: $white;
+  background-color: $blue-independence;
+  border-radius: $border-radius-sm;
+  transition: all 200ms ease;
+
+  &:hover {
+    background-color: $blue-yankees;
+    transition: all 200ms ease;
+  }
+
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
+  &--small {
+    @include font-size-map((null: 14));
+    min-width: 82px;
+    height: 32px;
+  }
+
+  &--medium {
+    min-width: 115px;
+    height: 38px;
+    white-space: nowrap;
+    padding: 0 25px;
+
+    span {
+      color: $white;
+      text-transform: uppercase;
+    }
+
+    span.last {
+      position: relative;
+      padding-right: 20px;
+    }
+  }
+
+  &--danger {
+    background-color: $red-cinnabar;
+
+    &:hover {
+      background-color: darken($red-cinnabar, 5);
+      transition: all 200ms ease;
+    }
+
+    span.icon {
+      &:before, &:after {
+        background: $red-cinnabar;
+      }
+
+      &:before {
+        transform: rotate(90deg);
+        top: 2px;
+      }
+
+      &:after {
+        transform: rotate(-180deg);
+        top: -12px;
+      }
+    }
+  }
+
+  &--icon {
+    svg {
+      vertical-align: middle;
+      margin-right: 4px;
+      path {
+        fill: $white;
+      }
+    }
+  }
+
+  &--primary {
+    background-color: $red-cinnabar;
+  }
+
+  &--disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &--secondary {
+    background-color: $white;
+    border: 1px solid $grey-ghost;
+    color: $grey-ghost-dark;
+    &:hover {
+      background-color: lighten($grey-ghost, 15);
+    }
+  }
+}
