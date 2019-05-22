@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 // import { NavLink } from 'react-router-dom'
-// import images from 'utils/images'
+import images from '../../../utils/images'
 import Icon from '../../common/Icon/Icon'
 // import type { RouteConfig } from 'routes'
 // import './Navigation.scss';
@@ -38,10 +38,9 @@ class Navigation extends React.Component<Props> {
     render() {
         return (
             <nav className="sidenav">
-                Link
-                {/*<div className="sidenav__logo">*/}
-                {/*    <img src={images.logo} alt="Teserakt"/>*/}
-                {/*</div>*/}
+                <div className="sidenav__logo">
+                    <img src={images.logo} alt="Teserakt"/>
+                </div>
                 {/*<div className="sidenav__nav">*/}
                 {/*    <ul>{this.renderLinks()}</ul>*/}
                 {/*</div>*/}

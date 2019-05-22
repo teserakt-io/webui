@@ -1,12 +1,11 @@
-
 @import "./shared";
 @import "./general";
-//@import "components/AppBar/UI/AppBar.scss";
-//@import "components/Navigation/UI/Navigation.scss";
-//@import "components/Overlay/Overlay.scss";
-//@import "components/common/Buttons/Button/Button.scss";
-//@import "components/common/Card/Card.scss";
-//@import "components/common/FormElements/Input/Input.scss";
-//@import "components/common/FormElements/Select/Select.scss";
-//@import "components/common/Modal/UI/Modal.scss";
-//@import "components/common/Table/Table.scss";
+//@import "../components/AppBar/UI/AppBar.scss";
+@import "../components/Navigation/UI/Navigation.scss";
+//@import "../components/Overlay/Overlay.scss";
+@import "../components/common/Buttons/Button/Button.scss";
+@import "../components/common/Card/Card.scss";
+@import "../components/common/FormElements/Input/Input.scss";
+@import "../components/common/FormElements/Select/Select.scss";
+@import "../components/common/Modal/UI/Modal.scss";
+@import "../components/common/Table/Table.scss";
