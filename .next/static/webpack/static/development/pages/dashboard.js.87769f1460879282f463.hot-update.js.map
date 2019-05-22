@@ -1,1 +1,0 @@
-{"version":3,"file":"static/webpack/static/development/pages/dashboard.js.87769f1460879282f463.hot-update.js","sources":["webpack:///./utils/images.js"],"sourcesContent":["let logo = 'static/images/logo.png';\nexport default {\n    logo\n}"],"mappings":";;;;;;;;;;AAAA;AAAA;AACA;AACA;AADA;;;;A","sourceRoot":""}
