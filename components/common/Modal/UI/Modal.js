@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import Icon from 'components/common/Icon/Icon'
+import Icon from '../../../common/Icon/Icon'
 
 type Props = {
     children?: any,
@@ -19,6 +19,7 @@ class InnerModal extends React.Component<Props> {
 
 class Modal extends React.Component<Props> {
     render() {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <div className="modal__close"

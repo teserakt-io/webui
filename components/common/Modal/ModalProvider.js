@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
-import Overlay from 'components/Overlay/Overlay'
-import Modal from 'components/common/Modal/UI/Modal'
-import ClientForm from 'components/Forms/ClientForm/ClientForm'
-import TopicForm from 'components/Forms/TopicForm/TopicForm'
-import { Store } from 'state/Store'
+import Overlay from '../../Overlay/Overlay'
+import Modal from './UI/Modal'
+import ClientForm from '../../Forms/ClientForm/ClientForm'
+import TopicForm from '../../Forms/TopicForm/TopicForm'
+import { Store } from '../../../state/Store'
 
 type Props = {
     store: Store

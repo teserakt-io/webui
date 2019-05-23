@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import "../../styles/main.scss"
 import NavigationProvider from "../Navigation/NavigationProvider";
+import ModalProvider from "../common/Modal/ModalProvider";
+import {NotificationContainer} from "react-notifications";
 
 function Layout(props) {
     return (
@@ -13,6 +15,8 @@ function Layout(props) {
             <main>
                 {props.children}
             </main>
+            <ModalProvider/>
+            <NotificationContainer/>
         </div>
     );
 }

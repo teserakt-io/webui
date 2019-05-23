@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import ButtonBase from 'components/common/Buttons/ButtonBase/ButtonBase'
+import ButtonBase from '../ButtonBase/ButtonBase'
 
 type Props = {
     type?: string,

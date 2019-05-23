@@ -1,0 +1,18 @@
+.overlay {
+  position: fixed;
+  background: $black;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  left: -100%;
+  z-index: z("default");
+  opacity: 0;
+  transition: opacity 300ms ease-in-out, left 0ms 300ms linear;
+
+  &--active {
+    opacity: .5;
+    left: 0;
+    z-index: z("default");
+    transition: opacity 300ms ease-in-out, left 0ms linear;
+  }
+}
