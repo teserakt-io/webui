@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Layout from "../components/layouts/Layout";
-// import TopicsTableProvider from '../components/TopicsTable/TopicsTableProvider'
+import TopicsTableProvider from '../components/TopicsTable/TopicsTableProvider'
 
 class Topics extends React.Component<{}> {
     render() {
@@ -8,7 +8,7 @@ class Topics extends React.Component<{}> {
             <Layout>
                 <React.Fragment>
                     <h1>Topics</h1>
-                    {/*<TopicsTableProvider/>*/}
+                    <TopicsTableProvider/>
                 </React.Fragment>
             </Layout>
         )

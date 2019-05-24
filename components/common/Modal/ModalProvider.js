@@ -5,6 +5,7 @@ import Overlay from '../../Overlay/Overlay'
 import Modal from './UI/Modal'
 import ClientForm from '../../Forms/ClientForm/ClientForm'
 import TopicForm from '../../Forms/TopicForm/TopicForm'
+import KeyForm from '../../Forms/TopicForm/KeyForm'
 import { Store } from '../../../state/Store'
 
 type Props = {
@@ -16,7 +17,8 @@ type Props = {
 class ModalProvider extends React.Component<Props> {
     static types = {
         CLIENT_FORM: 'CLIENT_FORM',
-        TOPIC_FORM: 'TOPIC_FORM'
+        TOPIC_FORM: 'TOPIC_FORM',
+        KEY_FORM: 'KEY_FORM',
     }
 
     getModalComponent(modalType: string) {
@@ -25,6 +27,8 @@ class ModalProvider extends React.Component<Props> {
                 return ClientForm
             case ModalProvider.types.TOPIC_FORM:
                 return TopicForm
+            case ModalProvider.types.KEY_FORM:
+                return KeyForm
         }
     }
 
