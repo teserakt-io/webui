@@ -43,11 +43,10 @@ class ClientForm extends React.Component<Props, State> {
             || Validation.isEmpty(this.state[ClientForm.formKeys.KEY])
     }
 
-    updateField = (e: Object) => {
+    updateField = (e: Object) =>
         this.setState({
             [e.target.id]: e.target.value
-        })
-    }
+        });
 
     onSubmit = (e: Object) => {
         e.preventDefault()
@@ -80,17 +79,17 @@ class ClientForm extends React.Component<Props, State> {
                         label="Key"
                         id={ClientForm.formKeys.KEY}
                         onChange={this.updateField}/>
-                    {
-                        !!this.props.topics.length &&
-                        <CustomSelect
-                            isMulti
-                            removeSelected
-                            name="selectedTopic"
-                            label="Topic"
-                            value={this.state.selectedTopics}
-                            onChange={this.onSelectChange}
-                            options={this.renderTopicOptions()}/>
-                    }
+                    {/*{*/}
+                    {/*    !!this.props.topics.length &&*/}
+                    {/*    <CustomSelect*/}
+                    {/*        isMulti*/}
+                    {/*        removeSelected*/}
+                    {/*        name="selectedTopic"*/}
+                    {/*        label="Topic"*/}
+                    {/*        value={this.state.selectedTopics}*/}
+                    {/*        onChange={this.onSelectChange}*/}
+                    {/*        options={this.renderTopicOptions()}/>*/}
+                    {/*}*/}
                     <div className="btn-control">
                         <Button small secondary onClick={this.onCancel}>
                             Cancel

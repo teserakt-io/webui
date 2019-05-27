@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import React, {Component} from 'react'
 import cx from 'classnames'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
     close: Function
 }
 
-class Overlay extends React.Component<Props> {
+class Overlay extends Component<Props> {
     render() {
         const classes = {
             root: cx('overlay', { 'overlay--active': this.props.active })

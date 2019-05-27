@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, {Component} from 'react';
 import images from '../../../utils/images'
 import Icon from '../../common/Icon/Icon'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ type Props = {
     history: Object
 }
 
-class Navigation extends React.Component<Props> {
+class Navigation extends Component<Props> {
     navItemHeight = 64;
     navItemOffset = 109.2;
 
@@ -23,10 +23,9 @@ class Navigation extends React.Component<Props> {
         return this.props.routes.map((route) => (
             <Link
                 key={route.path}
-                className="nav"
                 activeClassName="nav--active"
                 href={route.path}>
-                <a>
+                <a className="nav">
                     <li>
                         <Icon d={route.icon} viewBoxY={32} viewBoxX={34}/>
                         <span>{route.name}</span>

@@ -5,7 +5,7 @@ import Overlay from '../../Overlay/Overlay'
 import Modal from './UI/Modal'
 import ClientForm from '../../Forms/ClientForm/ClientForm'
 import TopicForm from '../../Forms/TopicForm/TopicForm'
-import KeyForm from '../../Forms/TopicForm/KeyForm'
+import KeyForm from '../../Forms/KeyForm/KeyForm'
 import { Store } from '../../../state/Store'
 
 type Props = {
@@ -33,7 +33,8 @@ class ModalProvider extends React.Component<Props> {
     }
 
     render() {
-        const View = this.getModalComponent(this.props.store.view.modal.modalType)
+        const View = this.getModalComponent(this.props.store.view.modal.modalType);
+        console.log(this.props.store.view.modal.isModalActive(), this.props.store.view.modal.hide);
         return (
             <React.Fragment>
                 <Overlay

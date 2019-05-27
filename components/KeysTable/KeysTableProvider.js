@@ -21,7 +21,9 @@ class KeysTableProvider extends React.Component<Props> {
     addKey = () => {
 
     };
-    removeKey = () => {},
+    removeKey = () => {
+
+    };
 
     openModal = () => {
         this.props.store.view.modal.open(ModalProvider.types.KEY_FORM, {
