@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "cross-env NODE_ENV=production PORT=3000 node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,12 @@
   "homepage": "https://bitbucket.org/vantino/teserakt-www#readme",
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
     "flow-bin": "^0.98.1",
+    "http-proxy-middleware": "^0.19.1",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.4",
     "next": "^8.1.0",
@@ -36,6 +39,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
-    "@babel/preset-flow": "^7.0.0"
+    "@babel/preset-flow": "^7.0.0",
+    "cross-env": "^5.0.1"
   }
 }

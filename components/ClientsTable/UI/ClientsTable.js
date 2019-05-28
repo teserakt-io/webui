@@ -6,10 +6,10 @@ import {
     TableHeader,
     TableRow,
     TableBody,
-    // TableCell
+    TableCell
 } from '../../common/Table'
 import Button from '../../common/Buttons/Button/Button'
-// import Icon from '../../common/Icon/Icon'
+import Icon from '../../common/Icon/Icon'
 
 type Props = {
     clients: Array<String>,
@@ -18,23 +18,23 @@ type Props = {
 }
 
 class ClientsTable extends React.Component<Props> {
-    // renderClients() {
-    //     return this.props.clients.map((client, index) => (
-    //         <TableRow key={index}>
-    //             <TableCell label="#" small center>{index + 1}</TableCell>
-    //             <TableCell label="Client">{client}</TableCell>
-    //             <TableCell label="Key">{client}</TableCell>
-    //             <TableCell label="Delete" small center>
-    //                 <div onClick={() => this.props.removeClient(client)} role="presentation">
-    //                     <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-    //                 </div>
-    //             </TableCell>
-    //         </TableRow>
-    //     ))
-    // }
+    renderClients() {
+        return this.props.clients.map((client, index) => (
+            <TableRow key={index}>
+                <TableCell label="#" small center>{index + 1}</TableCell>
+                <TableCell label="Client">{client}</TableCell>
+                <TableCell label="Key">{client}</TableCell>
+                <TableCell label="Delete" small center>
+                    <div onClick={() => this.props.removeClient(client)} role="presentation">
+                        <Icon color="black" className="pointer" d={Icon.d.BIN}/>
+                    </div>
+                </TableCell>
+            </TableRow>
+        ))
+    }
 
     render() {
-        console.log(this.props);
+        console.log("client table: ", this.props);
         return (
             <React.Fragment>
                 <Table>
@@ -42,12 +42,11 @@ class ClientsTable extends React.Component<Props> {
                         <TableRow border>
                             <TableHeader small>#</TableHeader>
                             <TableHeader>Client</TableHeader>
-                            <TableHeader>Key</TableHeader>
                             <TableHeader small>Delete</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {/*{this.renderClients()}*/}
+                        {this.renderClients()}
                     </TableBody>
                 </Table>
                 <Button

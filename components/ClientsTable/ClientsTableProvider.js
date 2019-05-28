@@ -6,8 +6,9 @@ import ModalProvider from '../common/Modal/ModalProvider'
 import CommandHandler from '../../services/handlers/CommandHandler'
 // import Services from '../../services/Services'
 import { Store } from '../../state/Store'
-// import AppStrings from '../../utils/AppStrings'
-// import { NotificationManager } from 'react-notifications'
+import api from '../../api/api';
+import AppStrings from '../../utils/AppStrings'
+import { NotificationManager } from 'react-notifications'
 // import type { SelectOption } from '../common/FormElements/Select/Select'
 
 type Props = {
@@ -21,6 +22,9 @@ type Props = {
 // @Services.inject([Services.type.COMMAND_HANDLER])
 @observer
 class ClientsTableProvider extends React.Component<Props> {
+    async componentDidMount() {
+        this.props.store.domain.clients.loadClients();
+    }
     addClient = () => {
 
     };
@@ -38,14 +42,13 @@ class ClientsTableProvider extends React.Component<Props> {
     //     }
     // }
     //
-    // removeClient = (client: string) => {
-    //     this.props.services.commandHandler.removeClient(client)
-    //     NotificationManager.success(AppStrings.CLIENT_REMOVED)
-    //     this.props.services.commandHandler.getClients()
-    // }
-    //
+    removeClient = (name: string) => {
+        console.log(name);
+        this.props.store.domain.clients.deleteClient(name);
+        NotificationManager.success(AppStrings.CLIENT_REMOVED)
+    }
+
     openModal = () => {
-        console.log('openModal');
         this.props.store.view.modal.open(ModalProvider.types.CLIENT_FORM, {
             submit: this.addClient,
             cancel: this.props.store.view.modal.hide,
@@ -56,9 +59,9 @@ class ClientsTableProvider extends React.Component<Props> {
     render() {
         return (
             <ClientsTable
-                // removeClient={this.removeClient}
+                removeClient={this.removeClient}
                 openModal={this.openModal}
-                // clients={this.props.store.domain.clients.getClients()}
+                clients={this.props.store.domain.clients.getClients()}
             />
         )
     }
