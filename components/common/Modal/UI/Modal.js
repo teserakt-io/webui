@@ -19,7 +19,6 @@ class InnerModal extends React.Component<Props> {
 
 class Modal extends React.Component<Props> {
     render() {
-        console.log(this.props);
         return (
             <React.Fragment>
                 <div className="modal__close"

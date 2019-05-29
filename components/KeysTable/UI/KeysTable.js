@@ -34,7 +34,6 @@ class KeysTable extends React.Component<Props> {
     // }
 
     render() {
-        console.log(this.props);
         return (
             <React.Fragment>
                 <Table>

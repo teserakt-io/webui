@@ -2,7 +2,6 @@
 import * as React from 'react'
 import Button from '../../common/Buttons/Button/Button'
 import Input from '../../common/FormElements/Input/Input'
-import Validation from '../../../utils/Validation'
 import CustomSelect from '../../common/FormElements/Select/Select'
 
 type Props = {

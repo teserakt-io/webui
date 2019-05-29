@@ -34,7 +34,6 @@ class ModalProvider extends React.Component<Props> {
 
     render() {
         const View = this.getModalComponent(this.props.store.view.modal.modalType);
-        console.log(this.props.store.view.modal.isModalActive(), this.props.store.view.modal.hide);
         return (
             <React.Fragment>
                 <Overlay

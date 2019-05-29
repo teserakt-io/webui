@@ -28,7 +28,7 @@ app
         server = express();
 
         // Set up the proxy.
-        if (dev && devProxy) {
+        if (devProxy) {
             const proxyMiddleware = require('http-proxy-middleware');
             Object.keys(devProxy).forEach(function (context) {
                 server.use(proxyMiddleware(context, devProxy[context]))
@@ -36,8 +36,10 @@ app
         }
 
         // Default catch-all handler to allow Next.js to handle all other routes
-        server.all('*', (req, res) => handle(req, res));
-
+        server.all('*', (req, res) => {
+            console.log(req.method);
+            handle(req, res)
+        });
         server.listen(port, err => {
             if (err) {
                 throw err

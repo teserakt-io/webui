@@ -34,9 +34,16 @@ class ClientsTable extends React.Component<Props> {
     }
 
     render() {
-        console.log("client table: ", this.props);
         return (
             <React.Fragment>
+                <Button
+                    danger
+                    uppercase
+                    medium
+                    className="mt-20"
+                    onClick={this.props.openModal}>
+                    Add client
+                </Button>
                 <Table>
                     <TableHead>
                         <TableRow border>
@@ -49,14 +56,6 @@ class ClientsTable extends React.Component<Props> {
                         {this.renderClients()}
                     </TableBody>
                 </Table>
-                <Button
-                    danger
-                    uppercase
-                    medium
-                    className="mt-20"
-                    onClick={this.props.openModal}>
-                    Add client
-                </Button>
             </React.Fragment>
         )
     }

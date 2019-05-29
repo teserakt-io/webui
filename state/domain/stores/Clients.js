@@ -16,7 +16,15 @@ class Clients {
     async loadClients() {
         const { data, status } = await api.clients.get();
 
-        this.clients = data;
+        this.clients = data ? data : [];
+    }
+
+    @action
+    async add(name, key) {
+        const { data, status } = await api.clients.post(name, key);
+        console.log("add client: ", data, status);
+
+
     }
 
     @action

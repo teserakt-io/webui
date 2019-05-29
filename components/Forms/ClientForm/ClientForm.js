@@ -3,9 +3,10 @@ import * as React from 'react'
 import Button from '../../common/Buttons/Button/Button'
 import Input from '../../common/FormElements/Input/Input'
 import CustomSelect from '../../common/FormElements/Select/Select'
-import Validation from '../../../utils/Validation'
+import validator from 'validator';
 import type { Topic } from '../../../state/domain/stores/Topics'
 import type { SelectOption } from '../../common/FormElements/Select/Select'
+import {generateKey} from "../../../utils/generator";
 
 type Props = {
     cancel: Function,
@@ -23,13 +24,13 @@ class ClientForm extends React.Component<Props, State> {
     static formKeys = {
         CLIENT: 'client',
         KEY: 'key'
-    }
+    };
 
     state = {
-        [ClientForm.formKeys.CLIENT]: null,
-        [ClientForm.formKeys.KEY]: null,
+        [ClientForm.formKeys.CLIENT]: "",
+        [ClientForm.formKeys.KEY]: "",
         selectedTopics: []
-    }
+    };
 
     renderTopicOptions() {
         return this.props.topics.map((topic) => ({
@@ -38,9 +39,12 @@ class ClientForm extends React.Component<Props, State> {
         }))
     }
 
-    isInvalid() {
-        return Validation.isEmpty(this.state[ClientForm.formKeys.CLIENT])
-            || Validation.isEmpty(this.state[ClientForm.formKeys.KEY])
+    isValid() {
+        const client = this.state[ClientForm.formKeys.CLIENT];
+        const key = this.state[ClientForm.formKeys.KEY];
+        return !validator.isEmpty(client) &&
+            (validator.isLength(client, {min: 1, max: 64})) &&
+            (key.length === 0 || (key.length === 64 && validator.isHexadecimal(key)));
     }
 
     updateField = (e: Object) =>
@@ -49,21 +53,24 @@ class ClientForm extends React.Component<Props, State> {
         });
 
     onSubmit = (e: Object) => {
-        e.preventDefault()
-        if (this.isInvalid()) return
-        const client = this.state[ClientForm.formKeys.CLIENT]
-        const key = this.state[ClientForm.formKeys.KEY]
+        e.preventDefault();
+        if (!this.isValid()) return;
+        const client = this.state[ClientForm.formKeys.CLIENT];
+        let key = this.state[ClientForm.formKeys.KEY];
+        if(key.length === 0)
+            key = generateKey();
+        console.log(client, key);
         this.props.submit(client, key, this.state.selectedTopics)
-    }
+    };
 
     onCancel = (e: Object) => {
-        e.preventDefault()
+        e.preventDefault();
         this.props.cancel()
-    }
+    };
 
     onSelectChange = (selectedTopics: Array<SelectOption>) => {
         this.setState({ selectedTopics })
-    }
+    };
 
     render() {
         return (
@@ -94,7 +101,7 @@ class ClientForm extends React.Component<Props, State> {
                         <Button small secondary onClick={this.onCancel}>
                             Cancel
                         </Button>
-                        <Button small disabled={this.isInvalid()} onClick={this.onSubmit}>
+                        <Button small disabled={!this.isValid()} onClick={this.onSubmit}>
                             Submit
                         </Button>
                     </div>

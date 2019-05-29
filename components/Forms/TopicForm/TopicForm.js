@@ -2,7 +2,6 @@
 import * as React from 'react'
 import Button from '../../common/Buttons/Button/Button'
 import Input from '../../common/FormElements/Input/Input'
-import Validation from '../../../utils/Validation'
 import CustomSelect from '../../common/FormElements/Select/Select'
 
 type Props = {
@@ -35,8 +34,9 @@ class TopicForm extends React.Component<Props, State> {
     }
 
     isInvalid() {
-        return Validation.isEmpty(this.state[TopicForm.formKeys.TOPIC])
-            || Validation.isEmpty(this.state[TopicForm.formKeys.KEY])
+        return true;
+        // return Validation.isEmpty(this.state[TopicForm.formKeys.TOPIC])
+        //     || Validation.isEmpty(this.state[TopicForm.formKeys.KEY])
     }
 
     renderClientOptions() {

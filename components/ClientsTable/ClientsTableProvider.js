@@ -25,8 +25,8 @@ class ClientsTableProvider extends React.Component<Props> {
     async componentDidMount() {
         this.props.store.domain.clients.loadClients();
     }
-    addClient = () => {
-
+    addClient = (client: string, key: string) => {
+        this.props.store.domain.clients.add(client, key);
     };
     // addClient = (client: string, key: string, topics: Array<SelectOption>) => {
     //     this.props.services.commandHandler.addClient(client, key)
