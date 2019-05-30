@@ -8,7 +8,7 @@ async function getClients(offset = 0, count = 0) {
 }
 
 async function postClient(name, key) {
-    return await request.post(`/client/${name}/key/${key}`);
+    return await request.post(`/client/name/${name}/key/${key}`);
 }
 
 async function deleteClient(name) {

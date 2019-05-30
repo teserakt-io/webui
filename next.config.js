@@ -1,6 +1,7 @@
 const withSass = require('@zeit/next-sass');
-module.exports = withSass({
-    webpack(config, options) {
-        return config
-    },
-});
+const withCss = require('@zeit/next-css');
+module.exports = withSass(withCss({
+    webpack:(config, options) => {
+        return config;
+    }
+}));

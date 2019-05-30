@@ -43,7 +43,6 @@ class ClientsTableProvider extends React.Component<Props> {
     // }
     //
     removeClient = (name: string) => {
-        console.log(name);
         this.props.store.domain.clients.deleteClient(name);
         NotificationManager.success(AppStrings.CLIENT_REMOVED)
     }

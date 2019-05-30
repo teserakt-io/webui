@@ -4,7 +4,6 @@ import "../../styles/main.scss"
 import NavigationProvider from "../Navigation/NavigationProvider";
 import ModalProvider from "../common/Modal/ModalProvider";
 import {NotificationContainer} from "react-notifications";
-import Overlay from "../Overlay/Overlay";
 
 function Layout(props) {
     return (
