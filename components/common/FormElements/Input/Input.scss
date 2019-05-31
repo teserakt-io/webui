@@ -1,4 +1,4 @@
-.input {
+.input, .input-inline {
   position: relative;
   padding-bottom: 18px;
 
@@ -30,4 +30,8 @@
     color: $red-cinnabar;
     @include font-size-map((null: 12px));
   }
+}
+
+.input-inline {
+  display: inline-block;
 }

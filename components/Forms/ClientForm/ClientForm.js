@@ -59,7 +59,6 @@ class ClientForm extends React.Component<Props, State> {
         let key = this.state[ClientForm.formKeys.KEY];
         if(key.length === 0)
             key = generateKey();
-        console.log(client, key);
         this.props.submit(client, key, this.state.selectedTopics)
     };
 

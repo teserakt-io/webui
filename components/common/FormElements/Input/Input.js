@@ -8,6 +8,7 @@ type Props = {
     label?: string,
     placeholder?: string,
     error?: string,
+    inline?: boolean,
     onChange: Function
 }
 
@@ -24,7 +25,7 @@ class Input extends React.Component<Props> {
         }
 
         return (
-            <div className="input">
+            <div className={this.props.inline ? 'input-inline' : 'input'}>
                 <label className={classes.label} htmlFor={this.props.id}>
                     {this.props.label}
                 </label>

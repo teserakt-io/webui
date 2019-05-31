@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import TopicsTable from './UI/TopicsTable'
 import { Store } from '../../state/Store'

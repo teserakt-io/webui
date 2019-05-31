@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import "../../styles/main.scss"
+require("../../styles/main.scss");
+require("react-notifications/lib/notifications.css");
 import NavigationProvider from "../Navigation/NavigationProvider";
 import ModalProvider from "../common/Modal/ModalProvider";
 import {NotificationContainer} from "react-notifications";
