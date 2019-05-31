@@ -1,24 +1,22 @@
 // @flow
 import * as React from 'react'
 import { observer } from 'mobx-react'
-import TopicsTable from 'components/TopicsTable/UI/TopicsTable'
-import { Store } from 'state/Store'
-import Services from 'services/Services'
-import CommandHandler from 'services/handlers/CommandHandler'
+import TopicsTable from './UI/TopicsTable'
+import { Store } from '../../state/Store'
 import { NotificationManager } from 'react-notifications'
-import AppStrings from 'utils/AppStrings'
-import ModalProvider from 'components/common/Modal/ModalProvider'
+import AppStrings from '../../utils/AppStrings'
+import ModalProvider from '../common/Modal/ModalProvider'
 import type { SelectOption } from 'components/common/FormElements/Select/Select'
 
 type Props = {
     store: Store,
-    services: {
-        commandHandler: CommandHandler
-    }
+    // services: {
+    //     commandHandler: CommandHandler
+    // }
 }
 
 @Store.inject
-@Services.inject([Services.type.COMMAND_HANDLER])
+// @Services.inject([Services.type.COMMAND_HANDLER])
 @observer
 class TopicsTableProvider extends React.Component<Props> {
     addTopic = (topic: string, key: string, clients: Array<SelectOption>) => {
