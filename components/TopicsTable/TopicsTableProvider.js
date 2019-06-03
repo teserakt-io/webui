@@ -20,37 +20,43 @@ type Props = {
 @observer
 class TopicsTableProvider extends React.Component<Props> {
     addTopic = (topic: string, key: string, clients: Array<SelectOption>) => {
-        this.props.services.commandHandler.addTopic(topic, key)
-        this.props.store.view.modal.hide()
-        NotificationManager.success(AppStrings.TOPIC_ADDED)
-        this.props.services.commandHandler.getTopics()
+        this.props.services.commandHandler.addTopic(topic, key);
+        this.props.store.view.modal.hide();
+        NotificationManager.success(AppStrings.TOPIC_ADDED);
+        this.props.services.commandHandler.getTopics();
 
         if (clients.length) {
             clients.forEach((client) => {
-                this.props.services.commandHandler.addTopicClient(topic, client.value)
+                this.props.services.commandHandler.addTopicClient(topic, client.value);
                 this.props.services.commandHandler.getTopicClients(topic)
             })
         }
-    }
+    };
 
     removeTopic = (topic: string) => {
-        this.props.services.commandHandler.removeTopic(topic)
-        NotificationManager.success(AppStrings.TOPIC_REMOVED)
-        this.props.services.commandHandler.getTopics()
-    }
+        this.props.store.domain.topics.remove(topic)
+            .then(() => {
+                NotificationManager.success(AppStrings.TOPIC_REMOVED);
+            }).catch(() => {
+                NotificationManager.error(AppStrings.TOPIC_REMOVED_ERROR);
+        });
+    };
 
-    openAddClientForm = () => {
+    openAddTopicForm = () => {
         this.props.store.view.modal.open(ModalProvider.types.TOPIC_FORM, {
             cancel: this.props.store.view.modal.hide,
             submit: this.addTopic,
-            clients: this.props.store.domain.clients.getClients()
         })
+    };
+
+    componentDidMount() {
+        this.props.store.domain.topics.load();
     }
 
     render() {
         return (
             <TopicsTable
-                openModal={this.openAddClientForm}
+                openModal={this.openAddTopicForm}
                 removeTopic={this.removeTopic}
                 topics={this.props.store.domain.topics.getTopics()}/>
         )

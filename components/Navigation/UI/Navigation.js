@@ -23,7 +23,7 @@ class Navigation extends Component<Props> {
         return this.props.routes.map((route) => (
             <Link
                 key={route.path}
-                activeClassName="nav--active"
+                // activeClassName="nav--active"
                 href={route.path}>
                 <a className="nav">
                     <li>

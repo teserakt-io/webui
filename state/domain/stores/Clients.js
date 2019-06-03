@@ -30,7 +30,7 @@ class Clients {
 
     @action
     async deleteClient(name) {
-        const {data} = await api.clients.delete(name);
+        const {data, status} = await api.clients.delete(name);
         this.clients = this.clients.filter(item => item !== name);
     }
 }

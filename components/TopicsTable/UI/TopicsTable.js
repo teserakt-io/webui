@@ -11,6 +11,9 @@ import {
 import Button from '../../common/Buttons/Button/Button'
 import Icon from '../../common/Icon/Icon'
 import type { Topic } from '../../../state/domain/stores/Topics'
+import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
+import TopicForm from "../../Forms/TopicForm/TopicForm";
+import TopicNameForm from "../../Forms/TopicForm/TopicNameForm.js";
 
 type Props = {
     topics: Array<String>,
@@ -23,11 +26,10 @@ class TopicsTable extends React.Component<Props> {
         return this.props.topics.map((topic: Topic, index) => (
             <TableRow key={index}>
                 <TableCell label="#" small center>{index + 1}</TableCell>
-                <TableCell label="Topic">{topic.name}</TableCell>
-                <TableCell label="Clients">{topic.clients || '-'}</TableCell>
-                <TableCell label="Key">{topic.name}</TableCell>
+                <TableCell label="Topic">{topic}</TableCell>
+                <TableCell label="Clients">-</TableCell>
                 <TableCell label="Delete" small center>
-                    <div onClick={() => this.props.removeTopic(topic.name)} role="presentation">
+                    <div onClick={() => this.props.removeTopic(topic)} role="presentation">
                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
                     </div>
                 </TableCell>
@@ -38,13 +40,23 @@ class TopicsTable extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
+                <Button
+                    danger
+                    uppercase
+                    medium
+                    className="mb-20"
+                    onClick={this.props.openModal}>
+                    Add topic
+                </Button>
+                <div style={{float: 'right'}}>
+                    <TopicNameForm submit={this.props.removeTopic}/>
+                </div>
                 <Table>
                     <TableHead>
                         <TableRow border>
                             <TableHeader small>#</TableHeader>
                             <TableHeader>Topic</TableHeader>
                             <TableHeader>Clients</TableHeader>
-                            <TableHeader>Key</TableHeader>
                             <TableHeader small>Delete</TableHeader>
                         </TableRow>
                     </TableHead>
@@ -52,14 +64,6 @@ class TopicsTable extends React.Component<Props> {
                         {this.renderClients()}
                     </TableBody>
                 </Table>
-                <Button
-                    danger
-                    uppercase
-                    medium
-                    className="mt-20"
-                    onClick={this.props.openModal}>
-                    Add topic
-                </Button>
             </React.Fragment>
         )
     }

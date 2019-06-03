@@ -45,8 +45,11 @@ class ClientsTableProvider extends React.Component<Props> {
     // }
     //
     removeClient = (name: string) => {
-        this.props.store.domain.clients.deleteClient(name);
-        NotificationManager.success(AppStrings.CLIENT_REMOVED)
+        this.props.store.domain.clients.deleteClient(name).then(() => {
+                NotificationManager.success(AppStrings.CLIENT_REMOVED)
+        }).catch(() => {
+            NotificationManager.error(AppStrings.CLIENT_REMOVED_ERROR);
+        });
     }
 
     openModal = () => {

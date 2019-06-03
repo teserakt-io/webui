@@ -37,13 +37,6 @@ const routes: {
         exact: true,
         icon: Icon.d.CLIENT
     },
-    keys: {
-        name: 'Keys',
-        path: '/keys',
-        // component: Keys,
-        exact: true,
-        icon: Icon.d.KEY
-    },
     topics: {
         name: 'Topics',
         path: '/topics',

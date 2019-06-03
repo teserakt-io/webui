@@ -9,20 +9,20 @@ type Props = {
 };
 
 type State = {
-    client_name: string,
+    topic_name: string,
 }
 
-class ClientNameForm extends Component<Props, State> {
+class TopicNameForm extends Component<Props, State> {
     static formKeys = {
         NAME: 'topic_name',
     };
 
     state = {
-        [ClientNameForm.formKeys.NAME]: "",
+        [TopicNameForm.formKeys.NAME]: "",
     };
 
     isValid() {
-        const name = this.state[ClientNameForm.formKeys.NAME];
+        const name = this.state[TopicNameForm.formKeys.NAME];
         return !validator.isEmpty(name) && name.length < 256;
     }
 
@@ -34,7 +34,7 @@ class ClientNameForm extends Component<Props, State> {
     onSubmit = (e: Object) => {
         e.preventDefault();
         if (!this.isValid()) return;
-        const name = this.state[ClientNameForm.formKeys.NAME];
+        const name = this.state[TopicNameForm.formKeys.NAME];
 
         this.props.submit(name)
     };
@@ -42,7 +42,7 @@ class ClientNameForm extends Component<Props, State> {
     render() {
         return (
             <React.Fragment>
-                <Input onChange={this.updateField} id={ClientNameForm.formKeys.NAME} inline={true}/>
+                <Input onChange={this.updateField} id={TopicNameForm.formKeys.NAME} inline={true}/>
                 <Button disabled={!this.isValid()} onClick={this.onSubmit} medium={true} className={'ml-20'}>
                     Submit
                 </Button>
@@ -51,4 +51,4 @@ class ClientNameForm extends Component<Props, State> {
     }
 }
 
-export default ClientNameForm;
+export default TopicNameForm;

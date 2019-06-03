@@ -34,12 +34,6 @@ class StatCards extends React.Component<Props> {
                         desc="Topics"
                         icon={Icon.d.TOPIC}/>
                 </Link>
-                <Link to={routes.keys.path}>
-                    <Card
-                        title={0}
-                        desc="Keys"
-                        icon={Icon.d.KEY}/>
-                </Link>
             </React.Fragment>
         )
     }
