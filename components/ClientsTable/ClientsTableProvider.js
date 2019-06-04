@@ -24,6 +24,7 @@ type Props = {
 class ClientsTableProvider extends React.Component<Props> {
     async componentDidMount() {
         this.props.store.domain.clients.loadClients();
+        this.props.store.domain.clients.loadCount();
     }
     addClient = (client: string, key: string) => {
         this.props.store.view.modal.hide();
@@ -60,12 +61,18 @@ class ClientsTableProvider extends React.Component<Props> {
         })
     };
 
+    onPageChange = (page) => {
+        this.props.store.domain.clients.changePage(page.selected);
+    }
+
     render() {
         return (
             <ClientsTable
                 removeClient={this.removeClient}
                 openModal={this.openModal}
                 clients={this.props.store.domain.clients.getClients()}
+                count={this.props.store.domain.clients.getCount()}
+                onPageChange={this.onPageChange}
             />
         )
     }

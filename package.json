@@ -36,6 +36,7 @@
     "react-dom": "^16.8.6",
     "react-json-view": "^1.19.1",
     "react-notifications": "^1.4.3",
+    "react-paginate": "^6.3.0",
     "react-select": "^2.4.4",
     "sass-loader": "^7.1.0",
     "url-loader": "^1.1.2",

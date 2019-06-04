@@ -11,6 +11,8 @@ import {
 import Button from '../../common/Buttons/Button/Button'
 import Icon from '../../common/Icon/Icon'
 import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
+import ReactPaginate from 'react-paginate';
+import Pagination from "../../Pagination/Pagination";
 
 type Props = {
     clients: Array<String>,
@@ -47,6 +49,7 @@ class ClientsTable extends React.Component<Props> {
                 <div style={{float: 'right'}}>
                     <ClientNameForm submit={this.props.removeClient}/>
                 </div>
+
                 <Table>
                     <TableHead>
                         <TableRow border>
@@ -59,6 +62,9 @@ class ClientsTable extends React.Component<Props> {
                         {this.renderClients()}
                     </TableBody>
                 </Table>
+                <Pagination
+                    count={this.props.count}
+                    onPageChange={this.props.onPageChange}/>
             </React.Fragment>
         )
     }

@@ -9,8 +9,9 @@ export type Topic = {
 class Topics {
     @observable topics: Array<Topic> = [];
     @observable count = 0;
+    @observable page = 1;
 
-    getTopics = () => this.topics
+    getTopics = () => this.topics;
     getCount = () => this.count;
 
     @action

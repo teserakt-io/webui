@@ -4,6 +4,8 @@ import api from '../../../api/api';
 class Clients {
     @observable clients = [];
     @observable count = 0;
+    @observable page = 0;
+    @observable onPage = 10;
 
     getClients = () => this.clients.toJS();
     getCount = () => this.count;
@@ -21,9 +23,18 @@ class Clients {
 
     @action
     async loadClients() {
-        const { data, status } = await api.clients.get();
+        const offset = this.page * this.onPage;
+        const count = this.onPage;
+        const { data, status } = await api.clients.get(offset, count);
 
         this.clients = data ? data : [];
+    }
+
+    @action
+    async changePage(page) {
+        console.log(page);
+        this.page = page;
+        this.loadClients();
     }
 
     @action
