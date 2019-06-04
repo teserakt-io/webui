@@ -14,6 +14,7 @@ import type { Topic } from '../../../state/domain/stores/Topics'
 import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
 import TopicForm from "../../Forms/TopicForm/TopicForm";
 import TopicNameForm from "../../Forms/TopicForm/TopicNameForm.js";
+import Pagination from "../../Pagination/Pagination";
 
 type Props = {
     topics: Array<String>,
@@ -64,6 +65,12 @@ class TopicsTable extends React.Component<Props> {
                         {this.renderClients()}
                     </TableBody>
                 </Table>
+
+                <Pagination
+                    count={this.props.count}
+                    onPageChange={this.props.onPageChange}
+                    forcePage={this.props.page}
+                />
             </React.Fragment>
         )
     }

@@ -9,6 +9,7 @@ class Clients {
 
     getClients = () => this.clients.toJS();
     getCount = () => this.count;
+    getPage = () => this.page;
 
     @action
     async loadCount() {
@@ -32,7 +33,6 @@ class Clients {
 
     @action
     async changePage(page) {
-        console.log(page);
         this.page = page;
         this.loadClients();
     }
@@ -41,14 +41,20 @@ class Clients {
     async add(name, key) {
         const { data, status } = await api.clients.post(name, key);
 
-        if(status === 200)
+        if(status === 200){
             this.clients.push(name);
+            this.count++;
+        }
     }
 
     @action
     async deleteClient(name) {
         const {data, status} = await api.clients.delete(name);
         this.clients = this.clients.filter(item => item !== name);
+
+        this.count--;
+        if(this.clients.length === 0 && this.page !== 0)
+            this.changePage(this.page - 1)
     }
 }
 

@@ -64,7 +64,8 @@ class ClientsTable extends React.Component<Props> {
                 </Table>
                 <Pagination
                     count={this.props.count}
-                    onPageChange={this.props.onPageChange}/>
+                    onPageChange={this.props.onPageChange}
+                    forcePage={this.props.page}/>
             </React.Fragment>
         )
     }

@@ -73,6 +73,7 @@ class ClientsTableProvider extends React.Component<Props> {
                 clients={this.props.store.domain.clients.getClients()}
                 count={this.props.store.domain.clients.getCount()}
                 onPageChange={this.onPageChange}
+                page={this.props.store.domain.clients.getPage()}
             />
         )
     }

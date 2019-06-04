@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import {observable, action, computed} from 'mobx'
 import api from "../../../api/api";
 
 export type Topic = {
@@ -9,10 +9,12 @@ export type Topic = {
 class Topics {
     @observable topics: Array<Topic> = [];
     @observable count = 0;
-    @observable page = 1;
+    @observable page = 0;
+    @observable onPage = 10;
 
     getTopics = () => this.topics;
     getCount = () => this.count;
+    getPage = () => this.page;
 
     @action
     async loadCount() {
@@ -23,10 +25,19 @@ class Topics {
 
     @action
     async load() {
-        const { data } = await api.topics.get();
+        const offset = this.page * this.onPage;
+        const count = this.onPage;
+        const { data } = await api.topics.get(offset, count);
 
         this.topics = data ? data : [];
     }
+
+    @action
+    async changePage(page) {
+        this.page = page;
+        this.load();
+    }
+
 
     @action
     addTopics(topics) {
@@ -43,12 +54,17 @@ class Topics {
         const {data} = await api.topics.post(name);
 
         this.topics.push(name);
+        this.count++;
     }
 
     @action
     async remove(name) {
         const {data} = await api.topics.delete(name);
         this.topics = this.topics.filter(item => item !== name);
+
+        this.count--;
+        if(this.topics.length === 0 && this.page !== 0)
+            this.changePage(this.page - 1)
     }
 }
 

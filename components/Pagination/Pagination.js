@@ -11,6 +11,7 @@ function Pagination(props) {
                 pageClassName={'page'}
                 previousLabel={'‹'}
                 nextLabel={'›'}
+                forcePage={props.forcePage}
                 onPageChange={props.onPageChange}
             />
         </React.Fragment>

@@ -7,6 +7,7 @@ import { NotificationManager } from 'react-notifications'
 import AppStrings from '../../utils/AppStrings'
 import ModalProvider from '../common/Modal/ModalProvider'
 import type { SelectOption } from 'components/common/FormElements/Select/Select'
+import ClientsTable from "../ClientsTable/UI/ClientsTable";
 
 type Props = {
     store: Store,
@@ -47,6 +48,11 @@ class TopicsTableProvider extends React.Component<Props> {
 
     componentDidMount() {
         this.props.store.domain.topics.load();
+        this.props.store.domain.topics.loadCount();
+    }
+
+    onPageChange = (page) => {
+        this.props.store.domain.topics.changePage(page.selected);
     }
 
     render() {
@@ -54,7 +60,11 @@ class TopicsTableProvider extends React.Component<Props> {
             <TopicsTable
                 openModal={this.openAddTopicForm}
                 removeTopic={this.removeTopic}
-                topics={this.props.store.domain.topics.getTopics()}/>
+                topics={this.props.store.domain.topics.getTopics()}
+                count={this.props.store.domain.topics.getCount()}
+                onPageChange={this.onPageChange}
+                page={this.props.store.domain.topics.getPage()}
+            />
         )
     }
 }
