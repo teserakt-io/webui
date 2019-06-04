@@ -44,7 +44,7 @@ class ClientNameForm extends Component<Props, State> {
             <React.Fragment>
                 <Input onChange={this.updateField} id={ClientNameForm.formKeys.NAME} inline={true}/>
                 <Button disabled={!this.isValid()} onClick={this.onSubmit} medium={true} className={'ml-20'}>
-                    Submit
+                    Delete
                 </Button>
             </React.Fragment>
         );

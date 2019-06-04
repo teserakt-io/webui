@@ -15,8 +15,13 @@ async function deleteClient(name) {
     return await request.delete(`/client/name/${name}`);
 }
 
+async function count() {
+    return await request.get(`/clients/count`);
+}
+
 export default {
     get: getClients,
     post: postClient,
     delete: deleteClient,
+    count: count,
 };

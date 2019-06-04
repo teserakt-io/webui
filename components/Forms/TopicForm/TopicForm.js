@@ -33,10 +33,8 @@ class TopicForm extends React.Component<Props, State> {
     };
 
     isValid() {
-        const topic = [TopicForm.formKeys.TOPIC];
-        return !validator.isEmpty(topic) && validator.isLength();
-        // return Validation.isEmpty(this.state[TopicForm.formKeys.TOPIC])
-        //     || Validation.isEmpty(this.state[TopicForm.formKeys.KEY])
+        const topic = this.state[TopicForm.formKeys.TOPIC];
+        return !validator.isEmpty(topic);
     }
 
     updateField = (e: Object) => {
@@ -47,7 +45,7 @@ class TopicForm extends React.Component<Props, State> {
 
     onSubmit = (e: Object) => {
         e.preventDefault();
-        if (this.isValid()) return;
+        if (!this.isValid()) return;
         const topic = this.state[TopicForm.formKeys.TOPIC];
         this.props.submit(topic)
     };

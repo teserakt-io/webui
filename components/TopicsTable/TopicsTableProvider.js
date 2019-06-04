@@ -20,17 +20,13 @@ type Props = {
 @observer
 class TopicsTableProvider extends React.Component<Props> {
     addTopic = (topic: string, key: string, clients: Array<SelectOption>) => {
-        this.props.services.commandHandler.addTopic(topic, key);
+        this.props.store.domain.topics.add(topic)
+            .then(() => {
+                NotificationManager.success(AppStrings.TOPIC_ADDED);
+            }).catch(() => {
+            NotificationManager.error(AppStrings.TOPIC_ADDED_ERROR);
+        });
         this.props.store.view.modal.hide();
-        NotificationManager.success(AppStrings.TOPIC_ADDED);
-        this.props.services.commandHandler.getTopics();
-
-        if (clients.length) {
-            clients.forEach((client) => {
-                this.props.services.commandHandler.addTopicClient(topic, client.value);
-                this.props.services.commandHandler.getTopicClients(topic)
-            })
-        }
     };
 
     removeTopic = (topic: string) => {

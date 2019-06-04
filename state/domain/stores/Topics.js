@@ -8,9 +8,17 @@ export type Topic = {
 
 class Topics {
     @observable topics: Array<Topic> = [];
+    @observable count = 0;
 
     getTopics = () => this.topics
-    countTopics = () => this.topics.length;
+    getCount = () => this.count;
+
+    @action
+    async loadCount() {
+        const {data} = await api.topics.count();
+
+        this.count = data;
+    }
 
     @action
     async load() {
@@ -27,6 +35,13 @@ class Topics {
     @action
     addTopicClients(topic, clients) {
         this.topics = this.topics.map((item) => item.name === topic ? { ...item, clients } : item)
+    }
+
+    @action
+    async add(name) {
+        const {data} = await api.topics.post(name);
+
+        this.topics.push(name);
     }
 
     @action

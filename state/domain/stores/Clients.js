@@ -3,11 +3,17 @@ import api from '../../../api/api';
 
 class Clients {
     @observable clients = [];
-    lastStatus = 0;
+    @observable count = 0;
 
     getClients = () => this.clients.toJS();
-    countClients = () => this.clients.toJS().length;
+    getCount = () => this.count;
 
+    @action
+    async loadCount() {
+        const {data} = await api.clients.count();
+
+        this.count = data;
+    }
     @action
     addClients(clients) {
         this.clients = clients
