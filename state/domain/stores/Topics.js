@@ -60,7 +60,7 @@ class Topics {
     @action
     async remove(name) {
         const {data} = await api.topics.delete(name);
-        this.topics = this.topics.filter(item => item !== name);
+        await this.load();
 
         this.count--;
         if(this.topics.length === 0 && this.page !== 0)

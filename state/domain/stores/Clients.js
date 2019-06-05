@@ -50,7 +50,7 @@ class Clients {
     @action
     async deleteClient(name) {
         const {data, status} = await api.clients.delete(name);
-        this.clients = this.clients.filter(item => item !== name);
+        await this.loadClients();
 
         this.count--;
         if(this.clients.length === 0 && this.page !== 0)
