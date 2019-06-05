@@ -7,6 +7,7 @@ import ClientForm from '../../Forms/ClientForm/ClientForm'
 import TopicForm from '../../Forms/TopicForm/TopicForm'
 import KeyForm from '../../Forms/KeyForm/KeyForm'
 import { Store } from '../../../state/Store'
+import ClientTopicsForm from "../../Forms/ClientForm/ClientTopicsForm";
 
 type Props = {
     store: Store
@@ -17,16 +18,19 @@ type Props = {
 class ModalProvider extends React.Component<Props> {
     static types = {
         CLIENT_FORM: 'CLIENT_FORM',
+        CLIENT_TOPICS_FORM: 'CLIENT_TOPICS_FORM',
         TOPIC_FORM: 'TOPIC_FORM',
         KEY_FORM: 'KEY_FORM',
-    }
+    };
 
     getModalComponent(modalType: string) {
         switch (modalType) {
             case ModalProvider.types.CLIENT_FORM:
-                return ClientForm
+                return ClientForm;
+            case ModalProvider.types.CLIENT_TOPICS_FORM:
+                return ClientTopicsForm;
             case ModalProvider.types.TOPIC_FORM:
-                return TopicForm
+                return TopicForm;
             case ModalProvider.types.KEY_FORM:
                 return KeyForm
         }

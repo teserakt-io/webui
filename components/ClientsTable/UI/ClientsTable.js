@@ -11,8 +11,8 @@ import {
 import Button from '../../common/Buttons/Button/Button'
 import Icon from '../../common/Icon/Icon'
 import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
-import ReactPaginate from 'react-paginate';
 import Pagination from "../../Pagination/Pagination";
+import FontAwesome from 'react-fontawesome';
 
 type Props = {
     clients: Array<String>,
@@ -26,10 +26,13 @@ class ClientsTable extends React.Component<Props> {
             <TableRow key={index}>
                 <TableCell label="#" small center>{index + 1}</TableCell>
                 <TableCell label="Client">{client}</TableCell>
-                <TableCell label="Delete" small center>
-                    <div onClick={() => this.props.removeClient(client)} role="presentation">
+                <TableCell label="Actions" small center className={'actions'}>
+                    <span onClick={() => this.props.openModalTopics()}>
+                        <FontAwesome name={'file'} className={'pointer'}/>
+                    </span>
+                    <span onClick={() => this.props.removeClient(client)} role="presentation">
                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-                    </div>
+                    </span>
                 </TableCell>
             </TableRow>
         ))
@@ -55,7 +58,7 @@ class ClientsTable extends React.Component<Props> {
                         <TableRow border>
                             <TableHeader small>#</TableHeader>
                             <TableHeader>Client</TableHeader>
-                            <TableHeader small>Delete</TableHeader>
+                            <TableHeader small>Actions</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>

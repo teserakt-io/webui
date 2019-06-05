@@ -57,8 +57,24 @@ class ClientsTableProvider extends React.Component<Props> {
         this.props.store.view.modal.open(ModalProvider.types.CLIENT_FORM, {
             submit: this.addClient,
             cancel: this.props.store.view.modal.hide,
-            // topics: this.props.store.domain.topics.getTopics()
         })
+    };
+
+    storeTopics = (topics: Array) => {
+        console.log(topics);
+    };
+
+    openModalTopics = () => {
+        this.props.store.domain.topics.load()
+            .then(() => {
+                this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
+                    submit: this.storeTopics,
+                    cancel: this.props.store.view.modal.hide,
+                    topics: this.props.store.domain.topics.getTopics(),
+                })
+            }).catch((e) => {
+                console.log(e);
+        });
     };
 
     onPageChange = (page) => {
@@ -70,6 +86,7 @@ class ClientsTableProvider extends React.Component<Props> {
             <ClientsTable
                 removeClient={this.removeClient}
                 openModal={this.openModal}
+                openModalTopics={this.openModalTopics}
                 clients={this.props.store.domain.clients.getClients()}
                 count={this.props.store.domain.clients.getCount()}
                 onPageChange={this.onPageChange}
