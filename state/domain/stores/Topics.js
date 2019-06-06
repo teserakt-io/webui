@@ -1,4 +1,4 @@
-import {observable, action, computed} from 'mobx'
+import {observable, action} from 'mobx'
 import api from "../../../api/api";
 
 export type Topic = {
@@ -12,7 +12,11 @@ class Topics {
     @observable page = 0;
     @observable onPage = 10;
 
-    getTopics = () => this.topics;
+    constructor() {
+        this.loadCount();
+    }
+
+    getTopics = () => this.topics.toJS();
     getCount = () => this.count;
     getPage = () => this.page;
 
@@ -35,7 +39,7 @@ class Topics {
     @action
     async changePage(page) {
         this.page = page;
-        this.load();
+        await this.load();
     }
 
 

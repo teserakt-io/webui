@@ -1,12 +1,11 @@
 // @flow
-import * as React from 'react'
+import React from 'react'
 import Button from '../../common/Buttons/Button/Button'
-import Input from '../../common/FormElements/Input/Input'
-import CustomSelect from '../../common/FormElements/Select/Select'
 import validator from 'validator';
 import type { Topic } from '../../../state/domain/stores/Topics'
 import type { SelectOption } from '../../common/FormElements/Select/Select'
-import {generateKey} from "../../../utils/generator";
+import SelectPagination from "../../SelectPagination/SelectPagination";
+import { Store } from '../../../state/Store'
 
 type Props = {
     cancel: Function,
@@ -20,6 +19,7 @@ type State = {
     selectedTopics: Array<SelectOption>
 }
 
+@Store.inject
 class ClientTopicsForm extends React.Component<Props, State> {
     static formKeys = {
         TOPICS: "topics"
@@ -29,17 +29,10 @@ class ClientTopicsForm extends React.Component<Props, State> {
         topics: []
     };
 
-    renderTopicOptions() {
-        return this.props.topics.map((topic) => ({
-            label: topic,
-            value: topic
-        }))
-    }
-
     isValid() {
         return true;
     }
-    
+
     onSubmit = (e: Object) => {
         e.preventDefault();
         if (!this.isValid()) return;
@@ -55,19 +48,25 @@ class ClientTopicsForm extends React.Component<Props, State> {
         this.setState({ topics })
     };
 
+    onPageChange = (page) => {
+        this.props.store.domain.topics.changePage(page.selected)
+            .then(() => {
+                this.forceUpdate();
+            });
+    };
+
     render() {
+        const topics = this.props.store.domain.topics.getTopics();
         return (
             <React.Fragment>
                 <form className="modal__form">
-                    <CustomSelect
-                        isMulti
-                        removeSelected
-                        name="selectedTopic"
-                        label="Topic"
+                    <SelectPagination
+                        items={topics}
+                        count={this.props.store.domain.topics.getCount()}
+                        onPageChange={this.onPageChange}
+                        onSelect={this.onSelectChange}
                         value={this.state.topics}
-                        onChange={this.onSelectChange}
-                        options={this.renderTopicOptions()}/>
-
+                    />
                     <div className="btn-control">
                         <Button small secondary onClick={this.onCancel}>
                             Cancel

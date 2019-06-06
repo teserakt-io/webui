@@ -41,10 +41,8 @@ class Clients {
     async add(name, key) {
         const { data, status } = await api.clients.post(name, key);
 
-        if(status === 200){
-            this.clients.push(name);
-            this.count++;
-        }
+        this.clients.push(name);
+        this.count++;
     }
 
     @action

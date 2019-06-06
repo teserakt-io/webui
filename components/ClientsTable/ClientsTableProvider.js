@@ -9,13 +9,9 @@ import { Store } from '../../state/Store'
 import api from '../../api/api';
 import AppStrings from '../../utils/AppStrings'
 import { NotificationManager } from 'react-notifications'
-// import type { SelectOption } from '../common/FormElements/Select/Select'
 
 type Props = {
     store: Store,
-    services: {
-        commandHandler: CommandHandler
-    }
 }
 
 @Store.inject
@@ -31,20 +27,7 @@ class ClientsTableProvider extends React.Component<Props> {
         this.props.store.domain.clients.add(client, key);
         NotificationManager.success(AppStrings.CLIENT_ADDED);
     };
-    // addClient = (client: string, key: string, topics: Array<SelectOption>) => {
-    //     this.props.services.commandHandler.addClient(client, key)
-    //     this.props.store.view.modal.hide()
-    //     NotificationManager.success(AppStrings.CLIENT_ADDED)
-    //     this.props.services.commandHandler.getClients()
-    //
-    //     if (topics.length) {
-    //         topics.forEach((topic) => {
-    //             this.props.services.commandHandler.addTopicClient(topic.value, client)
-    //             this.props.services.commandHandler.getTopicClients(topic.value)
-    //         })
-    //     }
-    // }
-    //
+
     removeClient = (name: string) => {
         this.props.store.domain.clients.deleteClient(name).then(() => {
                 NotificationManager.success(AppStrings.CLIENT_REMOVED)
@@ -71,6 +54,7 @@ class ClientsTableProvider extends React.Component<Props> {
                     submit: this.storeTopics,
                     cancel: this.props.store.view.modal.hide,
                     topics: this.props.store.domain.topics.getTopics(),
+                    count: this.props.store.domain.topics.getCount(),
                 })
             }).catch((e) => {
                 console.log(e);
