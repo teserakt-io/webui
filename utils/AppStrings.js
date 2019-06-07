@@ -15,6 +15,9 @@ class AppStrings {
 
     static TOPICS_ASSOCIATION_SUCCESS = "Topics were set!";
     static TOPICS_ASSOCIATION_ERROR = "Topics weren't set!";
+
+    static CLIENT_ASSOCIATION_SUCCESS = "Clients were set!";
+    static CLIENT_ASSOCIATION_ERROR = "Clients weren't set!";
 }
 
 export default AppStrings
