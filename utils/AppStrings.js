@@ -12,6 +12,9 @@ class AppStrings {
     static TOPIC_REMOVED = 'Topic successfully removed!'
     static TOPIC_REMOVED_ERROR = 'Topic removal failure!';
     static TOPIC_ADDED_ERROR = "Topic adding failure!";
+
+    static TOPICS_ASSOCIATION_SUCCESS = "Topics were set!";
+    static TOPICS_ASSOCIATION_ERROR = "Topics weren't set!";
 }
 
 export default AppStrings

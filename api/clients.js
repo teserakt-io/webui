@@ -19,9 +19,29 @@ async function count() {
     return await request.get(`/clients/count`);
 }
 
+async function joinTopic(client, topic) {
+    return await request.put(`/client/name/${client}/topic/${topic}`);
+}
+
+async function splitTopic(client, topic) {
+    return await request.delete(`/client/name/${client}/topic/${topic}`);
+}
+
+async function countMergedTopics(client) {
+    return await request.get(`/client/${client}/topics/count`);
+}
+
+async function joinedTopics(client, offset = 0, count = 100) {
+    return await request.get(`/client/name/${client}/topics/${offset}/${count}`);
+}
+
 export default {
     get: getClients,
     post: postClient,
     delete: deleteClient,
     count: count,
+    joinTopic: joinTopic,
+    splitTopic: splitTopic,
+    countMergedTopics: countMergedTopics,
+    joinedTopics: joinedTopics,
 };

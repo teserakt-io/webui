@@ -44,20 +44,30 @@ class ClientsTableProvider extends React.Component<Props> {
     };
 
     storeTopics = (topics: Array) => {
-        console.log(topics);
+        this.props.store.domain.clients.setTopics(topics.map(topic => topic.value))
+            .then(() => {
+                this.props.store.view.modal.hide();
+                NotificationManager.success(AppStrings.TOPICS_ASSOCIATION_SUCCESS);
+            })
+            .catch(() => {
+                NotificationManager.error(AppStrings.TOPICS_ASSOCIATION_ERROR);
+            });
     };
 
-    openModalTopics = () => {
-        this.props.store.domain.topics.load()
+    openModalTopics = (client) => {
+        this.props.store.domain.clients.setCurrent(client);
+        const loadJoinedTopics = this.props.store.domain.clients.loadJoinedTopics();
+        const loadTopics = this.props.store.domain.topics.load();
+        Promise.all([loadJoinedTopics, loadTopics])
             .then(() => {
-                this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
-                    submit: this.storeTopics,
-                    cancel: this.props.store.view.modal.hide,
-                    topics: this.props.store.domain.topics.getTopics(),
-                    count: this.props.store.domain.topics.getCount(),
-                })
-            }).catch((e) => {
-                console.log(e);
+            this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
+                submit: this.storeTopics,
+                cancel: this.props.store.view.modal.hide,
+                topics: this.props.store.domain.topics.getTopics(),
+                count: this.props.store.domain.topics.getCount(),
+            })
+        }).catch((e) => {
+            console.log(e);
         });
     };
 

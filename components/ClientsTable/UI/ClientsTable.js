@@ -27,7 +27,7 @@ class ClientsTable extends React.Component<Props> {
                 <TableCell label="#" small center>{index + 1}</TableCell>
                 <TableCell label="Client">{client}</TableCell>
                 <TableCell label="Actions" small center className={'actions'}>
-                    <span onClick={() => this.props.openModalTopics()}>
+                    <span onClick={() => this.props.openModalTopics(client)}>
                         <FontAwesome name={'file'} className={'pointer'}/>
                     </span>
                     <span onClick={() => this.props.removeClient(client)} role="presentation">
