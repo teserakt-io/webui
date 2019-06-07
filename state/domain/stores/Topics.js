@@ -11,6 +11,8 @@ class Topics {
     @observable count = 0;
     @observable page = 0;
     @observable onPage = 10;
+    @observable current = 0;
+    @observable joinedClients = [];
 
     constructor() {
         this.loadCount();
@@ -19,6 +21,7 @@ class Topics {
     getTopics = () => this.topics.toJS();
     getCount = () => this.count;
     getPage = () => this.page;
+    getJoinedClients = () => this.joinedClients;
 
     @action
     async loadCount() {
@@ -49,11 +52,6 @@ class Topics {
     }
 
     @action
-    addTopicClients(topic, clients) {
-        this.topics = this.topics.map((item) => item.name === topic ? { ...item, clients } : item)
-    }
-
-    @action
     async add(name) {
         const {data} = await api.topics.post(name);
 
@@ -69,6 +67,49 @@ class Topics {
         this.count--;
         if(this.topics.length === 0 && this.page !== 0)
             this.changePage(this.page - 1)
+    }
+
+    @action
+    setCurrent(topic) {
+        this.current = topic;
+    }
+
+    @action
+    async loadJoinedClients() {
+        const {data} = await api.topics.joinedClients(this.current);
+
+        this.joinedClients = data;
+    }
+
+    @action
+    async setClients(clients) {
+        if(this.getJoinedClients().length === 0)
+            await this.loadJoinedClients();
+
+        const forCreation = clients.filter(client => this.joinedClients.indexOf(client) === -1);
+        const forRemove = this.joinedClients.filter(joinedClient => clients.indexOf(joinedClient) === -1);
+        console.log("creation: ", forCreation);
+        console.log("remove: ", forRemove);
+        forCreation.map((client) => {
+            this.joinClient(client).then(() => {
+                this.joinedClients.push(client);
+            });
+        });
+        forRemove.map(client => {
+            this.splitClient(client).then(() => {
+                this.joinedClients.filter(item => item !== client);
+            });
+        });
+    }
+
+    @action
+    async joinClient(client) {
+        api.clients.joinTopic(client, this.current);
+    }
+
+    @action
+    async splitClient(client) {
+        api.clients.splitTopic(client, this.current);
     }
 }
 

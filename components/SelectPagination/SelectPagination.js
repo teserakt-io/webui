@@ -21,6 +21,7 @@ function SelectPagination(props: Props) {
             <CustomSelect name={props.name}
                           onChange={props.onSelect}
                           isMulti
+                          isSearchable
                           removeSelected
                           value={props.value}
                           options={items}/>

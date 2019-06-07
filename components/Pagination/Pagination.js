@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 type Props = {
     count: number,
-    forcePage: number,
+    forcePage?: number,
     onPageChange: Function,
 };
 

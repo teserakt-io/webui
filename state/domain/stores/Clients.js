@@ -2,6 +2,9 @@ import { observable, action } from 'mobx'
 import api from '../../../api/api';
 
 class Clients {
+    constructor() {
+        this.loadCount();
+    }
     @observable clients = [];
     @observable count = 0;
     @observable page = 0;
@@ -38,7 +41,7 @@ class Clients {
     @action
     async changePage(page) {
         this.page = page;
-        this.loadClients();
+        await this.loadClients();
     }
 
     @action

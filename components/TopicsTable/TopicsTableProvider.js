@@ -55,6 +55,34 @@ class TopicsTableProvider extends React.Component<Props> {
         this.props.store.domain.topics.changePage(page.selected);
     }
 
+    openModalClients = (topic) => {
+        this.props.store.domain.topics.setCurrent(topic);
+        const loadJoinedClients = this.props.store.domain.topics.loadJoinedClients();
+        const loadClients = this.props.store.domain.clients.changePage(0);
+        Promise.all([loadJoinedClients, loadClients])
+            .then(() => {
+                this.props.store.view.modal.open(ModalProvider.types.TOPIC_CLIENTS_FORM, {
+                    submit: this.storeClients,
+                    cancel: this.props.store.view.modal.hide,
+                    clients: this.props.store.domain.clients.getClients(),
+                    count: this.props.store.domain.clients.getCount(),
+                })
+            }).catch((e) => {
+            console.log(e);
+        });
+    };
+
+    storeClients = (clients: Array) => {
+        this.props.store.domain.topics.setClients(clients.map(client => client.value))
+            .then(() => {
+                this.props.store.view.modal.hide();
+                NotificationManager.success(AppStrings.CLIENT_ASSOCIATION_SUCCESS);
+            })
+            .catch(() => {
+                NotificationManager.error(AppStrings.CLIENT_ASSOCIATION_ERROR);
+            });
+    };
+
     render() {
         return (
             <TopicsTable
@@ -64,6 +92,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 count={this.props.store.domain.topics.getCount()}
                 onPageChange={this.onPageChange}
                 page={this.props.store.domain.topics.getPage()}
+                openModalClients={this.openModalClients}
             />
         )
     }
