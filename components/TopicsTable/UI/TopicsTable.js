@@ -54,8 +54,8 @@ class TopicsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add topic
                 </Button>
-                <div style={{float: 'right'}}>
-                    <TopicNameForm submit={this.props.removeTopic}/>
+                <div style={{float: 'left', marginRight: '20px'}}>
+                    <TopicNameForm submit={this.props.removeTopic} submitText={'DELETE TOPIC'}/>
                 </div>
                 <Table>
                     <TableHead>

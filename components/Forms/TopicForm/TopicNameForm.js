@@ -6,6 +6,7 @@ import validator from "validator";
 
 type Props = {
     submit: Function,
+    submitText: string,
 };
 
 type State = {
@@ -44,7 +45,7 @@ class TopicNameForm extends Component<Props, State> {
             <React.Fragment>
                 <Input onChange={this.updateField} id={TopicNameForm.formKeys.NAME} inline={true}/>
                 <Button disabled={!this.isValid()} onClick={this.onSubmit} medium={true} className={'ml-20'}>
-                    Delete
+                    {this.props.submitText || 'DELETE'}
                 </Button>
             </React.Fragment>
         );
