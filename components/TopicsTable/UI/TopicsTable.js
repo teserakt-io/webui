@@ -35,9 +35,9 @@ class TopicsTable extends React.Component<Props> {
                     <span onClick={() => this.props.openModalClients(topic)}>
                         <FontAwesome name={'file'} className={'pointer'}/>
                     </span>
-                    <div onClick={() => this.props.removeTopic(topic)} role="presentation">
+                    <span onClick={() => this.props.removeTopic(topic)} role="presentation">
                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-                    </div>
+                    </span>
                 </TableCell>
             </TableRow>
         ))
