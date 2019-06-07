@@ -57,7 +57,7 @@ class ClientsTableProvider extends React.Component<Props> {
     openModalTopics = (client) => {
         this.props.store.domain.clients.setCurrent(client);
         const loadJoinedTopics = this.props.store.domain.clients.loadJoinedTopics();
-        const loadTopics = this.props.store.domain.topics.load();
+        const loadTopics = this.props.store.domain.topics.changePage(0);
         Promise.all([loadJoinedTopics, loadTopics])
             .then(() => {
             this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
