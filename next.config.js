@@ -13,6 +13,9 @@ module.exports = withSass(withCss({
             }
         });
         return config
+    },
+    publicRuntimeConfig: {
+        ...process.env,
     }
 }));
 // module.exports = withCss(withSass({

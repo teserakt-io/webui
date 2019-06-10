@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 const express = require('express');
 const next = require('next');
+require('dotenv').config();
 
 const devProxy = {
     '/api': {
-        target: 'https://34.90.149.110:8765/e4',
+        target: process.env.C2_URL,
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
         secure: false,
