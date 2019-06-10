@@ -1,5 +1,6 @@
 import React from 'react';
-import CustomSelect from "../common/FormElements/Select/Select";
+import MultiSelect from "@kenshooui/react-multi-select";
+require("@kenshooui/react-multi-select/dist/style.css");
 import Pagination from "../Pagination/Pagination";
 
 type Props = {
@@ -12,19 +13,16 @@ type Props = {
 function SelectPagination(props: Props) {
     const items = props.items.map(item => {
         return {
-            value: item,
+            id: item,
             label: item,
         };
     });
     return (
         <React.Fragment>
-            <CustomSelect name={props.name}
-                          onChange={props.onSelect}
-                          isMulti
-                          isSearchable
-                          removeSelected
-                          value={props.value}
-                          options={items}/>
+            <MultiSelect
+                items={items}
+                selectedItems={props.value}
+                onChange={props.onSelect}/>
             <Pagination count={props.count}
                         onPageChange={props.onPageChange}/>
         </React.Fragment>

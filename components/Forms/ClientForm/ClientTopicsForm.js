@@ -24,7 +24,7 @@ class ClientTopicsForm extends React.Component<Props, State> {
     constructor(props) {
         super(props);
 
-        const topics = this.props.store.domain.clients.getJoinedTopics().map(topic => ({label: topic, value: topic}));
+        const topics = this.props.store.domain.clients.getJoinedTopics().map(topic => ({label: topic, id: topic}));
         this.state = {
             topics: topics,
         };

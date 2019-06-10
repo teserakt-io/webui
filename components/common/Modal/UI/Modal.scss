@@ -1,6 +1,7 @@
+$modalWidth: 600px;
 .modal-container {
   position: fixed;
-  min-width: 420px;
+  min-width: $modalWidth;
   min-height: 280px;
   top: 45%;
   left: 50%;
@@ -16,7 +17,7 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     width: 100%;
-    max-width: 420px;
+    max-width: $modalWidth;
     display: flex;
     flex-direction: column;
     align-self: center;

@@ -49,7 +49,7 @@ class ClientsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add client
                 </Button>
-                <div style={{float: 'left', marginRight: '20px'}}>
+                <div style={{float: 'left'}} className={'mr-20'}>
                     <ClientNameForm submit={this.props.removeClient} submitText={'DELETE CLIENT'}/>
                 </div>
 

@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import Button from '../../common/Buttons/Button/Button'
-import validator from 'validator';
 import type { SelectOption } from '../../common/FormElements/Select/Select'
 import SelectPagination from "../../SelectPagination/SelectPagination";
 import { Store } from '../../../state/Store'
@@ -21,7 +20,7 @@ class TopicClientsForm extends React.Component<Props, State> {
     constructor(props) {
         super(props);
 
-        const clients = this.props.store.domain.topics.getJoinedClients().map(client => ({label: client, value: client}));
+        const clients = this.props.store.domain.topics.getJoinedClients().map(client => ({label: client, id: client}));
         this.state = {
             clients: clients,
         };
