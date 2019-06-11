@@ -30,7 +30,7 @@ class TopicsTable extends React.Component<Props> {
             <TableRow key={index}>
                 <TableCell label="#" small center>{index + 1}</TableCell>
                 <TableCell label="Topic">{topic}</TableCell>
-                {/*<TableCell label="Clients">-</TableCell>*/}
+                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || "-"}</TableCell>
                 <TableCell label="Delete" small center>
                     <span onClick={() => this.props.openModalClients(topic)}>
                         <FontAwesome name={'file'} className={'pointer'}/>
@@ -62,7 +62,7 @@ class TopicsTable extends React.Component<Props> {
                         <TableRow border>
                             <TableHeader small>#</TableHeader>
                             <TableHeader>Topic</TableHeader>
-                            {/*<TableHeader>Clients</TableHeader>*/}
+                            <TableHeader>Clients</TableHeader>
                             <TableHeader small>Delete</TableHeader>
                         </TableRow>
                     </TableHead>

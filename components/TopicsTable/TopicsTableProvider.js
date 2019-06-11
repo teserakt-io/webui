@@ -47,7 +47,7 @@ class TopicsTableProvider extends React.Component<Props> {
     };
 
     componentDidMount() {
-        this.props.store.domain.topics.load();
+        this.props.store.domain.topics.load(true);
         this.props.store.domain.topics.loadCount();
     }
 
@@ -89,6 +89,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 openModal={this.openAddTopicForm}
                 removeTopic={this.removeTopic}
                 topics={this.props.store.domain.topics.getTopics()}
+                joinedClientsCounts={this.props.store.domain.topics.getJoinedClientsCounts()}
                 count={this.props.store.domain.topics.getCount()}
                 onPageChange={this.onPageChange}
                 page={this.props.store.domain.topics.getPage()}

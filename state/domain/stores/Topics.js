@@ -1,4 +1,4 @@
-import {observable, action} from 'mobx'
+import {observable, action, computed} from 'mobx'
 import api from "../../../api/api";
 import {Store} from "../../Store";
 
@@ -15,6 +15,7 @@ class Topics {
     @observable current = 0;
     @observable joinedClients = [];
     @observable joinedClientsCount = 0;
+    @observable joinedClientsCounts = {};
     logger = null;
 
     constructor() {
@@ -25,6 +26,7 @@ class Topics {
     getCount = () => this.count;
     getPage = () => this.page;
     getJoinedClients = () => this.joinedClients;
+    getJoinedClientsCounts = () => this.joinedClientsCounts;
 
     addLog(cmd, payload = {}) {
         if(this.logger === null)
@@ -46,7 +48,7 @@ class Topics {
     }
 
     @action
-    async load() {
+    async load(withCounts = false) {
         const offset = this.page * this.onPage;
         const count = this.onPage;
         const { data } = await api.topics.get(offset, count);
@@ -56,6 +58,11 @@ class Topics {
         });
 
         this.topics = data ? data : [];
+        if(withCounts) {
+            this.topics.map(async (topic) => {
+                this.joinedClientsCounts[topic] = await this.loadJoinedClientsCount(topic);
+            });
+        }
     }
 
     @action
@@ -96,11 +103,13 @@ class Topics {
     }
 
     @action
-    async loadJoinedClientsCount() {
-        const {data} = await api.topics.joinedClientsCount(this.current);
+    async loadJoinedClientsCount(topic = null) {
+        const {data} = await api.topics.joinedClientsCount(topic || this.current);
 
         this.joinedClientsCount = data;
-        this.addLog("joined_clients_count", {topic: this.current})
+        this.addLog("joined_clients_count", {topic: this.current});
+
+        return data;
     }
     @action
     async loadJoinedClients() {
