@@ -12,8 +12,7 @@ type Props = {
 @observer
 class StatCardsProvider extends Component<Props> {
     componentDidMount() {
-        this.props.store.domain.topics.loadCount();
-        this.props.store.domain.clients.loadCount();
+
     }
     render() {
         return (
