@@ -22,8 +22,9 @@ $nav-item-height: 64px;
     }
 
     &:hover + main {
-      transform: translateX($nav-offset);
-      width: calc(100% - #{$nav-width} - #{$nav-offset});
+      //transform: translateX($nav-offset);
+      margin-left: $nav-offset + $nav-width;
+      //width: calc(100% - #{$nav-width} - #{$nav-offset});
       transition: margin-left 300ms ease-in, width 1s ease-in;
     }
   }
