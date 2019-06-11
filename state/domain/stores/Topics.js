@@ -13,6 +13,7 @@ class Topics {
     @observable onPage = 10;
     @observable current = 0;
     @observable joinedClients = [];
+    @observable joinedClientsCount = 0;
 
     constructor() {
         this.loadCount();
@@ -75,10 +76,20 @@ class Topics {
     }
 
     @action
-    async loadJoinedClients() {
-        const {data} = await api.topics.joinedClients(this.current);
+    async loadJoinedClientsCount() {
+        const {data} = await api.topics.joinedClientsCount(this.current);
 
-        this.joinedClients = data;
+        this.joinedClientsCount = data;
+    }
+    @action
+    async loadJoinedClients() {
+        this.joinedClients = [];
+        await this.loadJoinedClientsCount(this.current);
+        const onRequest = 100;
+        for(let i = 0; i < this.joinedClientsCount; i += onRequest) {
+            const {data} = await api.topics.joinedClients(this.current, i, onRequest);
+            this.joinedClients.push(...data);
+        }
     }
 
     @action
@@ -88,8 +99,6 @@ class Topics {
 
         const forCreation = clients.filter(client => this.joinedClients.indexOf(client) === -1);
         const forRemove = this.joinedClients.filter(joinedClient => clients.indexOf(joinedClient) === -1);
-        console.log("creation: ", forCreation);
-        console.log("remove: ", forRemove);
         forCreation.map((client) => {
             this.joinClient(client).then(() => {
                 this.joinedClients.push(client);

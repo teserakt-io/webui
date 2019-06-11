@@ -18,11 +18,11 @@ async function count() {
     return await request.get(`/topics/count`);
 }
 
-async function countJoinedClients(topic) {
+async function joinedClientsCount(topic) {
     return await request.get(`/topic/${topic}/clients/count`);
 }
 
-async function joinedClients(topic, offset = 0, count = 100) {
+async function joinedClients(topic, offset = 0, count = 1) {
     return await request.get(`/topic/${topic}/clients/${offset}/${count}`);
 }
 
@@ -33,6 +33,6 @@ export default {
     patch: () => {},
     delete: remove,
     count: count,
-    countJoinedClients: countJoinedClients,
+    joinedClientsCount: joinedClientsCount,
     joinedClients: joinedClients,
 };

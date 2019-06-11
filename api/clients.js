@@ -27,8 +27,8 @@ async function splitTopic(client, topic) {
     return await request.delete(`/client/name/${client}/topic/${topic}`);
 }
 
-async function countMergedTopics(client) {
-    return await request.get(`/client/${client}/topics/count`);
+async function joinedTopicsCount(client) {
+    return await request.get(`/client/name/${client}/topics/count`);
 }
 
 async function joinedTopics(client, offset = 0, count = 100) {
@@ -42,6 +42,6 @@ export default {
     count: count,
     joinTopic: joinTopic,
     splitTopic: splitTopic,
-    countMergedTopics: countMergedTopics,
+    joinedTopicsCount: joinedTopicsCount,
     joinedTopics: joinedTopics,
 };

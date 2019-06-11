@@ -9,13 +9,14 @@ class Clients {
     @observable count = 0;
     @observable page = 0;
     @observable onPage = 10;
-    @observable currentClient = 0;
+    @observable current = 0;
     @observable joinedTopics = [];
+    @observable joinedTopicsCount = 0;
 
     getClients = () => this.clients.toJS();
     getCount = () => this.count;
     getPage = () => this.page;
-    getCurrent = () => this.currentClient;
+    getCurrent = () => this.current;
     getJoinedTopics = () => this.joinedTopics;
 
     @action
@@ -64,14 +65,24 @@ class Clients {
 
     @action
     setCurrent(client) {
-        this.currentClient = client;
+        this.current = client;
     }
 
     @action
-    async loadJoinedTopics() {
-        const {data} = await api.clients.joinedTopics(this.currentClient);
+    async loadJoinedTopicsCount() {
+        const {data} = await api.clients.joinedTopicsCount(this.current);
 
-        this.joinedTopics = data;
+        this.joinedTopicsCount = data;
+    }
+    @action
+    async loadJoinedTopics() {
+        this.joinedTopics = [];
+        await this.loadJoinedTopicsCount(this.current);
+        const onRequest = 100;
+        for(let i = 0; i < this.joinedTopicsCount; i += onRequest) {
+            const {data} = await api.clients.joinedTopics(this.current, i, onRequest);
+            this.joinedTopics.push(...data);
+        }
     }
 
     @action
@@ -84,23 +95,26 @@ class Clients {
         forCreation.map((topic) => {
             this.joinTopic(topic).then(() => {
                 this.joinedTopics.push(topic);
-            });
+            }).catch(e => console.log(e));
         });
+
         forRemove.map(topic => {
             this.splitTopic(topic).then(() => {
                 this.joinedTopics.filter(item => item !== topic);
+            }).catch(e => {
+                console.log(e);
             });
         });
     }
 
     @action
     async joinTopic(topic) {
-        api.clients.joinTopic(this.currentClient, topic);
+        api.clients.joinTopic(this.current, topic);
     }
 
     @action
     async splitTopic(topic) {
-        api.clients.splitTopic(this.currentClient, topic);
+        api.clients.splitTopic(this.current, topic);
     }
 
     @action

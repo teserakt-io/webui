@@ -16,7 +16,7 @@ class Dashboard extends Component {
             <Layout>
                 <React.Fragment>
                     <TextCard>
-                        <span className={'title'}>C2</span>: {c2.host}
+                        <span className={'title'}>C2:</span> {c2.host}
                     </TextCard>
                     <StatCardsProvider/>
                     <LogTableProvider/>
