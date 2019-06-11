@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx'
 import api from '../../../api/api';
+import {Store} from "../../Store";
 
 class Clients {
     constructor() {
@@ -12,6 +13,7 @@ class Clients {
     @observable current = 0;
     @observable joinedTopics = [];
     @observable joinedTopicsCount = 0;
+    logger = null;
 
     getClients = () => this.clients.toJS();
     getCount = () => this.count;
@@ -19,11 +21,23 @@ class Clients {
     getCurrent = () => this.current;
     getJoinedTopics = () => this.joinedTopics;
 
+    addLog(cmd, payload = {}) {
+        if(this.logger === null)
+            this.logger = Store.getInstance().domain.log;
+
+        this.logger.addLog({
+            date: new Date,
+            cmd: cmd,
+            payload: payload,
+        });
+    }
+
     @action
     async loadCount() {
         const {data} = await api.clients.count();
 
         this.count = data;
+        this.addLog("clients_count");
     }
     @action
     addClients(clients) {
@@ -37,6 +51,11 @@ class Clients {
         const { data, status } = await api.clients.get(offset, count);
 
         this.clients = data ? data : [];
+
+        this.addLog("load_clients", {
+            offset: offset,
+            count: count
+        });
     }
 
     @action
@@ -51,6 +70,8 @@ class Clients {
 
         this.clients.push(name);
         this.count++;
+
+        this.addLog("add_client", {name: name});
     }
 
     @action
@@ -61,6 +82,8 @@ class Clients {
         this.count--;
         if(this.clients.length === 0 && this.page !== 0)
             this.changePage(this.page - 1)
+
+        this.addLog("remove_client", {name: name});
     }
 
     @action
@@ -73,6 +96,7 @@ class Clients {
         const {data} = await api.clients.joinedTopicsCount(this.current);
 
         this.joinedTopicsCount = data;
+        this.addLog("joined_topics_count", {client: this.current});
     }
     @action
     async loadJoinedTopics() {
@@ -82,6 +106,12 @@ class Clients {
         for(let i = 0; i < this.joinedTopicsCount; i += onRequest) {
             const {data} = await api.clients.joinedTopics(this.current, i, onRequest);
             this.joinedTopics.push(...data);
+
+            this.addLog("get_joined_topics", {
+                client: this.current,
+                offset: i,
+                count: onRequest,
+            })
         }
     }
 
@@ -109,17 +139,21 @@ class Clients {
 
     @action
     async joinTopic(topic) {
-        api.clients.joinTopic(this.current, topic);
+        await api.clients.joinTopic(this.current, topic);
+
+        this.addLog("join_topic", {
+            client: this.current,
+            topic: topic,
+        })
     }
 
     @action
     async splitTopic(topic) {
-        api.clients.splitTopic(this.current, topic);
-    }
-
-    @action
-    splitTopics(topic) {
-
+        await api.clients.splitTopic(this.current, topic);
+        this.addLog("split_topic", {
+            client: this.current,
+            topic: topic,
+        })
     }
 
     @action

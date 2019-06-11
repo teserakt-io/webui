@@ -9,8 +9,12 @@ import {
     TableBody,
     TableCell,
     TableRow
-} from '../../common/Table'
-import type { LogType } from 'state/domain/stores/Log'
+} from '../../common/Table';
+import type { LogType } from 'state/domain/stores/Log';
+import dynamic from 'next/dynamic';
+const ReactJson = dynamic(import('react-json-view'), {
+    ssr: false
+});
 
 type Props = {
     logs: Array<LogType>
@@ -18,9 +22,6 @@ type Props = {
 
 @observer
 class LogTable extends React.Component<Props> {
-    componentDidMount() {
-        // const ReactJson = require('react-json-view');
-    }
     renderLogs() {
         return this.props.logs.map((log, index) => (
             <TableRow key={index}>
