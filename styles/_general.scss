@@ -34,3 +34,11 @@ h1 {
 span.title {
   font-weight: bold;
 }
+
+main {
+  //-webkit-transition: transform 700ms ease, width 500ms ease;
+  //-moz-transition: transform 700ms ease, width 500ms ease;
+  //-ms-transition: transform 700ms ease, width 500ms ease;
+  //-o-transition: transform 700ms ease, width 500ms ease;
+  //transition: transform 700ms ease, width 500ms ease;
+}

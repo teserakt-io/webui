@@ -23,8 +23,8 @@ $nav-item-height: 64px;
 
     &:hover + main {
       transform: translateX($nav-offset);
-      transition: all 300ms ease-in-out;
       width: calc(100% - #{$nav-width} - #{$nav-offset});
+      transition: margin-left 300ms ease-in, width 1s ease-in;
     }
   }
 
