@@ -1,9 +1,8 @@
-$nav-offset: 130px;
 $nav-item-height: 64px;
 
 .sidenav {
   width: 100%;
-  max-width: $nav-width;
+  max-width: $nav-width + $nav-offset;
   height: 100%;
   background: $blue-yankees;
   position: fixed;
@@ -16,17 +15,17 @@ $nav-item-height: 64px;
   @include box-shadow(2px, 0px, 8px, rgba(0, 0, 0, 0.4));
 
   @include breakpointMin($md) {
-    &:hover {
-      max-width: $nav-width + $nav-offset;
-      transition: max-width 350ms ease-in-out;
-    }
+    //&:hover {
+    //  max-width: $nav-width + $nav-offset;
+    //  transition: max-width 350ms ease-in-out;
+    //}
 
-    &:hover + main {
+    //&:hover + main {
       //transform: translateX($nav-offset);
-      margin-left: $nav-offset + $nav-width;
+      //margin-left: $nav-offset + $nav-width;
       //width: calc(100% - #{$nav-width} - #{$nav-offset});
-      transition: margin-left 300ms ease-in, width 1s ease-in;
-    }
+      //transition: margin-left 300ms ease-in, width 1s ease-in;
+    //}
   }
 
   @include breakpointMax($md) {
