@@ -19,8 +19,7 @@ type Props = {
 @observer
 class ClientsTableProvider extends React.Component<Props> {
     async componentDidMount() {
-        this.props.store.domain.clients.loadClients();
-        this.props.store.domain.clients.loadCount();
+        this.props.store.domain.clients.load(true);
     }
     addClient = (client: string, key: string) => {
         this.props.store.view.modal.hide();
@@ -72,7 +71,7 @@ class ClientsTableProvider extends React.Component<Props> {
     };
 
     onPageChange = (page) => {
-        this.props.store.domain.clients.changePage(page.selected);
+        this.props.store.domain.clients.changePage(page.selected, true);
     }
 
     render() {
@@ -82,6 +81,7 @@ class ClientsTableProvider extends React.Component<Props> {
                 openModal={this.openModal}
                 openModalTopics={this.openModalTopics}
                 clients={this.props.store.domain.clients.getClients()}
+                joinedTopicsCounts={this.props.store.domain.clients.joinedTopicsCounts}
                 count={this.props.store.domain.clients.getCount()}
                 onPageChange={this.onPageChange}
                 page={this.props.store.domain.clients.getPage()}

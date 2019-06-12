@@ -13,6 +13,7 @@ class Clients {
     @observable current = 0;
     @observable joinedTopics = [];
     @observable joinedTopicsCount = 0;
+    @observable joinedTopicsCounts = {};
     logger = null;
 
     getClients = () => this.clients.toJS();
@@ -45,23 +46,23 @@ class Clients {
     }
 
     @action
-    async loadClients() {
+    async load(withCounts = false) {
         const offset = this.page * this.onPage;
         const count = this.onPage;
-        const { data, status } = await api.clients.get(offset, count);
-
+        const { data } = await api.clients.get(offset, count);
         this.clients = data ? data : [];
 
         this.addLog("load_clients", {
             offset: offset,
             count: count
         });
+        if(withCounts) this.updateJoinedTopicsCounts();
     }
 
     @action
-    async changePage(page) {
+    async changePage(page, withCounts = false) {
         this.page = page;
-        await this.loadClients();
+        await this.load(withCounts);
     }
 
     @action
@@ -77,7 +78,7 @@ class Clients {
     @action
     async deleteClient(name) {
         const {data, status} = await api.clients.delete(name);
-        await this.loadClients();
+        await this.load();
 
         this.count--;
         if(this.clients.length === 0 && this.page !== 0)
@@ -92,11 +93,29 @@ class Clients {
     }
 
     @action
-    async loadJoinedTopicsCount() {
-        const {data} = await api.clients.joinedTopicsCount(this.current);
+    async updateJoinedTopicsCount(client, cache = true){
+        if(cache && this.joinedTopicsCounts[client] !== undefined) return;
+        const data = await this.loadJoinedTopicsCount(client);
+
+        this.joinedTopicsCounts = {...this.joinedTopicsCounts, [client]: data};
+        console.log(this.joinedTopicsCounts);
+    }
+
+    @action
+    async updateJoinedTopicsCounts() {
+        this.clients.map((client) => {
+            this.updateJoinedTopicsCount(client);
+        });
+    }
+
+    @action
+    async loadJoinedTopicsCount(client = null) {
+        const {data} = await api.clients.joinedTopicsCount(client || this.current);
 
         this.joinedTopicsCount = data;
-        this.addLog("joined_topics_count", {client: this.current});
+        this.addLog("joined_topics_count", {client: client || this.current});
+
+        return data;
     }
     @action
     async loadJoinedTopics() {
@@ -120,21 +139,34 @@ class Clients {
         if(this.getJoinedTopics().length === 0)
             await this.loadJoinedTopics();
 
+        const requests = [];
+        let changeCount = 0;
         const forCreation = topics.filter(topic => this.joinedTopics.indexOf(topic) === -1);
         const forRemove = this.joinedTopics.filter(joinedTopic => topics.indexOf(joinedTopic) === -1);
         forCreation.map((topic) => {
-            this.joinTopic(topic).then(() => {
+            const request = this.joinTopic(topic).then(() => {
                 this.joinedTopics.push(topic);
+                changeCount++;
             }).catch(e => console.log(e));
+            requests.push(request);
         });
 
         forRemove.map(topic => {
-            this.splitTopic(topic).then(() => {
+            const request = this.splitTopic(topic).then(() => {
                 this.joinedTopics.filter(item => item !== topic);
+                changeCount--;
             }).catch(e => {
                 console.log(e);
             });
+            requests.push(request);
         });
+
+        Promise.all(requests)
+            .then(() =>
+                this.joinedTopicsCounts = {
+                ...this.joinedTopicsCounts,
+                    [this.current]: this.joinedTopicsCounts[this.current] + changeCount
+            });
     }
 
     @action

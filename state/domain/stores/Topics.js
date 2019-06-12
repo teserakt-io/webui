@@ -123,7 +123,8 @@ class Topics {
     }
 
     @action
-    async updateJoinedClientCount(topic){
+    async updateJoinedClientCount(topic, cache = true){
+        if(cache && this.joinedClientsCounts[topic] !== undefined) return;
         const data = await this.loadJoinedClientsCount(topic);
 
         this.joinedClientsCounts = {...this.joinedClientsCounts, [topic]: data};
@@ -158,7 +159,12 @@ class Topics {
             }));
         });
 
-        Promise.all(requests).then(() => this.joinedClientsCounts = {...this.joinedClientsCounts, [this.current]: this.joinedClientsCounts[this.current] + changeCount});
+        Promise.all(requests)
+            .then(() =>
+                this.joinedClientsCounts = {
+                ...this.joinedClientsCounts,
+                    [this.current]: this.joinedClientsCounts[this.current] + changeCount
+            });
     }
 
     @action
