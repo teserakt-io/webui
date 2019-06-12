@@ -27,6 +27,12 @@ h1 {
   color: $blue-yankees;
 }
 
+.f-l {
+  float: left;
+}
+.f-r {
+  float: right;
+}
 .pointer {
   cursor: pointer;
 }
@@ -35,10 +41,7 @@ span.title {
   font-weight: bold;
 }
 
-main {
-  //-webkit-transition: transform 700ms ease, width 500ms ease;
-  //-moz-transition: transform 700ms ease, width 500ms ease;
-  //-ms-transition: transform 700ms ease, width 500ms ease;
-  //-o-transition: transform 700ms ease, width 500ms ease;
-  //transition: transform 700ms ease, width 500ms ease;
+.select {
+  background-color: #fff;
+  height: 36px;
 }

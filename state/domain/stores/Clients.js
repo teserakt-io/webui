@@ -66,6 +66,12 @@ class Clients {
     }
 
     @action
+    async setOnPage(onPage) {
+        this.onPage = onPage;
+        this.changePage(0,true);
+    }
+
+    @action
     async add(name, key) {
         const { data, status } = await api.clients.post(name, key);
 
@@ -98,7 +104,6 @@ class Clients {
         const data = await this.loadJoinedTopicsCount(client);
 
         this.joinedTopicsCounts = {...this.joinedTopicsCounts, [client]: data};
-        console.log(this.joinedTopicsCounts);
     }
 
     @action

@@ -53,7 +53,11 @@ class TopicsTableProvider extends React.Component<Props> {
 
     onPageChange = (page) => {
         this.props.store.domain.topics.changePage(page.selected, true);
-    }
+    };
+
+    handleOnPageChange = (onPage) => {
+        this.props.store.domain.topics.setOnPage(onPage, true);
+    };
 
     openModalClients = (topic) => {
         this.props.store.domain.topics.setCurrent(topic);
@@ -92,6 +96,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 joinedClientsCounts={this.props.store.domain.topics.joinedClientsCounts}
                 count={this.props.store.domain.topics.getCount()}
                 onPageChange={this.onPageChange}
+                handleOnPageChange={this.handleOnPageChange}
                 page={this.props.store.domain.topics.getPage()}
                 openModalClients={this.openModalClients}
             />

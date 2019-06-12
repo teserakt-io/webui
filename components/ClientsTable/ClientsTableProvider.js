@@ -33,7 +33,7 @@ class ClientsTableProvider extends React.Component<Props> {
         }).catch(() => {
             NotificationManager.error(AppStrings.CLIENT_REMOVED_ERROR);
         });
-    }
+    };
 
     openModal = () => {
         this.props.store.view.modal.open(ModalProvider.types.CLIENT_FORM, {
@@ -70,9 +70,13 @@ class ClientsTableProvider extends React.Component<Props> {
         });
     };
 
-    onPageChange = (page) => {
+    handlePageChange = (page) => {
         this.props.store.domain.clients.changePage(page.selected, true);
-    }
+    };
+
+    handleOnPage = (onPage) => {
+        this.props.store.domain.clients.setOnPage(onPage);
+    };
 
     render() {
         return (
@@ -83,7 +87,8 @@ class ClientsTableProvider extends React.Component<Props> {
                 clients={this.props.store.domain.clients.getClients()}
                 joinedTopicsCounts={this.props.store.domain.clients.joinedTopicsCounts}
                 count={this.props.store.domain.clients.getCount()}
-                onPageChange={this.onPageChange}
+                handlePageChange={this.handlePageChange}
+                handleOnPage={this.handleOnPage}
                 page={this.props.store.domain.clients.getPage()}
             />
         )

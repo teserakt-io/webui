@@ -13,6 +13,7 @@ import Icon from '../../common/Icon/Icon'
 import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
 import Pagination from "../../Pagination/Pagination";
 import FontAwesome from 'react-fontawesome';
+import OnPage from "../../Pagination/OnPage";
 
 type Props = {
     clients: Array<String>,
@@ -54,6 +55,9 @@ class ClientsTable extends React.Component<Props> {
                     <ClientNameForm submit={this.props.removeClient} submitText={'DELETE CLIENT'}/>
                 </div>
 
+                <div className={'f-r'}>
+                    <OnPage onChange={this.props.handleOnPage} options={[10, 50, 100]}/>
+                </div>
                 <Table>
                     <TableHead>
                         <TableRow border>
@@ -69,7 +73,7 @@ class ClientsTable extends React.Component<Props> {
                 </Table>
                 <Pagination
                     count={this.props.count}
-                    onPageChange={this.props.onPageChange}
+                    onPageChange={this.props.handlePageChange}
                     forcePage={this.props.page}/>
             </React.Fragment>
         )

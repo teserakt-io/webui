@@ -66,6 +66,12 @@ class Topics {
         await this.load(withCounts);
     }
 
+    @action
+    setOnPage(onPage, withCounts = false) {
+        this.onPage = onPage;
+        this.changePage(0, withCounts);
+    }
+
 
     @action
     addTopics(topics) {
