@@ -52,7 +52,7 @@ class TopicsTableProvider extends React.Component<Props> {
     }
 
     onPageChange = (page) => {
-        this.props.store.domain.topics.changePage(page.selected);
+        this.props.store.domain.topics.changePage(page.selected, true);
     }
 
     openModalClients = (topic) => {
@@ -68,7 +68,7 @@ class TopicsTableProvider extends React.Component<Props> {
                     count: this.props.store.domain.clients.getCount(),
                 })
             }).catch((e) => {
-            console.log(e);
+                console.log(e);
         });
     };
 
@@ -89,7 +89,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 openModal={this.openAddTopicForm}
                 removeTopic={this.removeTopic}
                 topics={this.props.store.domain.topics.getTopics()}
-                joinedClientsCounts={this.props.store.domain.topics.getJoinedClientsCounts()}
+                joinedClientsCounts={this.props.store.domain.topics.joinedClientsCounts}
                 count={this.props.store.domain.topics.getCount()}
                 onPageChange={this.onPageChange}
                 page={this.props.store.domain.topics.getPage()}

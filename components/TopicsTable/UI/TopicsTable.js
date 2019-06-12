@@ -26,6 +26,7 @@ type Props = {
 
 class TopicsTable extends React.Component<Props> {
     renderClients() {
+        console.log();
         return this.props.topics.map((topic: Topic, index) => (
             <TableRow key={index}>
                 <TableCell label="#" small center>{index + 1}</TableCell>

@@ -26,7 +26,6 @@ class Topics {
     getCount = () => this.count;
     getPage = () => this.page;
     getJoinedClients = () => this.joinedClients;
-    getJoinedClientsCounts = () => this.joinedClientsCounts;
 
     addLog(cmd, payload = {}) {
         if(this.logger === null)
@@ -51,24 +50,20 @@ class Topics {
     async load(withCounts = false) {
         const offset = this.page * this.onPage;
         const count = this.onPage;
-        const { data } = await api.topics.get(offset, count);
+        const {data} = await api.topics.get(offset, count);
         this.addLog("get_topics", {
             offset: offset,
             count: count,
         });
 
         this.topics = data ? data : [];
-        if(withCounts) {
-            this.topics.map(async (topic) => {
-                this.joinedClientsCounts[topic] = await this.loadJoinedClientsCount(topic);
-            });
-        }
+        if(withCounts) this.updateJoinedClientsCounts();
     }
 
     @action
-    async changePage(page) {
+    async changePage(page, withCounts = false) {
         this.page = page;
-        await this.load();
+        await this.load(withCounts);
     }
 
 
@@ -107,7 +102,7 @@ class Topics {
         const {data} = await api.topics.joinedClientsCount(topic || this.current);
 
         this.joinedClientsCount = data;
-        this.addLog("joined_clients_count", {topic: this.current});
+        this.addLog("joined_clients_count", {topic: topic || this.current});
 
         return data;
     }
@@ -128,22 +123,42 @@ class Topics {
     }
 
     @action
+    async updateJoinedClientCount(topic){
+        const data = await this.loadJoinedClientsCount(topic);
+
+        this.joinedClientsCounts = {...this.joinedClientsCounts, [topic]: data};
+    }
+
+    @action
+    async updateJoinedClientsCounts() {
+        this.topics.map((topic) => {
+            this.updateJoinedClientCount(topic);
+        });
+    }
+
+    @action
     async setClients(clients) {
         if(this.getJoinedClients().length === 0)
             await this.loadJoinedClients();
 
+        const requests = [];
+        let changeCount = 0;
         const forCreation = clients.filter(client => this.joinedClients.indexOf(client) === -1);
         const forRemove = this.joinedClients.filter(joinedClient => clients.indexOf(joinedClient) === -1);
         forCreation.map((client) => {
-            this.joinClient(client).then(() => {
+            requests.push(this.joinClient(client).then(() => {
                 this.joinedClients.push(client);
-            });
+                changeCount++;
+            }));
         });
         forRemove.map(client => {
-            this.splitClient(client).then(() => {
+            requests.push(this.splitClient(client).then(() => {
                 this.joinedClients.filter(item => item !== client);
-            });
+                changeCount--;
+            }));
         });
+
+        Promise.all(requests).then(() => this.joinedClientsCounts = {...this.joinedClientsCounts, [this.current]: this.joinedClientsCounts[this.current] + changeCount});
     }
 
     @action
