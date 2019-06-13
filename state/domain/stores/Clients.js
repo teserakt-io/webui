@@ -199,6 +199,18 @@ class Clients {
             this.spitTopics(item);
         });
     }
+
+    @action
+    async reset() {
+        const onRequest = 100;
+        for(let i = 0; i < this.count;) {
+            const { data } = await api.clients.get(i, onRequest);
+
+            data.map(item => {
+                this.deleteClient(item);
+            });
+        }
+    }
 }
 
 export default Clients

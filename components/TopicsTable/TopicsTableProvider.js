@@ -8,6 +8,8 @@ import AppStrings from '../../utils/AppStrings'
 import ModalProvider from '../common/Modal/ModalProvider'
 import type { SelectOption } from 'components/common/FormElements/Select/Select'
 import ClientsTable from "../ClientsTable/UI/ClientsTable";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 type Props = {
     store: Store,
@@ -87,6 +89,19 @@ class TopicsTableProvider extends React.Component<Props> {
             });
     };
 
+    handleReset = () => {
+        const ResetSwal = withReactContent(Swal);
+        ResetSwal.fire({
+            type: 'warning',
+            title: 'Reset all topics?',
+            showCancelButton: true,
+        }).then((res) => {
+            if(res.value) {
+                this.props.store.domain.topics.reset();
+            }
+        })
+    };
+
     render() {
         return (
             <TopicsTable
@@ -99,6 +114,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 handleOnPageChange={this.handleOnPageChange}
                 page={this.props.store.domain.topics.getPage()}
                 openModalClients={this.openModalClients}
+                handleReset={this.handleReset}
             />
         )
     }

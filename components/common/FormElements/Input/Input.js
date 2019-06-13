@@ -26,9 +26,9 @@ class Input extends React.Component<Props> {
 
         return (
             <div className={this.props.inline ? 'input-inline' : 'input'}>
-                <label className={classes.label} htmlFor={this.props.id}>
+                {this.props.label && <label className={classes.label} htmlFor={this.props.id}>
                     {this.props.label}
-                </label>
+                </label>}
                 <input
                     id={this.props.id}
                     className="input__elem"

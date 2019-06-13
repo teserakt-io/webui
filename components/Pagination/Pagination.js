@@ -14,7 +14,7 @@ function Pagination(props: Props) {
         <React.Fragment>
             <ReactPaginate
                 pageCount={pageCount}
-                containerClassName={'paginator'}
+                containerClassName={'paginator ' + props.className}
                 pageClassName={'page'}
                 previousLabel={'‹'}
                 nextLabel={'›'}

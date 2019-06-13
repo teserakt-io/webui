@@ -47,7 +47,7 @@ class ClientsTable extends React.Component<Props> {
                     danger
                     uppercase
                     medium
-                    className="mb-20 mt-5"
+                    className="mb-20"
                     onClick={this.props.openModal}>
                     Add client
                 </Button>
@@ -74,7 +74,19 @@ class ClientsTable extends React.Component<Props> {
                 <Pagination
                     count={this.props.count}
                     onPageChange={this.props.handlePageChange}
-                    forcePage={this.props.page}/>
+                    forcePage={this.props.page}
+                    className={'f-l'}
+                />
+                    <div className={'f-r'}>
+                        <Button
+                            danger
+                            uppercase
+                            medium
+                            className="mt-15"
+                            onClick={this.props.handleReset}>
+                            Reset
+                        </Button>
+                    </div>
             </React.Fragment>
         )
     }

@@ -190,6 +190,18 @@ class Topics {
             client: client,
         })
     }
+
+    @action
+    async reset() {
+        const onRequest = 100;
+        for(let i = 0; i < this.count;) {
+            const { data } = await api.topics.get(i, onRequest);
+
+            data.map(item => {
+                this.remove(item);
+            });
+        }
+    }
 }
 
 export default Topics

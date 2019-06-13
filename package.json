@@ -43,6 +43,8 @@
     "react-paginate": "^6.3.0",
     "react-select": "^2.4.4",
     "sass-loader": "^7.1.0",
+    "sweetalert2": "^8.12.1",
+    "sweetalert2-react-content": "^1.1.0",
     "url-loader": "^1.1.2",
     "validator": "^11.0.0",
     "webpack": "^4.33.0"

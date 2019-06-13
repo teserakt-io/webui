@@ -9,6 +9,13 @@ import { Store } from '../../state/Store'
 import api from '../../api/api';
 import AppStrings from '../../utils/AppStrings'
 import { NotificationManager } from 'react-notifications'
+import dynamic from 'next/dynamic';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+// const SweetAlert = dynamic(import('sweetalert2-react'), {
+//     ssr: false
+// });
+
 
 type Props = {
     store: Store,
@@ -18,6 +25,9 @@ type Props = {
 // @Services.inject([Services.type.COMMAND_HANDLER])
 @observer
 class ClientsTableProvider extends React.Component<Props> {
+    state = {
+        reset: false,
+    };
     async componentDidMount() {
         this.props.store.domain.clients.load(true);
     }
@@ -78,6 +88,19 @@ class ClientsTableProvider extends React.Component<Props> {
         this.props.store.domain.clients.setOnPage(onPage);
     };
 
+    handleReset = () => {
+        const ResetSwal = withReactContent(Swal);
+        ResetSwal.fire({
+            type: 'warning',
+            title: 'Reset all clients?',
+            showCancelButton: true,
+        }).then((res) => {
+            if(res.value) {
+                this.props.store.domain.clients.reset();
+            }
+        })
+    };
+
     render() {
         return (
             <ClientsTable
@@ -90,6 +113,7 @@ class ClientsTableProvider extends React.Component<Props> {
                 handlePageChange={this.handlePageChange}
                 handleOnPage={this.handleOnPage}
                 page={this.props.store.domain.clients.getPage()}
+                handleReset={this.handleReset}
             />
         )
     }

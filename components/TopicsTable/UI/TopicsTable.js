@@ -80,7 +80,18 @@ class TopicsTable extends React.Component<Props> {
                     count={this.props.count}
                     onPageChange={this.props.handlePageChange}
                     forcePage={this.props.page}
+                    className={'f-l'}
                 />
+                <div className={'f-r'}>
+                    <Button
+                        danger
+                        uppercase
+                        medium
+                        className="mt-15"
+                        onClick={this.props.handleReset}>
+                        Reset
+                    </Button>
+                </div>
             </React.Fragment>
         )
     }
