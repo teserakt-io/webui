@@ -27,7 +27,6 @@ class Clients {
             this.logger = Store.getInstance().domain.log;
 
         this.logger.addLog({
-            date: new Date,
             cmd: cmd,
             payload: payload,
         });

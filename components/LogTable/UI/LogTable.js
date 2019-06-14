@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-// import ReactJson from 'react-json-view'
 import { observer } from 'mobx-react'
 import {
     Table,
@@ -15,6 +14,7 @@ import dynamic from 'next/dynamic';
 const ReactJson = dynamic(import('react-json-view'), {
     ssr: false
 });
+let moment = require('moment');
 
 type Props = {
     logs: Array<LogType>
@@ -26,7 +26,7 @@ class LogTable extends React.Component<Props> {
         return this.props.logs.map((log, index) => (
             <TableRow key={index}>
                 <TableCell label="Date" small center>
-                    <span>{new Date(log.date).toLocaleString()}</span>
+                    <span>{moment(log.date).format("YYYYMMDD-HHMM")}</span>
                 </TableCell>
                 <TableCell label="Command">
                     <i>{log.cmd}</i>

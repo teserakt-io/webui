@@ -14,6 +14,8 @@ class Log {
 
     @action
     addLog(log: LogType) {
+        if(!log.date)
+            log.date = new Date();
         this.logs.unshift(log)
     }
 }

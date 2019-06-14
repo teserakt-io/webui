@@ -20,13 +20,6 @@ class StatCards extends React.Component<Props> {
                         desc="Clients"
                         icon={Icon.d.CLIENT}/>
                 </Link>
-                <Link to={routes.clients.path}>
-                    <Card
-                        blue
-                        title={0}
-                        desc="Active clients"
-                        icon={Icon.d.CLIENT}/>
-                </Link>
                 <Link to={routes.topics.path}>
                     <Card
                         darkBlue
