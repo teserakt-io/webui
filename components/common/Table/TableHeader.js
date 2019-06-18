@@ -16,7 +16,7 @@ class TableHeader extends React.Component<Props> {
         }
 
         return (
-            <th className={classes.root}>
+            <th className={classes.root} style={this.props.style}>
                 {this.props.children}
             </th>
         )

@@ -25,7 +25,7 @@ class LogTable extends React.Component<Props> {
     renderLogs() {
         return this.props.logs.map((log, index) => (
             <TableRow key={index}>
-                <TableCell label="Date" small center>
+                <TableCell label="Date" center>
                     <span>{moment(log.date).format("YYYYMMDD-HHMM")}</span>
                 </TableCell>
                 <TableCell label="Command">
@@ -46,7 +46,7 @@ class LogTable extends React.Component<Props> {
             <Table className="mt-40">
                 <TableHead>
                     <TableRow border>
-                        <TableHeader small>Date</TableHeader>
+                        <TableHeader>Date</TableHeader>
                         <TableHeader>Command</TableHeader>
                         <TableHeader>Payload</TableHeader>
                     </TableRow>
