@@ -15,6 +15,7 @@ class NavigationProvider extends React.Component<Props> {
                 routes.dashboard,
                 routes.clients,
                 routes.topics,
+                routes.ae,
             ]}/>
     }
 }

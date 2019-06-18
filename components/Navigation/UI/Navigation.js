@@ -27,7 +27,12 @@ class Navigation extends Component<Props> {
                 href={route.path}>
                 <a className="nav">
                     <li>
-                        <Icon d={route.icon} viewBoxY={32} viewBoxX={34}/>
+                        {route.iconType === 'fa' && <React.Fragment>
+                            {route.icon}
+                        </React.Fragment>}
+                        {route.iconType !== 'fa' && <React.Fragment>
+                            <Icon d={route.icon} viewBoxY={32} viewBoxX={34}/>
+                        </React.Fragment>}
                         <span>{route.name}</span>
                     </li>
                 </a>
