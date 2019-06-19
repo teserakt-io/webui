@@ -1,6 +1,7 @@
 import Clients from './stores/Clients'
 import Topics from './stores/Topics'
 import Log from './stores/Log'
+import AE from "./stores/ae/AE";
 
 class DomainStore {
     rootStore = null;
@@ -13,6 +14,7 @@ class DomainStore {
         this.clients = new Clients();
         this.topics = new Topics();
         this.log = new Log();
+        this.ae = new AE();
     }
 }
 
