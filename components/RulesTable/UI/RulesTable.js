@@ -10,15 +10,24 @@ import {
 } from "../../common/Table";
 import FontAwesome from "react-fontawesome";
 import Icon from "../../common/Icon/Icon";
+import Button from "../../common/Buttons/Button/Button";
 
 type Props = {
     rules: Function,
+    createModal: Function,
 };
 
 function RulesTable(props: Props) {
-    console.log(props);
     return (
-        <Fragment>
+        <div>
+            <Button
+                danger
+                uppercase
+                medium
+                className="mb-20"
+                onClick={props.createModal}>
+                Add Rule
+            </Button>
             <Table>
                 <TableHead>
                     <TableRow border>
@@ -45,7 +54,7 @@ function RulesTable(props: Props) {
                                     <span onClick={() => console.log(rule)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>
                                     </span>
-                                                    <span onClick={() => console.log(rule)} role="presentation">
+                                    <span onClick={() => console.log(rule)} role="presentation">
                                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
                                     </span>
                                 </TableCell>
@@ -54,7 +63,7 @@ function RulesTable(props: Props) {
                     })}
                 </TableBody>
             </Table>
-        </Fragment>
+        </div>
     );
 }
 

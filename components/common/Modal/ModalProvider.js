@@ -9,6 +9,7 @@ import KeyForm from '../../Forms/KeyForm/KeyForm'
 import { Store } from '../../../state/Store'
 import ClientTopicsForm from "../../Forms/ClientForm/ClientTopicsForm";
 import TopicClientsForm from "../../Forms/TopicForm/TopicClientsForm";
+import RuleForm from "../../Forms/RuleForm/RuleForm";
 
 type Props = {
     store: Store
@@ -23,6 +24,7 @@ class ModalProvider extends React.Component<Props> {
         TOPIC_FORM: 'TOPIC_FORM',
         KEY_FORM: 'KEY_FORM',
         TOPIC_CLIENTS_FORM: 'TOPIC_CLIENTS_FORM',
+        RULE_FORM: 'RULE_FORM',
     };
 
     getModalComponent(modalType: string) {
@@ -36,7 +38,9 @@ class ModalProvider extends React.Component<Props> {
             case ModalProvider.types.TOPIC_CLIENTS_FORM:
                 return TopicClientsForm;
             case ModalProvider.types.KEY_FORM:
-                return KeyForm
+                return KeyForm;
+            case ModalProvider.types.RULE_FORM:
+                return RuleForm;
         }
     }
 
