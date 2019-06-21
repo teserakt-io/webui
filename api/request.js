@@ -1,6 +1,7 @@
 const axios = require('axios');
-const instance = axios.create({
-    baseURL: '/api',
+export const c2 = axios.create({
+    baseURL: '/c2',
 });
-
-export default instance;
+export const ae = axios.create({
+    baseURL: '/ae'
+});

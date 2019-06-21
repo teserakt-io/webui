@@ -23,9 +23,9 @@ class Store {
 
         class EnhancedComponent extends React.Component {
             render() {
-                return <Component store={store} {...this.props}/>
-            }
+            return <Component store={store} {...this.props}/>
         }
+    }
 
         return Object.assign(EnhancedComponent, Component)
     }

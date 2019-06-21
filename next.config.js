@@ -1,3 +1,8 @@
+require('dotenv').config()
+
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
+
 const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 module.exports = withSass(withCss({
@@ -12,20 +17,19 @@ module.exports = withSass(withCss({
                 }
             }
         });
+
+        config.plugins = config.plugins || []
+        config.plugins = [
+            ...config.plugins,
+            new Dotenv({
+                path: path.join(__dirname, '.env'),
+                systemvars: true
+            })
+        ];
+
         return config
     },
     publicRuntimeConfig: {
         ...process.env,
-    }
+    },
 }));
-// module.exports = withCss(withSass({
-//     webpack:(config, options) => {
-//         // console.log(options.defaultLoaders);
-//         // config.module.rules.push({
-//         //     test: /\.css$/,
-//         //     use: options.defaultLoaders.sass
-//         // });
-//         // console.log(config.module.rules);
-//         return config;
-//     }
-// }));

@@ -23,6 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "classnames": "^2.2.6",
     "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
     "file-loader": "^3.0.1",
     "flow-bin": "^0.98.1",

@@ -1,5 +1,7 @@
-async function get() {
+import {ae} from './request';
 
+async function get() {
+    return ae.get('/rules');
 }
 
 async function post() {

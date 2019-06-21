@@ -4,9 +4,15 @@ const next = require('next');
 require('dotenv').config();
 
 const devProxy = {
-    '/api': {
+    '/c2': {
         target: process.env.C2_URL,
-        pathRewrite: { '^/api': '' },
+        pathRewrite: { '^/c2': '' },
+        changeOrigin: true,
+        secure: false,
+    },
+    '/ae': {
+        target: process.env.AE_URL,
+        pathRewrite: { '^/ae': '' },
         changeOrigin: true,
         secure: false,
     }
