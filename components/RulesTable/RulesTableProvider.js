@@ -9,7 +9,6 @@ class RulesTableProvider extends Component{
         this.props.store.view.modal.open(ModalProvider.types.RULE_FORM, {
 
         });
-        console.log("open");
     }
 
     render() {

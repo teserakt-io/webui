@@ -11,6 +11,7 @@ import {
 import FontAwesome from "react-fontawesome";
 import Icon from "../../common/Icon/Icon";
 import Button from "../../common/Buttons/Button/Button";
+import Pagination from "../../Pagination/Pagination";
 
 type Props = {
     rules: Function,
@@ -63,6 +64,12 @@ function RulesTable(props: Props) {
                     })}
                 </TableBody>
             </Table>
+            <Pagination
+                count={() => {}}
+                onPageChange={() => {}}
+                forcePage={0}
+                className={'f-l'}
+            />
         </div>
     );
 }
