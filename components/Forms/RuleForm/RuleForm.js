@@ -14,11 +14,12 @@ import {
 @Store.inject
 class RuleForm extends Component{
     render() {
+        const ae = this.props.store.domain.ae;
+        const types = ae.rules.types;
         const triggers = this.props.store.domain.ae.triggers.get();
-        console.log(triggers);
         return (
             <form className="modal__form">
-                <CustomSelect label={'Type'} name={'type'} onChange={(e) => console.log(e)} options={[]}/>
+                <CustomSelect label={'Type'} name={'type'} onChange={(e) => console.log(e)} options={types}/>
                 <Input label={'Description'} name={'description'} onChange={e => console.log(e)}/>
                 <div>
                     Triggers:

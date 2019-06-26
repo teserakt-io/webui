@@ -5,7 +5,6 @@ import Overlay from '../../Overlay/Overlay'
 import Modal from './UI/Modal'
 import ClientForm from '../../Forms/ClientForm/ClientForm'
 import TopicForm from '../../Forms/TopicForm/TopicForm'
-import KeyForm from '../../Forms/KeyForm/KeyForm'
 import { Store } from '../../../state/Store'
 import ClientTopicsForm from "../../Forms/ClientForm/ClientTopicsForm";
 import TopicClientsForm from "../../Forms/TopicForm/TopicClientsForm";
@@ -22,7 +21,6 @@ class ModalProvider extends React.Component<Props> {
         CLIENT_FORM: 'CLIENT_FORM',
         CLIENT_TOPICS_FORM: 'CLIENT_TOPICS_FORM',
         TOPIC_FORM: 'TOPIC_FORM',
-        KEY_FORM: 'KEY_FORM',
         TOPIC_CLIENTS_FORM: 'TOPIC_CLIENTS_FORM',
         RULE_FORM: 'RULE_FORM',
     };
@@ -37,8 +35,6 @@ class ModalProvider extends React.Component<Props> {
                 return TopicForm;
             case ModalProvider.types.TOPIC_CLIENTS_FORM:
                 return TopicClientsForm;
-            case ModalProvider.types.KEY_FORM:
-                return KeyForm;
             case ModalProvider.types.RULE_FORM:
                 return RuleForm;
         }

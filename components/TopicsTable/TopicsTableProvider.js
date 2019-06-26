@@ -19,7 +19,6 @@ type Props = {
 }
 
 @Store.inject
-// @Services.inject([Services.type.COMMAND_HANDLER])
 @observer
 class TopicsTableProvider extends React.Component<Props> {
     addTopic = (topic: string, key: string, clients: Array<SelectOption>) => {

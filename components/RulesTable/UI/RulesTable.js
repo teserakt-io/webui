@@ -42,20 +42,20 @@ function RulesTable(props: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.rules.map((rule, index) => {
+                    {props.rules.map((rule) => {
                         return (
-                            <TableRow key={index}>
-                                <TableCell label={'#'} small center>{index + 1}</TableCell>
+                            <TableRow key={rule.id}>
+                                <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'}>{rule.type}</TableCell>
                                 <TableCell label={'Description'}>{rule.description}</TableCell>
-                                <TableCell label={'Last executed'}>{rule.last}</TableCell>
-                                <TableCell label={'# Triggers'}>{rule.triggers}</TableCell>
-                                <TableCell label={'# Targets'}>{rule.targets}</TableCell>
+                                <TableCell label={'Last executed'}>{rule.lastExectued}</TableCell>
+                                <TableCell label={'#Triggers'}>{rule.triggers}</TableCell>
+                                <TableCell label={'#Targets'}>{rule.targets}</TableCell>
                                 <TableCell label={'Actions'} small center className={'actions'}>
                                     <span onClick={() => console.log(rule)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>
                                     </span>
-                                    <span onClick={() => console.log(rule)} role="presentation">
+                                    <span onClick={() => props.removeRule(rule.id)} role="presentation">
                                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
                                     </span>
                                 </TableCell>

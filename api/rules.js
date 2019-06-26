@@ -11,9 +11,10 @@ async function post() {
 async function put() {
 
 }
-async function remove() {
-
+async function remove(id) {
+    return await ae.delete(`/rules/${id}`);
 }
+
 export default {
     get: get,
     post: post,
