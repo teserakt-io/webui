@@ -4,8 +4,13 @@ async function get() {
     return ae.get('/rules');
 }
 
-async function post() {
-
+async function post(action, description, triggers = [], targets = []) {
+    return ae.post('/rules', {
+        action,
+        description,
+        triggers,
+        targets
+    });
 }
 
 async function put() {

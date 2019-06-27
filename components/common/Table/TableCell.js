@@ -4,8 +4,8 @@ import cx from 'classnames'
 
 type Props = {
     children: any,
-    small: ?boolean,
-    center: ?boolean,
+    small?: ?boolean,
+    center?: ?boolean,
     label: ?string
 }
 

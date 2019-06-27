@@ -3,7 +3,7 @@ import * as React from 'react'
 
 type Props = {
     children: any,
-    border: ?boolean
+    border?: ?boolean
 }
 
 class TableRow extends React.Component<Props> {

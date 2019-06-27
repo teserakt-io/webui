@@ -14,8 +14,9 @@ import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 
 type Props = {
-    rules: Function,
+    rules: Array,
     createModal: Function,
+    removeRule: Function,
 };
 
 function RulesTable(props: Props) {
@@ -36,8 +37,8 @@ function RulesTable(props: Props) {
                         <TableHeader>Type</TableHeader>
                         <TableHeader>Description</TableHeader>
                         <TableHeader>Last executed</TableHeader>
-                        <TableHeader small># Triggers</TableHeader>
-                        <TableHeader small># Targets</TableHeader>
+                        <TableHeader small>#Triggers</TableHeader>
+                        <TableHeader small>#Targets</TableHeader>
                         <TableHeader small>Actions</TableHeader>
                     </TableRow>
                 </TableHead>
@@ -46,11 +47,11 @@ function RulesTable(props: Props) {
                         return (
                             <TableRow key={rule.id}>
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
-                                <TableCell label={'Type'}>{rule.type}</TableCell>
+                                <TableCell label={'Type'}>{rule.action}</TableCell>
                                 <TableCell label={'Description'}>{rule.description}</TableCell>
                                 <TableCell label={'Last executed'}>{rule.lastExectued}</TableCell>
-                                <TableCell label={'#Triggers'}>{rule.triggers}</TableCell>
-                                <TableCell label={'#Targets'}>{rule.targets}</TableCell>
+                                <TableCell label={'#Triggers'}>{rule.triggers || 0}</TableCell>
+                                <TableCell label={'#Targets'}>{rule.targets || 0}</TableCell>
                                 <TableCell label={'Actions'} small center className={'actions'}>
                                     <span onClick={() => console.log(rule)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>

@@ -31,6 +31,10 @@ class CustomSelect extends React.Component<Props> {
         const options = Array.isArray(this.props.options) ?
             this.props.options.map(item => ({value: item, label: item}))
             : this.props.options;
+        const value = typeof this.props.value === "object" ? this.props.value : {
+            label: this.props.value,
+            value: this.props.value,
+        };
         return (
             <div className="input">
                 <label className="input__label" htmlFor={this.props.name}>
@@ -40,7 +44,7 @@ class CustomSelect extends React.Component<Props> {
                     {...this.props}
                     className={classes.root}
                     name={this.props.name}
-                    value={this.props.value}
+                    value={value}
                     onChange={this.props.onChange}
                     options={options}/>
             </div>

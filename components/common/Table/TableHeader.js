@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 type Props = {
     children: any,
-    small: ?boolean
+    small?: ?boolean
 }
 
 class TableHeader extends React.Component<Props> {

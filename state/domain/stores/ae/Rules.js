@@ -27,6 +27,17 @@ class Rules {
         // });
     }
 
+    async add(action, description, triggers = [], targets = []) {
+        const {data} = await api.rules.post(
+            action,
+            description,
+            triggers,
+            targets,
+        );
+
+        this.rules.push(data.rule);
+    }
+
     async remove(id) {
         const {data} = await api.rules.remove(id);
 
