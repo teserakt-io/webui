@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 type Props = {
     children: any,
-    className: ?String
+    className?: ?String
 }
 
 class Table extends React.Component<Props> {

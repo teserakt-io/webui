@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Store} from '../../../state/Store';
 import CustomSelect from "../../common/FormElements/Select/Select";
 import Input from "../../common/FormElements/Input/Input";
+import Button from "../../common/Buttons/Button/Button";
 import {
     Table,
     TableHead,
@@ -10,7 +11,7 @@ import {
     TableRow,
     TableBody, TableCell,
 } from "../../common/Table";
-import Button from "../../common/Buttons/Button/Button";
+import TriggersTable from "../../TriggersTable/TriggersTable";
 
 @Store.inject
 class RuleForm extends Component{
@@ -25,6 +26,7 @@ class RuleForm extends Component{
         this.state = {
             [RuleForm.formKeys.TYPE]: props.store.domain.ae.rules.types[0],
             [RuleForm.formKeys.DESCRIPTION]: "",
+            triggerEdit: false,
         };
     }
 
@@ -48,12 +50,24 @@ class RuleForm extends Component{
         this.props.submit(type, description)
     };
 
+    handleNewTrigger = (e) => {
+        e.preventDefault();
+        this.setState({ triggerEdit: true });
+        this.props.store.view.form.getTrigger().clear();
+    };
+
+    handleTriggerTypeChange = (selected) => {
+        this.props.store.view.form.getTrigger().setType(selected.value);
+        this.forceUpdate();
+    };
+
     render() {
         console.log("props: ", this.props);
         console.log("state: ", this.state);
         const ae = this.props.store.domain.ae;
         const types = ae.rules.types;
         const triggers = this.props.store.domain.ae.triggers.get();
+        const targets = this.props.store.domain.ae.targets.get();
         return (
             <form className="modal__form" method={'post'}>
                 <CustomSelect label={'Type'}
@@ -67,34 +81,15 @@ class RuleForm extends Component{
                        name={'description'}
                        value={this.state[RuleForm.formKeys.DESCRIPTION]}
                        onChange={this.onChange}/>
-                <div>
-                    Triggers:
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableHeader>#</TableHeader>
-                                <TableHeader>Type</TableHeader>
-                                <TableHeader>Settings</TableHeader>
-                                <TableHeader>Actions</TableHeader>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {triggers.map((trigger, index) => {
-                                return (
-                                    <TableRow border>
-                                        <TableCell label={'#'}>{index + 1}</TableCell>
-                                        <TableCell label={'Type'}>{trigger.type}</TableCell>
-                                        <TableCell label={'Settings'}>{trigger.settings}</TableCell>
-                                        <TableCell label={'Actions'}>
 
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </div>
-
+                <TriggersTable
+                    triggers={triggers}
+                    newTrigger={this.handleNewTrigger}
+                    current={this.props.store.view.form.getTrigger()}
+                    edit={this.state.triggerEdit}
+                    types={this.props.store.domain.ae.triggers.types}
+                    onTypeChange={this.handleTriggerTypeChange}
+                />
                 <div>
                     Targets:
                     <Table>
@@ -107,7 +102,7 @@ class RuleForm extends Component{
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {triggers.map((target, index) => {
+                            {targets.map((target, index) => {
                                 return (
                                     <TableRow border>
                                         <TableCell label={'#'}>{index + 1}</TableCell>
