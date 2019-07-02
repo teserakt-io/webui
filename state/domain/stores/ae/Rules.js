@@ -8,11 +8,6 @@ class Rules {
     @observable onPage = 10;
     @observable page = 0;
 
-    types = [
-        "UNDEFINED_ACTION",
-        "KEY_ROTATION",
-    ];
-
     get = () => this.rules;
     getCurrent = () => this.current;
     getOnPage = () => this.onPage;

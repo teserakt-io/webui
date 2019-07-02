@@ -9,13 +9,14 @@ type Props = {
 };
 
 function Settings(props: Props) {
+    console.log("settings: ", props);
     switch (props.type) {
         case 'TIME_INTERVAL':
-            return <TimeIntervalSettings/>;
+            return <TimeIntervalSettings {...props}/>;
         case 'CLIENT_SUBSCRIBED':
-            return SubscribeSettings;
+            return <SubscribeSettings {...props}/>;
         default:
-            return UndefinedSettings;
+            return <UndefinedSettings {...props}/>;
     }
 }
 

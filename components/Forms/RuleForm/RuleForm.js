@@ -12,8 +12,11 @@ import {
     TableBody, TableCell,
 } from "../../common/Table";
 import TriggersTable from "../../TriggersTable/TriggersTable";
+import Rule from '../../../state/view/stores/Forms/Rule';
+import {observer} from "mobx-react";
 
 @Store.inject
+@observer
 class RuleForm extends Component{
     static formKeys = {
         TYPE: "type",
@@ -24,18 +27,19 @@ class RuleForm extends Component{
         super(props);
 
         this.state = {
-            [RuleForm.formKeys.TYPE]: props.store.domain.ae.rules.types[0],
-            [RuleForm.formKeys.DESCRIPTION]: "",
             triggerEdit: false,
         };
+
+        this.triggerForm = this.props.store.view.form.getTrigger();
+        this.ruleForm = this.props.store.view.form.getRule();
     }
 
     onChange = (e: Object) => {
-        this.setState({ [e.target.id]: e.target.value });
+        this.ruleForm.set(e.target.id, e.target.value);
     };
 
     onSelectChange = (option: Object) => {
-        this.setState({ [RuleForm.formKeys.TYPE]: option.value });
+        this.ruleForm.setType(option.value);
     };
 
     isValid() {
@@ -57,38 +61,53 @@ class RuleForm extends Component{
     };
 
     handleTriggerTypeChange = (selected) => {
-        this.props.store.view.form.getTrigger().setType(selected.value);
+        this.triggerForm.setType(selected.value);
         this.forceUpdate();
     };
 
+    handleSettingsChange = (e) => {
+        this.triggerForm.setSetting(e.target.id, e.target.value);
+        this.forceUpdate();
+    };
+
+    handleTriggerSave = (e) => {
+        e.preventDefault();
+        const data = this.triggerForm.serialize();
+        this.ruleForm.addTrigger(data);
+        this.setState({ triggerEdit: false });
+    };
+
+    handleRemoveTrigger = (index) => {
+        this.ruleForm.removeTrigger(index);
+    };
+
     render() {
-        console.log("props: ", this.props);
-        console.log("state: ", this.state);
-        const ae = this.props.store.domain.ae;
-        const types = ae.rules.types;
-        const triggers = this.props.store.domain.ae.triggers.get();
+        const triggers = this.ruleForm.getTriggers();
         const targets = this.props.store.domain.ae.targets.get();
         return (
             <form className="modal__form" method={'post'}>
                 <CustomSelect label={'Type'}
                               name={RuleForm.formKeys.TYPE}
                               onChange={this.onSelectChange}
-                              options={types}
-                              value={this.state[RuleForm.formKeys.TYPE]}
+                              options={Rule.types}
+                              value={this.ruleForm.getType()}
                 />
                 <Input label={'Description'}
                        id={RuleForm.formKeys.DESCRIPTION}
                        name={'description'}
-                       value={this.state[RuleForm.formKeys.DESCRIPTION]}
+                       value={this.ruleForm[RuleForm.formKeys.DESCRIPTION]}
                        onChange={this.onChange}/>
 
                 <TriggersTable
                     triggers={triggers}
                     newTrigger={this.handleNewTrigger}
-                    current={this.props.store.view.form.getTrigger()}
+                    current={this.triggerForm}
                     edit={this.state.triggerEdit}
+                    remove={this.handleRemoveTrigger}
                     types={this.props.store.domain.ae.triggers.types}
                     onTypeChange={this.handleTriggerTypeChange}
+                    onSettingChange={this.handleSettingsChange}
+                    onTriggerSave={this.handleTriggerSave}
                 />
                 <div>
                     Targets:
