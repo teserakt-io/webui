@@ -5,6 +5,12 @@ async function get() {
 }
 
 async function post(action, description, triggers = [], targets = []) {
+    console.log({
+        action,
+        description,
+        triggers,
+        targets
+    });
     return ae.post('/rules', {
         action,
         description,

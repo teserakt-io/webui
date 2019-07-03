@@ -22,6 +22,16 @@ $modalWidth: 600px;
     flex-direction: column;
     align-self: center;
   }
+
+  table {
+    width: 100%;
+    .table__header {
+      padding: 6px 12px;
+    }
+    .table__cell {
+      padding: 6px 12px;
+    }
+  }
 }
 
 .modal {

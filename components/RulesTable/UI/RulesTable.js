@@ -34,9 +34,9 @@ function RulesTable(props: Props) {
                 <TableHead>
                     <TableRow border>
                         <TableHeader small>#</TableHeader>
-                        <TableHeader>Type</TableHeader>
+                        <TableHeader small>Type</TableHeader>
                         <TableHeader>Description</TableHeader>
-                        <TableHeader>Last executed</TableHeader>
+                        <TableHeader small>Last executed</TableHeader>
                         <TableHeader small>#Triggers</TableHeader>
                         <TableHeader small>#Targets</TableHeader>
                         <TableHeader small>Actions</TableHeader>
@@ -44,14 +44,16 @@ function RulesTable(props: Props) {
                 </TableHead>
                 <TableBody>
                     {props.rules.map((rule) => {
+                        const triggerCount = rule.triggers ? rule.triggers.length : 0;
+                        const targetCount = rule.targets ? rule.targets.length : 0;
                         return (
                             <TableRow key={rule.id}>
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
-                                <TableCell label={'Type'}>{rule.action}</TableCell>
-                                <TableCell label={'Description'}>{rule.description}</TableCell>
-                                <TableCell label={'Last executed'}>{rule.lastExectued}</TableCell>
-                                <TableCell label={'#Triggers'}>{rule.triggers || 0}</TableCell>
-                                <TableCell label={'#Targets'}>{rule.targets || 0}</TableCell>
+                                <TableCell label={'Type'} small>{rule.action}</TableCell>
+                                <TableCell label={'Description'} small>{rule.description}</TableCell>
+                                <TableCell label={'Last executed'} small>{rule.lastExecuted}</TableCell>
+                                <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
+                                <TableCell label={'#Targets'} small>{targetCount}</TableCell>
                                 <TableCell label={'Actions'} small center className={'actions'}>
                                     <span onClick={() => console.log(rule)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>

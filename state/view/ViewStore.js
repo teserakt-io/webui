@@ -8,7 +8,7 @@ class ViewStore {
     constructor(rootStore) {
         this.rootStore = rootStore;
         this.modal = new Modal();
-        this.form = new Forms();
+        this.forms = new Forms();
     }
 }
 

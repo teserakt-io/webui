@@ -1,9 +1,11 @@
 import Trigger from "./Trigger";
 import Rule from "./Rule";
+import Target from "./Target";
 
 class Forms {
     trigger = null;
     rule  = null;
+    target = null;
 
     getTrigger() {
         if(this.trigger === null)
@@ -17,6 +19,13 @@ class Forms {
             this.rule = new Rule();
 
         return this.rule;
+    }
+
+    getTarget() {
+        if(this.target === null)
+            this.target = new Target();
+
+        return this.target;
     }
 }
 

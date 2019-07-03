@@ -19,10 +19,11 @@ class RulesTableProvider extends Component{
         });
     };
 
-    submitRule = (type, description) => {
-        this.props.store.domain.ae.rules.add(type, description).then(() => {
-            NotificationManager.success(AppStrings.RULE_ADDED);
-            this.forceUpdate();
+    submitRule = (type, description, triggers = [], targets = []) => {
+        this.props.store.domain.ae.rules.add(type, description, triggers, targets)
+            .then(() => {
+                NotificationManager.success(AppStrings.RULE_ADDED);
+                this.forceUpdate();
         }).catch(() => {
             NotificationManager.error(AppStrings.RULE_ERROR);
         });

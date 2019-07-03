@@ -17,17 +17,23 @@ class Rules {
         const {data} = await api.rules.get();
 
         this.rules = data.rules || [];
-        // this.rules = data.rules.map(rule => {
-        //     rule.lastExectued = moment(rule.lastExectued);
-        // });
     }
 
     async add(action, description, triggers = [], targets = []) {
+        const b64triggers = triggers.map(trigger => {
+            trigger.settings = btoa(JSON.stringify(trigger.settings));
+            return trigger;
+        });
+
+        const b64targets = targets.map(target => {
+            target.settings = btoa(JSON.stringify(target.settings));
+            return target;
+        });
         const {data} = await api.rules.post(
             action,
             description,
-            triggers,
-            targets,
+            b64triggers,
+            b64targets,
         );
 
         this.rules.push(data.rule);

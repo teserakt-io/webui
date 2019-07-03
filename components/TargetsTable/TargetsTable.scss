@@ -1,17 +1,11 @@
 .table__block {
-  .table__triggers {
+  .table__targets {
     margin-bottom: 10px;
   }
-  .trigger__edit {
+  .target__edit {
     margin-bottom: 15px;
   }
   .button__new {
     margin-bottom: 15px;
-  }
-  .cron {
-    .input {
-      width: 16.6%;
-      float: left;
-    }
   }
 }

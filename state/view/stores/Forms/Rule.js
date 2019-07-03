@@ -6,11 +6,13 @@ class Rule {
     ];
 
     @observable type = Rule.types[0];
+    @observable description = "";
     @observable triggers = [];
     @observable targets = [];
 
     getType = () => this.type;
     getTriggers = () => this.triggers;
+    getTargets = () => this.targets;
 
     @action
     setType(value) {
@@ -20,18 +22,45 @@ class Rule {
     @action
     set(name, value) {
         this[name] = value;
-        console.log(this);
     }
 
     @action
-    addTrigger(trigger) {
-        this.triggers.push(trigger);
+    saveTrigger(trigger) {
+        if(trigger.id !== null && trigger.id !== 'undefined') {
+            this.triggers[trigger.id] = trigger;
+        }
+        else
+            this.triggers.push(trigger);
     }
 
     @action
     removeTrigger(index) {
-        console.log(index);
         this.triggers = this.triggers.filter((trigger, cur) => index !== cur);
+    }
+
+    @action
+    saveTarget(target) {
+        if(target.id !== null && target.id !== 'undefined') {
+            this.targets[target.id] = target;
+        }
+        else
+            this.targets.push(target);
+    }
+
+    @action
+    removeTarget(index) {
+        this.targets = this.targets.filter((target, cur) => index !== cur);
+    }
+
+    serialize() {
+        const {type, description, targets, triggers} = this;
+
+        return {
+            type,
+            description,
+            targets,
+            triggers,
+        };
     }
 }
 

@@ -30,7 +30,7 @@
     "font-awesome": "^4.7.0",
     "http-proxy-middleware": "^0.19.1",
     "mini-css-extract-plugin": "^0.7.0",
-    "mobx": "^5.10.1",
+    "mobx": "^5.11.0",
     "mobx-react": "^5.4.4",
     "moment": "^2.24.0",
     "next": "^8.1.0",
@@ -43,13 +43,14 @@
     "react-json-view": "^1.19.1",
     "react-notifications": "^1.4.3",
     "react-paginate": "^6.3.0",
+    "react-scroll-into-view-if-needed": "^2.1.7",
     "react-select": "^2.4.4",
     "sass-loader": "^7.1.0",
-    "sweetalert2": "^8.12.1",
+    "sweetalert2": "^8.13.0",
     "sweetalert2-react-content": "^1.1.0",
     "url-loader": "^1.1.2",
     "validator": "^11.0.0",
-    "webpack": "^4.33.0"
+    "webpack": "^4.35.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",

@@ -3,6 +3,8 @@ import {observable, action} from "mobx";
 class Trigger {
     @observable type = "";
     @observable settings = {};
+    id = null;
+
     types = [
         "UNDEFINED_TRIGGER",
         "TIME_INTERVAL",
@@ -26,6 +28,7 @@ class Trigger {
 
     @action
     clear() {
+        this.id = null;
         this.type = this.types[0];
         this.settings = JSON.stringify({});
     }
@@ -41,6 +44,29 @@ class Trigger {
     @action
     setSetting(name, value) {
         this.settings[name] = value;
+    }
+
+    @action
+    parse(trigger, id = null) {
+        this.id = id;
+        this.type = trigger.type;
+        switch (this.type) {
+            case "TIME_INTERVAL": {
+                const expr = trigger.settings.expr.split(" ");
+                this.settings = {
+                    ...trigger.settings,
+                    minutes: expr[0],
+                    hours: expr[1],
+                    days: expr[2],
+                    month: expr[3],
+                    weeks: expr[4],
+                    years: expr[5],
+                };
+                break;
+            }
+            default:
+                break;
+        }
     }
 
     serialize() {
@@ -60,6 +86,7 @@ class Trigger {
         }
 
         return {
+            id: this.id,
             type: this.type,
             settings,
         };

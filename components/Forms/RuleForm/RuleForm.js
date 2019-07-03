@@ -4,16 +4,10 @@ import {Store} from '../../../state/Store';
 import CustomSelect from "../../common/FormElements/Select/Select";
 import Input from "../../common/FormElements/Input/Input";
 import Button from "../../common/Buttons/Button/Button";
-import {
-    Table,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableBody, TableCell,
-} from "../../common/Table";
 import TriggersTable from "../../TriggersTable/TriggersTable";
 import Rule from '../../../state/view/stores/Forms/Rule';
 import {observer} from "mobx-react";
+import TargetsTable from "../../TargetsTable/TargetsTable";
 
 @Store.inject
 @observer
@@ -28,10 +22,13 @@ class RuleForm extends Component{
 
         this.state = {
             triggerEdit: false,
+            targetEdit: false,
         };
 
-        this.triggerForm = this.props.store.view.form.getTrigger();
-        this.ruleForm = this.props.store.view.form.getRule();
+        this.triggerForm = this.props.store.view.forms.getTrigger();
+        this.ruleForm = this.props.store.view.forms.getRule();
+        this.targetForm = this.props.store.view.forms.getTarget();
+        console.log(this.props.store.view.forms);
     }
 
     onChange = (e: Object) => {
@@ -50,14 +47,15 @@ class RuleForm extends Component{
         e.preventDefault();
         if (!this.isValid()) return;
 
-        const { type, description } = this.state;
-        this.props.submit(type, description)
+        const data = this.ruleForm.serialize();
+        const {type, description, triggers, targets} = data;
+        this.props.submit(type, description, triggers, targets);
     };
 
     handleNewTrigger = (e) => {
         e.preventDefault();
         this.setState({ triggerEdit: true });
-        this.props.store.view.form.getTrigger().clear();
+        this.triggerForm.clear();
     };
 
     handleTriggerTypeChange = (selected) => {
@@ -70,20 +68,61 @@ class RuleForm extends Component{
         this.forceUpdate();
     };
 
+    handleEditTrigger = (id) => {
+        const trigger = this.ruleForm.triggers[id];
+        this.triggerForm.parse(trigger, id);
+        this.setState({ triggerEdit: true });
+    };
+
     handleTriggerSave = (e) => {
         e.preventDefault();
         const data = this.triggerForm.serialize();
-        this.ruleForm.addTrigger(data);
+        this.ruleForm.saveTrigger(data);
         this.setState({ triggerEdit: false });
     };
 
     handleRemoveTrigger = (index) => {
         this.ruleForm.removeTrigger(index);
+        this.setState({ triggerEdit: false });
+    };
+
+    handleNewTarget = (e) => {
+        e.preventDefault();
+        this.setState({ targetEdit: true });
+        this.targetForm.clear();
+    };
+
+    handleTargetTypeChange = (selected) => {
+        this.targetForm.setType(selected.value);
+        this.forceUpdate();
+    };
+
+    handleExpressionChange = (e) => {
+        this.targetForm.setExpression(e.target.value);
+        this.forceUpdate();
+    };
+
+    handleTargetSave = (e) => {
+        e.preventDefault();
+        const data = this.targetForm.serialize();
+        this.ruleForm.saveTarget(data);
+        this.setState({ targetEdit: false });
+    };
+
+    handleRemoveTarget = (index) => {
+        this.ruleForm.removeTarget(index);
+        this.setState({ targetEdit: false });
+    };
+
+    handleEditTarget = (id) => {
+        const target = this.ruleForm.targets[id];
+        this.targetForm.parse(target, id);
+        this.setState({ targetEdit: true });
     };
 
     render() {
         const triggers = this.ruleForm.getTriggers();
-        const targets = this.props.store.domain.ae.targets.get();
+        const targets = this.ruleForm.getTargets();
         return (
             <form className="modal__form" method={'post'}>
                 <CustomSelect label={'Type'}
@@ -102,40 +141,27 @@ class RuleForm extends Component{
                     triggers={triggers}
                     newTrigger={this.handleNewTrigger}
                     current={this.triggerForm}
-                    edit={this.state.triggerEdit}
+                    editable={this.state.triggerEdit}
+                    edit={this.handleEditTrigger}
                     remove={this.handleRemoveTrigger}
                     types={this.props.store.domain.ae.triggers.types}
                     onTypeChange={this.handleTriggerTypeChange}
                     onSettingChange={this.handleSettingsChange}
                     onTriggerSave={this.handleTriggerSave}
                 />
-                <div>
-                    Targets:
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableHeader>#</TableHeader>
-                                <TableHeader>Type</TableHeader>
-                                <TableHeader>Expression</TableHeader>
-                                <TableHeader>Actions</TableHeader>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {targets.map((target, index) => {
-                                return (
-                                    <TableRow border>
-                                        <TableCell label={'#'}>{index + 1}</TableCell>
-                                        <TableCell label={'Type'}>{target.type}</TableCell>
-                                        <TableCell label={'Expression'}>{target.settings}</TableCell>
-                                        <TableCell label={'Actions'}>
 
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </div>
+                <TargetsTable
+                    targets={targets}
+                    new={this.handleNewTarget}
+                    current={this.targetForm}
+                    editable={this.state.targetEdit}
+                    edit={this.handleEditTarget}
+                    remove={this.handleRemoveTarget}
+                    types={this.targetForm.getTypes()}
+                    onTypeChange={this.handleTargetTypeChange}
+                    onExpressionChange={this.handleExpressionChange}
+                    onSave={this.handleTargetSave}
+                />
                 <div className="btn-control">
                     <Button small disabled={!this.isValid()} onClick={this.onSubmit}>
                         Submit
