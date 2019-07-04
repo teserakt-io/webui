@@ -8,6 +8,7 @@ import TriggersTable from "../../TriggersTable/TriggersTable";
 import Rule from '../../../state/view/stores/Forms/Rule';
 import {observer} from "mobx-react";
 import TargetsTable from "../../TargetsTable/TargetsTable";
+require('./RuleForm.scss');
 
 @Store.inject
 @observer
@@ -28,7 +29,6 @@ class RuleForm extends Component{
         this.triggerForm = this.props.store.view.forms.getTrigger();
         this.ruleForm = this.props.store.view.forms.getRule();
         this.targetForm = this.props.store.view.forms.getTarget();
-        console.log(this.props.store.view.forms);
     }
 
     onChange = (e: Object) => {
@@ -123,7 +123,7 @@ class RuleForm extends Component{
         const triggers = this.ruleForm.getTriggers();
         const targets = this.ruleForm.getTargets();
         return (
-            <form className="modal__form" method={'post'}>
+            <div className="modal__form rule__form">
                 <CustomSelect label={'Type'}
                               name={RuleForm.formKeys.TYPE}
                               onChange={this.onSelectChange}
@@ -162,11 +162,11 @@ class RuleForm extends Component{
                     onSave={this.handleTargetSave}
                 />
                 <div className="btn-control">
-                    <Button small disabled={!this.isValid()} onClick={this.onSubmit}>
+                    <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit}>
                         Submit
                     </Button>
                 </div>
-            </form>
+            </div>
         );
     }
 }

@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import FontAwesome from "react-fontawesome";
 import Icon from "../common/Icon/Icon";
 import Input from "../common/FormElements/Input/Input";
-const ReactJson = dynamic(import('react-json-view'), {
+const Reacttarget = dynamic(import('react-json-view'), {
     ssr: false
 });
 
@@ -67,7 +67,7 @@ function TargetsTable(props: Props) {
                 />
                 <Input id={'expression'} onChange={props.onExpressionChange} value={props.current.expression}/>
                 <div>
-                    <Button small uppercase onClick={props.onSave}>Save</Button>
+                    <Button small uppercase danger onClick={props.onSave}>Save</Button>
                 </div>
             </div>}
         </div>

@@ -69,13 +69,13 @@ class ClientsTableProvider extends React.Component<Props> {
         const loadTopics = this.props.store.domain.topics.changePage(0);
         Promise.all([loadJoinedTopics, loadTopics])
             .then(() => {
-            this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
-                submit: this.storeTopics,
-                cancel: this.props.store.view.modal.hide,
-                topics: this.props.store.domain.topics.getTopics(),
-                count: this.props.store.domain.topics.getCount(),
-            })
-        }).catch((e) => {
+                this.props.store.view.modal.open(ModalProvider.types.CLIENT_TOPICS_FORM, {
+                    submit: this.storeTopics,
+                    cancel: this.props.store.view.modal.hide,
+                    topics: this.props.store.domain.topics.getTopics(),
+                    count: this.props.store.domain.topics.getCount(),
+                })
+            }).catch((e) => {
             console.log(e);
         });
     };

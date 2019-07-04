@@ -79,7 +79,7 @@ function TriggersTable(props: Props) {
                     data={props.current.settings}
                 />
                 <div>
-                    <Button small uppercase onClick={props.onTriggerSave}>Save</Button>
+                    <Button small uppercase danger onClick={props.onTriggerSave}>Save</Button>
                 </div>
             </div>}
         </div>

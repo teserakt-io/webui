@@ -6,7 +6,7 @@ import {isBase64} from "../../../../utils/helpers";
 class Rules {
     @observable rules = [];
     @observable current = 0;
-    @observable onPage = 1;
+    @observable onPage = 10;
     @observable page = 0;
 
     get = (id = null) => {
