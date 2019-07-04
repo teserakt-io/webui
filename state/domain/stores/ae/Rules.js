@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {observable, action, computed} from "mobx";
 import api from '../../../../api/api';
 import moment from "moment";
 import {isBase64} from "../../../../utils/helpers";
@@ -6,12 +6,14 @@ import {isBase64} from "../../../../utils/helpers";
 class Rules {
     @observable rules = [];
     @observable current = 0;
-    @observable onPage = 10;
+    @observable onPage = 1;
     @observable page = 0;
 
     get = (id = null) => {
-        if(id === null)
-            return this.rules;
+        if(id === null) {
+            const start = this.page * this.onPage;
+            return this.rules.slice(start, start+this.onPage);
+        }
 
         return this.rules.find(rule => rule.id === id);
     };
@@ -30,6 +32,11 @@ class Rules {
             rule.targets = rule.targets || [];
             return rule;
         });
+    }
+
+    @action
+    setPage(page) {
+        this.page = page;
     }
 
     @action
@@ -77,6 +84,7 @@ class Rules {
         const {data} = await api.rules.remove(id);
 
         this.rules = this.rules.filter(item => item.id !== id);
+        this.setPage(0);
     }
 }
 

@@ -6,10 +6,11 @@ type Props = {
     count: number,
     forcePage?: number,
     onPageChange: Function,
+    onPage?: number,
 };
 
 function Pagination(props: Props) {
-    const pageCount = Math.ceil(props.count / 10);
+    const pageCount = Math.ceil(props.count / (props.onPage || 10));
     return (
         <React.Fragment>
             <ReactPaginate

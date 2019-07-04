@@ -69,9 +69,10 @@ function RulesTable(props: Props) {
                 </TableBody>
             </Table>
             <Pagination
-                count={() => {}}
-                onPageChange={() => {}}
-                forcePage={0}
+                count={props.count}
+                onPage={props.onPage}
+                onPageChange={props.onPageChange}
+                forcePage={props.current}
                 className={'f-l'}
             />
         </div>

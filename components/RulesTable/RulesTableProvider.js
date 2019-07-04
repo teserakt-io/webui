@@ -53,6 +53,10 @@ class RulesTableProvider extends Component{
         this.props.store.domain.ae.rules.remove(id);
     };
 
+    onPageChange = (page) => {
+        this.props.store.domain.ae.rules.setPage(page.selected);
+    };
+
     render() {
        return (
            <RulesTable
@@ -60,6 +64,10 @@ class RulesTableProvider extends Component{
                createModal={this.createModal}
                editRule={this.editRule}
                removeRule={this.removeRule}
+               count={this.props.store.domain.ae.rules.rules.length}
+               onPage={this.props.store.domain.ae.rules.onPage}
+               onPageChange={this.onPageChange}
+               currentPage={this.props.store.domain.ae.rules.page}
            />
        );
     }
