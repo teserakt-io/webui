@@ -5,12 +5,6 @@ async function get() {
 }
 
 async function post(action, description, triggers = [], targets = []) {
-    console.log({
-        action,
-        description,
-        triggers,
-        targets
-    });
     return ae.post('/rules', {
         action,
         description,
@@ -19,8 +13,21 @@ async function post(action, description, triggers = [], targets = []) {
     });
 }
 
-async function put() {
-
+async function put(id, action, description, triggers = [], targets = []) {
+    console.log({
+        ruleId: id,
+        action,
+        description,
+        triggers,
+        targets
+    });
+    return ae.put('/rules', {
+        ruleId: id,
+        action,
+        description,
+        triggers,
+        targets
+    });
 }
 async function remove(id) {
     return await ae.delete(`/rules/${id}`);

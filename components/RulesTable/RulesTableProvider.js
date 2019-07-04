@@ -19,15 +19,34 @@ class RulesTableProvider extends Component{
         });
     };
 
-    submitRule = (type, description, triggers = [], targets = []) => {
-        this.props.store.domain.ae.rules.add(type, description, triggers, targets)
-            .then(() => {
-                NotificationManager.success(AppStrings.RULE_ADDED);
-                this.forceUpdate();
-        }).catch(() => {
-            NotificationManager.error(AppStrings.RULE_ERROR);
-        });
+    submitRule = (rule) => {
+        const {id, type, description, triggers, targets} = rule;
+        if(id === 'undefined' || id === null) {
+            this.props.store.domain.ae.rules.add(type, description, triggers, targets)
+                .then(() => {
+                    NotificationManager.success(AppStrings.RULE_ADDED);
+                    this.forceUpdate();
+                }).catch(() => {
+                NotificationManager.error(AppStrings.RULE_ERROR);
+            });
+        } else {
+            this.props.store.domain.ae.rules.edit(id, type, description, triggers, targets)
+                .then(() => {
+                    NotificationManager.success(AppStrings.RULE_UPDATED);
+                    this.forceUpdate();
+                }).catch(() => {
+                    NotificationManager.error(AppStrings.RULE_ERROR);
+            });
+            this.forceUpdate();
+        }
+
         this.props.store.view.modal.hide();
+    };
+
+    editRule = (id) => {
+        const data = this.props.store.domain.ae.rules.get(parseInt(id));
+        this.props.store.view.forms.getRule().parse(data);
+        this.createModal();
     };
 
     removeRule = (id) => {
@@ -39,6 +58,7 @@ class RulesTableProvider extends Component{
            <RulesTable
                rules={this.props.store.domain.ae.rules.get()}
                createModal={this.createModal}
+               editRule={this.editRule}
                removeRule={this.removeRule}
            />
        );

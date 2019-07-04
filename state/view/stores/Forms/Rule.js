@@ -9,6 +9,7 @@ class Rule {
     @observable description = "";
     @observable triggers = [];
     @observable targets = [];
+    id = null;
 
     getType = () => this.type;
     getTriggers = () => this.triggers;
@@ -53,14 +54,27 @@ class Rule {
     }
 
     serialize() {
-        const {type, description, targets, triggers} = this;
+        const {id, type, description, targets, triggers} = this;
 
         return {
+            id,
             type,
             description,
             targets,
             triggers,
         };
+    }
+
+    parse(rule) {
+        const {id, action, description, triggers, targets} = rule;
+        this.id = id;
+        this.type = action;
+        this.description = description;
+        this.triggers = triggers.map(trigger => {
+            trigger.settings = JSON.parse(atob(trigger.settings));
+            return trigger;
+        });
+        this.targets = targets;
     }
 }
 

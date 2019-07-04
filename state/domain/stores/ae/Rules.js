@@ -1,6 +1,7 @@
-import {observable} from "mobx";
+import {observable, action} from "mobx";
 import api from '../../../../api/api';
 import moment from "moment";
+import {isBase64} from "../../../../utils/helpers";
 
 class Rules {
     @observable rules = [];
@@ -8,17 +9,30 @@ class Rules {
     @observable onPage = 10;
     @observable page = 0;
 
-    get = () => this.rules;
+    get = (id = null) => {
+        if(id === null)
+            return this.rules;
+
+        return this.rules.find(rule => rule.id === id);
+    };
     getCurrent = () => this.current;
     getOnPage = () => this.onPage;
     getPage = () => this.page;
 
+    @action
     async load() {
         const {data} = await api.rules.get();
 
-        this.rules = data.rules || [];
+        const rules = data.rules || [];
+
+        this.rules = rules.map(rule => {
+            rule.triggers = rule.triggers || [];
+            rule.targets = rule.targets || [];
+            return rule;
+        });
     }
 
+    @action
     async add(action, description, triggers = [], targets = []) {
         const b64triggers = triggers.map(trigger => {
             trigger.settings = btoa(JSON.stringify(trigger.settings));
@@ -39,6 +53,26 @@ class Rules {
         this.rules.push(data.rule);
     }
 
+    @action
+    async edit(id, action, description, triggers = [], targets = []) {
+        const b64triggers = triggers.map(trigger => {
+            trigger.settings = btoa(JSON.stringify(trigger.settings));
+            return trigger;
+        });
+
+        const {data} = await api.rules.put(
+            id,
+            action,
+            description,
+            b64triggers,
+            targets,
+        );
+
+        const index = this.rules.findIndex(rule => rule.id === data.rule.id);
+        this.rules.splice(index, 1, data.rule);
+    }
+
+    @action
     async remove(id) {
         const {data} = await api.rules.remove(id);
 

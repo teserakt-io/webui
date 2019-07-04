@@ -48,8 +48,7 @@ class RuleForm extends Component{
         if (!this.isValid()) return;
 
         const data = this.ruleForm.serialize();
-        const {type, description, triggers, targets} = data;
-        this.props.submit(type, description, triggers, targets);
+        this.props.submit(data);
     };
 
     handleNewTrigger = (e) => {

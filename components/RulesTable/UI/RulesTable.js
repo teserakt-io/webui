@@ -16,12 +16,13 @@ import Pagination from "../../Pagination/Pagination";
 type Props = {
     rules: Array,
     createModal: Function,
+    editRule: Function,
     removeRule: Function,
 };
 
 function RulesTable(props: Props) {
     return (
-        <div>
+        <div className={'rules'}>
             <Button
                 danger
                 uppercase
@@ -30,10 +31,10 @@ function RulesTable(props: Props) {
                 onClick={props.createModal}>
                 Add Rule
             </Button>
-            <Table>
+            <Table className={'rules__table'}>
                 <TableHead>
                     <TableRow border>
-                        <TableHeader small>#</TableHeader>
+                        <TableHeader small center>#</TableHeader>
                         <TableHeader small>Type</TableHeader>
                         <TableHeader>Description</TableHeader>
                         <TableHeader small>Last executed</TableHeader>
@@ -55,7 +56,7 @@ function RulesTable(props: Props) {
                                 <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
                                 <TableCell label={'#Targets'} small>{targetCount}</TableCell>
                                 <TableCell label={'Actions'} small center className={'actions'}>
-                                    <span onClick={() => console.log(rule)}>
+                                    <span onClick={() => props.editRule(rule.id)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>
                                     </span>
                                     <span onClick={() => props.removeRule(rule.id)} role="presentation">
