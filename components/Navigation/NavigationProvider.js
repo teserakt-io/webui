@@ -7,7 +7,7 @@ import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 
 type Props = {
-    history: Object
+    history?: Object
 }
 
 class NavigationProvider extends React.Component<Props> {

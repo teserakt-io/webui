@@ -19,7 +19,11 @@ class Topics {
     logger = null;
 
     constructor() {
-        this.loadCount();
+        this.loadCount()
+            .catch(e => {
+                this.count = 0;
+                console.log(e.response);
+            });
     }
 
     getTopics = () => this.topics.toJS();

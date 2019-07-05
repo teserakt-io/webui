@@ -4,7 +4,11 @@ import {Store} from "../../Store";
 
 class Clients {
     constructor() {
-        this.loadCount();
+        this.loadCount()
+            .catch(e => {
+                this.count = 0;
+                console.log(e.response);
+            });
     }
     @observable clients = [];
     @observable count = 0;

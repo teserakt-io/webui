@@ -22,7 +22,7 @@ class ClientsTableProvider extends React.Component<Props> {
     state = {
         reset: false,
     };
-    async componentDidMount() {
+    componentDidMount() {
         this.props.store.domain.clients.load(true);
     }
     addClient = (client: string, key: string) => {

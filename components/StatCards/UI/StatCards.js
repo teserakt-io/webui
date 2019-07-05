@@ -13,19 +13,23 @@ class StatCards extends React.Component<Props> {
     render() {
         return (
             <React.Fragment>
-                <Link to={routes.clients.path}>
-                    <Card
-                        red
-                        title={this.props.clientsCount}
-                        desc="Clients"
-                        icon={Icon.d.CLIENT}/>
+                <Link href={routes.clients.path}>
+                    <a>
+                        <Card
+                            red
+                            title={this.props.clientsCount}
+                            desc="Clients"
+                            icon={Icon.d.CLIENT}/>
+                    </a>
                 </Link>
-                <Link to={routes.topics.path}>
-                    <Card
-                        darkBlue
-                        title={this.props.topicsCount}
-                        desc="Topics"
-                        icon={Icon.d.TOPIC}/>
+                <Link href={routes.topics.path}>
+                    <a>
+                        <Card
+                            darkBlue
+                            title={this.props.topicsCount}
+                            desc="Topics"
+                            icon={Icon.d.TOPIC}/>
+                    </a>
                 </Link>
             </React.Fragment>
         )
