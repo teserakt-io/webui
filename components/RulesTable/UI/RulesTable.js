@@ -72,7 +72,7 @@ function RulesTable(props: Props) {
                 count={props.count}
                 onPage={props.onPage}
                 onPageChange={props.onPageChange}
-                forcePage={props.current}
+                forcePage={props.currentPage}
                 className={'f-l'}
             />
         </div>
