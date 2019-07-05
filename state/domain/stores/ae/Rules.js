@@ -42,8 +42,7 @@ class Rules {
     @action
     async add(action, description, triggers = [], targets = []) {
         const b64triggers = triggers.map(trigger => {
-            // trigger.settings = btoa(JSON.stringify(trigger.settings));
-            trigger.settings = "{}";
+            trigger.settings = btoa(JSON.stringify(trigger.settings));
             return trigger;
         });
 
