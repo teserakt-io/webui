@@ -164,7 +164,7 @@ class RuleForm extends Component{
                     onCancel={() => this.setState({targetEdit: false})}
                 />
                 <div className="btn-control">
-                    <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit}>
+                    <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit} className={'mb-10'}>
                         Submit
                     </Button>
                 </div>

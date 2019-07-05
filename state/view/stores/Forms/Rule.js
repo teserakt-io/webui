@@ -1,4 +1,5 @@
 import {action, observable} from 'mobx';
+import {isBase64} from "../../../../utils/helpers";
 class Rule {
     static types = [
         "KEY_ROTATION",
@@ -70,7 +71,8 @@ class Rule {
         this.type = action;
         this.description = description;
         this.triggers = triggers.map(trigger => {
-            trigger.settings = JSON.parse(atob(trigger.settings));
+            if(typeof trigger.settings === 'string' && isBase64(trigger.settings))
+                trigger.settings = JSON.parse(atob(trigger.settings));
             return trigger;
         });
         this.targets = targets;

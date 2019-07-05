@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import Input from "../common/FormElements/Input/Input";
 
 function TimeIntervalSettings(props) {
-    console.log(props);
     return (
         <Fragment>
             <div className={'cron'}>

@@ -9,7 +9,6 @@ type Props = {
 };
 
 function Settings(props: Props) {
-    console.log("settings: ", props);
     switch (props.type) {
         case 'TIME_INTERVAL':
             return <TimeIntervalSettings {...props}/>;

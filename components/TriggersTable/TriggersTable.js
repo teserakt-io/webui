@@ -81,7 +81,7 @@ function TriggersTable(props: Props) {
                 />
                 <div>
                     <Button small uppercase danger onClick={props.onSave}>Save</Button>
-                    <Button small uppercase danger onClick={props.onCancel}>Cancel</Button>
+                    <Button small uppercase danger onClick={props.onCancel} className={'ml-10'}>Cancel</Button>
                 </div>
             </div>}
         </div>

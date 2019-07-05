@@ -12,6 +12,7 @@ import FontAwesome from "react-fontawesome";
 import Icon from "../../common/Icon/Icon";
 import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
+import TimeAgo from "react-timeago";
 
 type Props = {
     rules: Array,
@@ -62,7 +63,10 @@ function RulesTable(props: Props) {
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{rule.action}</TableCell>
                                 <TableCell label={'Description'} small>{rule.description}</TableCell>
-                                <TableCell label={'Last executed'} small>{rule.lastExecuted}</TableCell>
+                                <TableCell label={'Last executed'} small>
+                                    <TimeAgo date={rule.lastExecuted} />
+
+                                </TableCell>
                                 <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
                                 <TableCell label={'#Targets'} small>{targetCount}</TableCell>
                                 <TableCell label={'Actions'} small center className={'actions'}>

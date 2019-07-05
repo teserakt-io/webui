@@ -69,7 +69,7 @@ function TargetsTable(props: Props) {
                 <Input id={'expression'} onChange={props.onExpressionChange} value={props.current.expr}/>
                 <div>
                     <Button small uppercase danger onClick={props.onSave}>Save</Button>
-                    <Button small uppercase danger onClick={props.onCancel}>Cancel</Button>
+                    <Button small uppercase danger onClick={props.onCancel} className={'ml-10'}>Cancel</Button>
                 </div>
             </div>}
         </div>
