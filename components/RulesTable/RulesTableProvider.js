@@ -6,6 +6,8 @@ import {observer} from "mobx-react";
 import {NotificationManager} from "react-notifications";
 import AppStrings from "../../utils/AppStrings";
 import {capitalize} from "../../utils/helpers";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 @Store.inject
 @observer
@@ -51,11 +53,24 @@ class RulesTableProvider extends Component{
     };
 
     removeRule = (id) => {
-        this.props.store.domain.ae.rules.remove(id);
+        const RemoveSwal = withReactContent(Swal);
+        RemoveSwal.fire({
+            type: 'error',
+            title: 'Delete rule?',
+            showCancelButton: true,
+        }).then((res) => {
+            if(res.value) {
+                this.props.store.domain.ae.rules.remove(id);
+            }
+        })
     };
 
     onPageChange = (page) => {
         this.props.store.domain.ae.rules.setPage(page.selected);
+    };
+
+    handleRefresh  = () => {
+        this.props.store.domain.ae.rules.load();
     };
 
     render() {
@@ -69,6 +84,7 @@ class RulesTableProvider extends Component{
                onPage={this.props.store.domain.ae.rules.onPage}
                onPageChange={this.onPageChange}
                currentPage={this.props.store.domain.ae.rules.page}
+               refresh={this.handleRefresh}
            />
        );
     }

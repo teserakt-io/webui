@@ -18,6 +18,8 @@ type Props = {
     createModal: Function,
     editRule: Function,
     removeRule: Function,
+    currentPage: number,
+    refresh: Function,
 };
 
 function RulesTable(props: Props) {
@@ -30,6 +32,14 @@ function RulesTable(props: Props) {
                 className="mb-20"
                 onClick={props.createModal}>
                 Add Rule
+            </Button>
+            <Button
+                danger
+                uppercase
+                medium
+                className="mb-20 ml-10"
+                onClick={props.refresh}>
+                <FontAwesome name={'refresh'}/>
             </Button>
             <Table className={'rules__table'}>
                 <TableHead>

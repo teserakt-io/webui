@@ -9,20 +9,14 @@ import { Store } from '../../state/Store'
 import api from '../../api/api';
 import AppStrings from '../../utils/AppStrings'
 import { NotificationManager } from 'react-notifications'
-import dynamic from 'next/dynamic';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-// const SweetAlert = dynamic(import('sweetalert2-react'), {
-//     ssr: false
-// });
-
 
 type Props = {
     store: Store,
 }
 
 @Store.inject
-// @Services.inject([Services.type.COMMAND_HANDLER])
 @observer
 class ClientsTableProvider extends React.Component<Props> {
     state = {
