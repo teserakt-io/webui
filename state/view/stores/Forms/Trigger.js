@@ -1,44 +1,49 @@
 import {observable, action} from "mobx";
 
 class Trigger {
-    @observable type = "";
+    @observable type = Trigger.types;
     @observable settings = {};
     id = null;
 
-    types = [
-        "UNDEFINED_TRIGGER",
+    static types = [
         "TIME_INTERVAL",
         "CLIENT_SUBSCRIBED",
-        "CLIENT_UNSUBSCRIBED"
+        "CLIENT_UNSUBSCRIBED",
     ];
 
-    baseSettings = {
-        "TIME_INTERVAL": {
-            minutes: "*",
-            hours: "*",
-            days: "*",
-            month: "*",
-            weeks: "*",
-            years: "*",
-        }
-    };
-
+    getTypes = () => Trigger.types;
     getType = () => this.type;
     getSettings = () => this.settings;
+    getBaseSettings() {
+        switch (this.getType()) {
+            case "TIME_INTERVAL": {
+                return  {
+                    minutes: "*",
+                    hours: "*",
+                    days: "*",
+                    month: "*",
+                    weeks: "*",
+                    years: "*",
+                }
+            }
+            default:
+                return {};
+        }
+    }
 
     @action
     clear() {
         this.id = null;
-        this.type = this.types[0];
-        this.settings = JSON.stringify({});
+        this.type = Trigger.types[0];
+        this.settings = this.getBaseSettings();
     }
 
     @action
     setType(value) {
-        if(this.type !== value)
-            this.settings = this.baseSettings[value];
-
-        this.type = value;
+        if(this.type !== value) {
+            this.type = value;
+            this.settings = this.getBaseSettings();
+        }
     }
 
     @action

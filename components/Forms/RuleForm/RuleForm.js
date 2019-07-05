@@ -40,7 +40,7 @@ class RuleForm extends Component{
     };
 
     isValid() {
-        return true;
+        return !(this.state.targetEdit || this.state.triggerEdit);
     }
 
     onSubmit = (e: Object) => {
@@ -138,15 +138,16 @@ class RuleForm extends Component{
 
                 <TriggersTable
                     triggers={triggers}
-                    newTrigger={this.handleNewTrigger}
+                    new={this.handleNewTrigger}
                     current={this.triggerForm}
                     editable={this.state.triggerEdit}
                     edit={this.handleEditTrigger}
                     remove={this.handleRemoveTrigger}
-                    types={this.props.store.domain.ae.triggers.types}
+                    types={this.triggerForm.getTypes()}
                     onTypeChange={this.handleTriggerTypeChange}
                     onSettingChange={this.handleSettingsChange}
-                    onTriggerSave={this.handleTriggerSave}
+                    onSave={this.handleTriggerSave}
+                    onCancel={() => this.setState({triggerEdit: false})}
                 />
 
                 <TargetsTable
@@ -160,6 +161,7 @@ class RuleForm extends Component{
                     onTypeChange={this.handleTargetTypeChange}
                     onExpressionChange={this.handleExpressionChange}
                     onSave={this.handleTargetSave}
+                    onCancel={() => this.setState({targetEdit: false})}
                 />
                 <div className="btn-control">
                     <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit}>

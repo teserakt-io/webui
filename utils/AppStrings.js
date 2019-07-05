@@ -20,7 +20,7 @@ class AppStrings {
     static CLIENT_ASSOCIATION_ERROR = "Clients weren't set!";
 
     static RULE_ADDED = 'Rule successfully added!';
-    static RULE_ADDED = "Rule wasn't added!";
+    static RULE_ERROR = "Rule wasn't added!";
 }
 
 export default AppStrings

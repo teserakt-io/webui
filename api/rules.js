@@ -14,13 +14,6 @@ async function post(action, description, triggers = [], targets = []) {
 }
 
 async function put(id, action, description, triggers = [], targets = []) {
-    console.log({
-        ruleId: id,
-        action,
-        description,
-        triggers,
-        targets
-    });
     return ae.put('/rules', {
         ruleId: id,
         action,

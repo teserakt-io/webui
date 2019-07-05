@@ -1,7 +1,6 @@
 import {action, observable} from 'mobx';
 class Rule {
     static types = [
-        "UNDEFINED_ACTION",
         "KEY_ROTATION",
     ];
 

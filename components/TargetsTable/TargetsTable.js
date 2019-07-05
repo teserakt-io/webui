@@ -22,6 +22,7 @@ type Props = {
     onTypeChange: Function,
     onExpressionChange: Function,
     onSave: Function,
+    onCancel: Function,
 };
 
 function TargetsTable(props: Props) {
@@ -43,7 +44,7 @@ function TargetsTable(props: Props) {
                             <TableRow border key={index}>
                                 <TableCell label={'#'}>{index + 1}</TableCell>
                                 <TableCell label={'Type'}>{target.type}</TableCell>
-                                <TableCell label={'Expression'}>{target.expression}</TableCell>
+                                <TableCell label={'Expression'}>{target.expr}</TableCell>
                                 <TableCell small label={'Actions'}>
                                     <span onClick={() => props.edit(index)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>
@@ -65,9 +66,10 @@ function TargetsTable(props: Props) {
                     options={props.types}
                     value={props.current.type}
                 />
-                <Input id={'expression'} onChange={props.onExpressionChange} value={props.current.expression}/>
+                <Input id={'expression'} onChange={props.onExpressionChange} value={props.current.expr}/>
                 <div>
                     <Button small uppercase danger onClick={props.onSave}>Save</Button>
+                    <Button small uppercase danger onClick={props.onCancel}>Cancel</Button>
                 </div>
             </div>}
         </div>

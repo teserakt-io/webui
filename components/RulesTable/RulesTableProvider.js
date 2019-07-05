@@ -5,6 +5,7 @@ import ModalProvider from "../common/Modal/ModalProvider";
 import {observer} from "mobx-react";
 import {NotificationManager} from "react-notifications";
 import AppStrings from "../../utils/AppStrings";
+import {capitalize} from "../../utils/helpers";
 
 @Store.inject
 @observer
@@ -26,16 +27,16 @@ class RulesTableProvider extends Component{
                 .then(() => {
                     NotificationManager.success(AppStrings.RULE_ADDED);
                     this.forceUpdate();
-                }).catch(() => {
-                NotificationManager.error(AppStrings.RULE_ERROR);
+                }).catch((e) => {
+                    NotificationManager.error(capitalize(e.response.data.message));
             });
         } else {
             this.props.store.domain.ae.rules.edit(id, type, description, triggers, targets)
                 .then(() => {
                     NotificationManager.success(AppStrings.RULE_UPDATED);
                     this.forceUpdate();
-                }).catch(() => {
-                    NotificationManager.error(AppStrings.RULE_ERROR);
+                }).catch((e) => {
+                    NotificationManager.error(capitalize(e.response.data.message));
             });
             this.forceUpdate();
         }

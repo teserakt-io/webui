@@ -6,3 +6,8 @@ export function isBase64(str) {
         return false;
     }
 }
+
+export function capitalize(s) {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}

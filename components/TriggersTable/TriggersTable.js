@@ -13,7 +13,7 @@ const ReactJson = dynamic(import('react-json-view'), {
 
 type Props = {
     triggers: Array,
-    newTrigger: Function,
+    new: Function,
     current?: Object,
     types: Array,
     editable: boolean,
@@ -21,7 +21,8 @@ type Props = {
     remove: Function,
     onTypeChange: Function,
     onSettingChange: Function,
-    onTriggerSave: Function,
+    onSave: Function,
+    onCancel: Function,
 };
 
 function TriggersTable(props: Props) {
@@ -64,7 +65,7 @@ function TriggersTable(props: Props) {
                     })}
                 </TableBody>
             </Table>
-            <Button small uppercase onClick={props.newTrigger} className={'button__new'}>New trigger</Button>
+            <Button small uppercase onClick={props.new} className={'button__new'}>New trigger</Button>
             {props.editable && <div className={'trigger__edit'}>
                 <CustomSelect
                     name={'triggerType'}
@@ -79,7 +80,8 @@ function TriggersTable(props: Props) {
                     data={props.current.settings}
                 />
                 <div>
-                    <Button small uppercase danger onClick={props.onTriggerSave}>Save</Button>
+                    <Button small uppercase danger onClick={props.onSave}>Save</Button>
+                    <Button small uppercase danger onClick={props.onCancel}>Cancel</Button>
                 </div>
             </div>}
         </div>
