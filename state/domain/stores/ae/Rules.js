@@ -83,7 +83,9 @@ class Rules {
         const {data} = await api.rules.remove(id);
 
         this.rules = this.rules.filter(item => item.id !== id);
-        this.setPage(0);
+
+        if(this.page * this.onPage >= this.rules.length && this.page > 0)
+            this.setPage(this.page - 1);
     }
 }
 
