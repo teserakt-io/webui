@@ -1,4 +1,5 @@
 import {observable, action} from "mobx";
+import validator from 'validator'
 
 class Trigger {
     @observable type = Trigger.types;
@@ -72,6 +73,19 @@ class Trigger {
             default:
                 break;
         }
+    }
+
+    isValid() {
+        switch (this.type) {
+            case "TIME_INTERVAL": {
+                for(let val in this.settings) {
+                    if(validator.isEmpty(this.settings[val]))
+                        return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     serialize() {

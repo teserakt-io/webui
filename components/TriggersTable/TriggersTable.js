@@ -23,6 +23,7 @@ type Props = {
     onSettingChange: Function,
     onSave: Function,
     onCancel: Function,
+    isValid: Function,
 };
 
 function TriggersTable(props: Props) {
@@ -80,7 +81,7 @@ function TriggersTable(props: Props) {
                     data={props.current.settings}
                 />
                 <div>
-                    <Button small uppercase danger onClick={props.onSave}>Save</Button>
+                    <Button small uppercase danger disabled={!props.isValid} onClick={props.onSave}>Save</Button>
                     <Button small uppercase danger onClick={props.onCancel} className={'ml-10'}>Cancel</Button>
                 </div>
             </div>}

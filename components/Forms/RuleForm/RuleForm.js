@@ -148,6 +148,7 @@ class RuleForm extends Component{
                     onSettingChange={this.handleSettingsChange}
                     onSave={this.handleTriggerSave}
                     onCancel={() => this.setState({triggerEdit: false})}
+                    isValid={this.triggerForm.isValid()}
                 />
 
                 <TargetsTable

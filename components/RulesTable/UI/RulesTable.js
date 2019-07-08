@@ -13,6 +13,7 @@ import Icon from "../../common/Icon/Icon";
 import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
+import moment from "moment";
 
 type Props = {
     rules: Array,
@@ -58,14 +59,15 @@ function RulesTable(props: Props) {
                     {props.rules.map((rule) => {
                         const triggerCount = rule.triggers ? rule.triggers.length : 0;
                         const targetCount = rule.targets ? rule.targets.length : 0;
+                        const ago = moment(rule.lastExecuted).year() === 1 ? "Never" :
+                            <TimeAgo date={rule.lastExecuted} />;
                         return (
                             <TableRow key={rule.id}>
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{rule.action}</TableCell>
                                 <TableCell label={'Description'} small>{rule.description}</TableCell>
                                 <TableCell label={'Last executed'} small>
-                                    <TimeAgo date={rule.lastExecuted} />
-
+                                    {ago}
                                 </TableCell>
                                 <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
                                 <TableCell label={'#Targets'} small>{targetCount}</TableCell>

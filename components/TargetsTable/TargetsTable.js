@@ -66,7 +66,11 @@ function TargetsTable(props: Props) {
                     options={props.types}
                     value={props.current.type}
                 />
-                <Input id={'expression'} onChange={props.onExpressionChange} value={props.current.expr}/>
+                <Input id={'expression'}
+                       onChange={props.onExpressionChange}
+                       value={props.current.expr}
+                       placeholder={'This field expect a valid regular expression'}
+                />
                 <div>
                     <Button small uppercase danger onClick={props.onSave}>Save</Button>
                     <Button small uppercase danger onClick={props.onCancel} className={'ml-10'}>Cancel</Button>
