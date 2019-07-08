@@ -32,14 +32,15 @@ class Card extends React.Component<Props> {
                         <span className="info__title">{this.props.title.toString()}</span>
                         <span className="info__desc">{this.props.desc}</span>
                     </div>
-                    <Icon
+                    {this.props.faIcon}
+                    {this.props.icon && <Icon
                         className="card__icon"
                         d={this.props.icon}
                         viewBoxX={34}
                         viewBoxY={36}
                         height={50}
                         maxWidth={50}
-                        minWidth={50}/>
+                        minWidth={50}/>}
                 </div>
             </div>
         )

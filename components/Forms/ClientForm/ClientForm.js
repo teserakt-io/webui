@@ -67,10 +67,6 @@ class ClientForm extends React.Component<Props, State> {
         this.props.cancel()
     };
 
-    onSelectChange = (selectedTopics: Array<SelectOption>) => {
-        this.setState({ selectedTopics })
-    };
-
     render() {
         return (
             <React.Fragment>
@@ -85,22 +81,11 @@ class ClientForm extends React.Component<Props, State> {
                         label="Key"
                         id={ClientForm.formKeys.KEY}
                         onChange={this.updateField}/>
-                    {/*{*/}
-                    {/*    !!this.props.topics.length &&*/}
-                    {/*    <CustomSelect*/}
-                    {/*        isMulti*/}
-                    {/*        removeSelected*/}
-                    {/*        name="selectedTopic"*/}
-                    {/*        label="Topic"*/}
-                    {/*        value={this.state.selectedTopics}*/}
-                    {/*        onChange={this.onSelectChange}*/}
-                    {/*        options={this.renderTopicOptions()}/>*/}
-                    {/*}*/}
                     <div className="btn-control">
-                        <Button small secondary onClick={this.onCancel}>
+                        <Button type={'button'} small secondary onClick={this.onCancel}>
                             Cancel
                         </Button>
-                        <Button small disabled={!this.isValid()} onClick={this.onSubmit}>
+                        <Button type={'submit'} small disabled={!this.isValid()} onClick={this.onSubmit}>
                             Submit
                         </Button>
                     </div>

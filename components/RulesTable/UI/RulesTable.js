@@ -14,6 +14,7 @@ import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
 import moment from "moment";
+import Info from "../../common/Info/Info";
 
 type Props = {
     rules: Array,
@@ -71,12 +72,14 @@ function RulesTable(props: Props) {
                                 </TableCell>
                                 <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
                                 <TableCell label={'#Targets'} small>{targetCount}</TableCell>
-                                <TableCell label={'Actions'} small center className={'actions'}>
-                                    <span onClick={() => props.editRule(rule.id)}>
+                                <TableCell  label={'Actions'} small center className={'actions'}>
+                                    <span className={'info-container'} onClick={() => props.editRule(rule.id)}>
                                         <FontAwesome name={'file'} className={'pointer'}/>
+                                        <Info text={'Edit'}/>
                                     </span>
-                                    <span onClick={() => props.removeRule(rule.id)} role="presentation">
+                                    <span className={'info-container'} onClick={() => props.removeRule(rule.id)} role="presentation">
                                         <Icon color="black" className="pointer" d={Icon.d.BIN}/>
+                                        <Info text={'Delete'}/>
                                     </span>
                                 </TableCell>
                             </TableRow>

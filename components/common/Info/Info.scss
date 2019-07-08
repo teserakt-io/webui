@@ -1,0 +1,16 @@
+.info-container {
+  position: relative;
+}
+span.info {
+  display: none;
+}
+*:hover + span.info {
+  display: block;
+  position: absolute;
+  top:100%;
+  left:100%;
+  z-index: 1000;
+  padding: 7px 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}

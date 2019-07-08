@@ -31,6 +31,16 @@ class StatCards extends React.Component<Props> {
                             icon={Icon.d.TOPIC}/>
                     </a>
                 </Link>
+                <Link href={routes.ae.path}>
+                    <a>
+                        <Card
+                            blue
+                            title={this.props.rulesCount}
+                            desc="Rules"
+                            faIcon={routes.ae.icon}
+                        />
+                    </a>
+                </Link>
             </React.Fragment>
         )
     }

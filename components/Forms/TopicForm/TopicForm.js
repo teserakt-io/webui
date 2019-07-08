@@ -69,10 +69,10 @@ class TopicForm extends React.Component<Props, State> {
                         label="Topic"
                         onChange={this.updateField}/>
                     <div className="btn-control">
-                        <Button small secondary onClick={this.onCancel}>
+                        <Button type={'button'} small secondary onClick={this.onCancel}>
                             Cancel
                         </Button>
-                        <Button small disabled={!this.isValid()} onClick={this.onSubmit}>
+                        <Button type={'submit'} small disabled={!this.isValid()} onClick={this.onSubmit}>
                             Submit
                         </Button>
                     </div>
