@@ -15,6 +15,7 @@ import Pagination from "../../Pagination/Pagination";
 import FontAwesome from 'react-fontawesome';
 import OnPage from "../../Pagination/OnPage";
 import Info from "../../common/Info/Info";
+import ActionButtons from "../../ActionButtons/ActionButtons";
 
 type Props = {
     clients: Array<String>,
@@ -30,14 +31,10 @@ class ClientsTable extends React.Component<Props> {
                 <TableCell label="Client">{client}</TableCell>
                 <TableCell label="Topics">{this.props.joinedTopicsCounts[client] || "-"}</TableCell>
                 <TableCell label="Actions" small center className={'actions'}>
-                    <span onClick={() => this.props.openModalTopics(client)} className={'info-container'}>
-                        <FontAwesome name={'file'} className={'pointer'}/>
-                        <Info text={'Edit'}/>
-                    </span>
-                    <span onClick={() => this.props.removeClient(client)} role="presentation" className={'info-container'}>
-                        <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-                        <Info text={'Delete'}/>
-                    </span>
+                    <ActionButtons
+                        edit={() => this.props.openModalTopics(client)}
+                        remove={() => this.props.removeClient(client)}
+                    />
                 </TableCell>
             </TableRow>
         ))
