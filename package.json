@@ -47,16 +47,16 @@
     "react-select": "^2.4.4",
     "react-timeago": "^4.4.0",
     "sass-loader": "^7.1.0",
-    "sweetalert2": "^8.13.0",
+    "sweetalert2": "^8.13.3",
     "sweetalert2-react-content": "^1.1.0",
     "url-loader": "^1.1.2",
-    "validator": "^11.0.0",
-    "webpack": "^4.35.2"
+    "validator": "^11.1.0",
+    "webpack": "^4.35.3"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.5.2",
     "@babel/preset-flow": "^7.0.0",
     "cross-env": "^5.0.1"
   }

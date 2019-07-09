@@ -10,17 +10,22 @@ type Props = {
     icon: string,
     title: string | number,
     desc?: string,
-    className?: string
+    className?: string,
+    large?: Boolean,
 }
 
 class Card extends React.Component<Props> {
     render() {
         const classes = {
-            root: cx('card-container'),
+            root: cx('card-container', {
+                'card--large': this.props.large,
+                'card--medium': this.props.medium,
+            }),
             card: cx('card', {
                 'card--red': this.props.red,
                 'card--blue': this.props.blue,
                 'card--blue-dark': this.props.darkBlue,
+                'card--white': this.props.white,
                 [this.props.className || '']: this.props.className
             })
         }

@@ -1,9 +1,13 @@
 .card-container {
   display: inline-block;
-  width: 33%;
+  width: 33.3%;
   height: 120px;
   padding: 5px;
   vertical-align: top;
+
+  &.card--large {
+    width: 100%;
+  }
 
   @include breakpointMax($md) {
     width: 33%;

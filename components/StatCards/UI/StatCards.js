@@ -3,6 +3,9 @@ import Card from '../../common/Card/Card'
 import Icon from '../../common/Icon/Icon'
 import Link from 'next/link'
 import routes from '../../../routes'
+import url from "url";
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 type Props = {
     clientsCount: number,
@@ -11,8 +14,16 @@ type Props = {
 
 class StatCards extends React.Component<Props> {
     render() {
+        const {C2_URL} = publicRuntimeConfig;
+        const c2 = url.parse(C2_URL);
         return (
             <React.Fragment>
+                <Card
+                    white
+                    large
+                    title={'C2'}
+                    desc={c2.host}
+                />
                 <Link href={routes.clients.path}>
                     <a>
                         <Card
