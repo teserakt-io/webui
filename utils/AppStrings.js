@@ -21,6 +21,8 @@ class AppStrings {
 
     static RULE_ADDED = 'Rule successfully added!';
     static RULE_ERROR = "Rule wasn't added!";
+
+    static RULE_UPDATED = 'Rule successfully updated!';
 }
 
 export default AppStrings
