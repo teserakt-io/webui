@@ -27,8 +27,11 @@ class ClientsTableProvider extends React.Component<Props> {
     }
     addClient = (client: string, key: string) => {
         this.props.store.view.modal.hide();
-        this.props.store.domain.clients.add(client, key);
-        NotificationManager.success(AppStrings.CLIENT_ADDED);
+        this.props.store.domain.clients.add(client, key).then(() => {
+            NotificationManager.success(AppStrings.CLIENT_ADDED);
+        }).catch(e => {
+            NotificationManager.error(AppStrings.CLIENT_ADDING_ERROR);
+        });
     };
 
     removeClient = (name: string) => {

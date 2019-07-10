@@ -9,14 +9,17 @@ const devProxy = {
         pathRewrite: { '^/c2': '' },
         changeOrigin: true,
         secure: false,
-    },
-    '/ae': {
+    }
+};
+
+if(process.env.AE_ENABLED === "true") {
+    devProxy['/ae'] = {
         target: process.env.AE_URL,
         pathRewrite: { '^/ae': '' },
         changeOrigin: true,
         secure: false,
-    }
-};
+    };
+}
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;

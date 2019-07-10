@@ -28,13 +28,14 @@ class CustomSelect extends React.Component<Props> {
             })
         }
 
-        const options = Array.isArray(this.props.options) ?
+        const options = Array.isArray(this.props.options[0]) ?
             this.props.options.map(item => ({value: item, label: item}))
             : this.props.options;
         const value = typeof this.props.value === "object" ? this.props.value : {
             label: this.props.value,
             value: this.props.value,
         };
+        console.log(options);
         return (
             <div className="input">
                 <label className="input__label" htmlFor={this.props.name}>

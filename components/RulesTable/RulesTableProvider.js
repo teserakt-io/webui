@@ -38,7 +38,6 @@ class RulesTableProvider extends Component{
                     NotificationManager.success(AppStrings.RULE_UPDATED);
                     this.forceUpdate();
                 }).catch((e) => {
-                console.log(e.response);
                 NotificationManager.error(capitalize(e.response.data.message));
             });
             this.forceUpdate();

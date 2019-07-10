@@ -30,6 +30,12 @@
     color: $red-cinnabar;
     @include font-size-map((null: 12px));
   }
+
+  &__info {
+    position: relative;
+    color: #777;
+    font-size: 0.75em;
+  }
 }
 
 .input-inline {

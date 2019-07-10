@@ -5,6 +5,7 @@ class AppStrings {
     static SOCKET_CONNECTION_ERROR = 'Socket connection error';
 
     static CLIENT_ADDED = 'Client successfully added!';
+    static CLIENT_ADDING_ERROR = "Client wasn't added!";
     static CLIENT_REMOVED = 'Client successfully removed!';
     static CLIENT_REMOVED_ERROR = 'Client removal failure!';
 

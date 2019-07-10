@@ -36,6 +36,7 @@ class Input extends React.Component<Props> {
                     onChange={this.props.onChange}
                     value={this.props.value}
                     type={this.props.type}/>
+                <span className="input__info">{this.props.info}</span>
                 <span className="input__error">{this.props.error}</span>
             </div>
         )

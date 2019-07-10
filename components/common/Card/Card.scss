@@ -8,6 +8,9 @@
   &.card--large {
     width: 100%;
   }
+  &.card--medium {
+    width: 50%;
+  }
 
   @include breakpointMax($md) {
     width: 33%;
