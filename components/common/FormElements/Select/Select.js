@@ -35,7 +35,6 @@ class CustomSelect extends React.Component<Props> {
             label: this.props.value,
             value: this.props.value,
         };
-        console.log(options);
         return (
             <div className="input">
                 <label className="input__label" htmlFor={this.props.name}>

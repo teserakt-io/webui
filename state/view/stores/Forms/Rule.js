@@ -77,7 +77,7 @@ class Rule {
                 trigger.settings = JSON.parse(atob(trigger.settings));
             return trigger;
         });
-        this.targets = targets;
+        this.targets = targets || [];
     }
 }
 

@@ -86,8 +86,10 @@ class Topics {
     async add(name) {
         await api.topics.post(name);
 
-        this.topics.push(name);
         this.count++;
+        if (this.topics.length < this.onPage)
+            this.topics.push(name);
+
         this.addLog("add_topic", { name: name });
     }
 

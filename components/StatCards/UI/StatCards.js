@@ -17,15 +17,14 @@ class StatCards extends React.Component<Props> {
         const {C2_URL, AE_ENABLED} = publicRuntimeConfig;
         const c2 = url.parse(C2_URL);
         const ae_enabled = AE_ENABLED === "true";
-        console.log(publicRuntimeConfig);
         return (
             <React.Fragment>
-                {ae_enabled && <Card
+                <Card
                     white
                     large
                     title={'C2'}
                     desc={c2.host}
-                />}
+                />
                 <Link href={routes.clients.path}>
                     <a>
                         <Card
