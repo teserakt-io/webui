@@ -24,23 +24,8 @@ type Props = {
 }
 
 class ClientsTable extends React.Component<Props> {
-    renderClients() {
-        return this.props.clients.map((client, index) => (
-            <TableRow key={index}>
-                <TableCell label="#" small center>{index + 1}</TableCell>
-                <TableCell label="Client">{client}</TableCell>
-                <TableCell label="Topics">{this.props.joinedTopicsCounts[client] || "-"}</TableCell>
-                <TableCell label="Actions" small center className={'actions'}>
-                    <ActionButtons
-                        edit={() => this.props.openModalTopics(client)}
-                        remove={() => this.props.removeClient(client)}
-                    />
-                </TableCell>
-            </TableRow>
-        ))
-    }
-
     render() {
+        const offset = this.props.onPage * this.props.page;
         return (
             <React.Fragment>
                 <Button
@@ -68,11 +53,23 @@ class ClientsTable extends React.Component<Props> {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.renderClients()}
+                        {this.props.clients.map((client, index) => (
+                            <TableRow key={index}>
+                                <TableCell label="#" small center>{offset + index + 1}</TableCell>
+                                <TableCell label="Client">{client}</TableCell>
+                                <TableCell label="Topics">{this.props.joinedTopicsCounts[client] || "-"}</TableCell>
+                                <TableCell label="Actions" small center className={'actions'}>
+                                    <ActionButtons
+                                        edit={() => this.props.openModalTopics(client)}
+                                        remove={() => this.props.removeClient(client)}
+                                    />
+                                </TableCell>
+                            </TableRow>))}
                     </TableBody>
                 </Table>
                 <Pagination
                     count={this.props.count}
+                    onPage={this.props.onPage}
                     onPageChange={this.props.handlePageChange}
                     forcePage={this.props.page}
                     className={'f-l'}

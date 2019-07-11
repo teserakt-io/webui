@@ -28,23 +28,8 @@ type Props = {
 }
 
 class TopicsTable extends React.Component<Props> {
-    renderClients() {
-        return this.props.topics.map((topic: Topic, index) => (
-            <TableRow key={index}>
-                <TableCell label="#" small center>{index + 1}</TableCell>
-                <TableCell label="Topic">{topic}</TableCell>
-                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || "-"}</TableCell>
-                <TableCell label="Actions" small center>
-                    <ActionButtons
-                        edit={() => this.props.openModalClients(topic)}
-                        remove={() => this.props.removeTopic(topic)}
-                    />
-                </TableCell>
-            </TableRow>
-        ))
-    }
-
     render() {
+        const offset = this.props.page * this.props.onPage;
         return (
             <React.Fragment>
                 <Button
@@ -55,7 +40,7 @@ class TopicsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add topic
                 </Button>
-                <div style={{float: 'left', marginRight: '20px'}}>
+                <div className={'f-l mr-20'}>
                     <TopicNameForm submit={this.props.removeTopic} submitText={'DELETE TOPIC'}/>
                 </div>
 
@@ -72,26 +57,29 @@ class TopicsTable extends React.Component<Props> {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.renderClients()}
+                        {this.props.topics.map((topic: Topic, index) => (
+                            <TableRow key={index}>
+                                <TableCell label="#" small center>{offset + index + 1}</TableCell>
+                                <TableCell label="Topic">{topic}</TableCell>
+                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || "-"}</TableCell>
+                                <TableCell label="Actions" small center>
+                                    <ActionButtons
+                                        edit={() => this.props.openModalClients(topic)}
+                                        remove={() => this.props.removeTopic(topic)}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
 
                 <Pagination
                     count={this.props.count}
-                    onPageChange={this.props.handlePageChange}
+                    onPageChange={this.props.onPageChange}
+                    onPage={this.props.onPage}
                     forcePage={this.props.page}
                     className={'f-l'}
                 />
-                <div className={'f-r'}>
-                    <Button
-                        danger
-                        uppercase
-                        medium
-                        className="mt-15"
-                        onClick={this.props.handleReset}>
-                        Reset
-                    </Button>
-                </div>
             </React.Fragment>
         )
     }

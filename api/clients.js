@@ -11,6 +11,10 @@ async function postClient(name, key) {
     return await c2.post(`/client/name/${name}/key/${key}`);
 }
 
+async function put(name) {
+    return await c2.put(`/client/name/${name}`);
+}
+
 async function deleteClient(name) {
     return await c2.delete(`/client/name/${name}`);
 }
@@ -38,6 +42,7 @@ async function joinedTopics(client, offset = 0, count = 100) {
 export default {
     get: getClients,
     post: postClient,
+    put,
     delete: deleteClient,
     count: count,
     joinTopic: joinTopic,

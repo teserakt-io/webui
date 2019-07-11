@@ -85,6 +85,11 @@ class Clients {
     }
 
     @action
+    async reset(client) {
+        const {data} = api.clients.put(client);
+    }
+
+    @action
     async deleteClient(name) {
         const {data, status} = await api.clients.delete(name);
         await this.load();
@@ -204,13 +209,13 @@ class Clients {
     }
 
     @action
-    async reset() {
+    async resetAll() {
         const onRequest = 100;
-        for(let i = 0; i < this.count;) {
+        for(let i = 0; i < this.count; i += onRequest) {
             const { data } = await api.clients.get(i, onRequest);
 
             data.map(item => {
-                this.deleteClient(item);
+                this.reset(item);
             });
         }
     }

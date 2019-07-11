@@ -13,9 +13,6 @@ import Swal from "sweetalert2";
 
 type Props = {
     store: Store,
-    // services: {
-    //     commandHandler: CommandHandler
-    // }
 }
 
 @Store.inject
@@ -110,6 +107,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 joinedClientsCounts={this.props.store.domain.topics.joinedClientsCounts}
                 count={this.props.store.domain.topics.getCount()}
                 onPageChange={this.onPageChange}
+                onPage={this.props.store.domain.topics.onPage}
                 handleOnPageChange={this.handleOnPageChange}
                 page={this.props.store.domain.topics.getPage()}
                 openModalClients={this.openModalClients}
