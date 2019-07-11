@@ -9,7 +9,7 @@ async function postClient(name, key) {
 }
 
 async function put(name) {
-    return await c2.put(`/client/name/${name}`);
+    return await c2.put(`/e4/client/${name}`);
 }
 
 async function deleteClient(name) {
