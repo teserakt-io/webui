@@ -36,7 +36,7 @@ class RuleForm extends Component{
     };
 
     onSelectChange = (option: Object) => {
-        this.ruleForm.setType(option.value);
+        this.ruleForm.setType(option.label);
     };
 
     isValid() {

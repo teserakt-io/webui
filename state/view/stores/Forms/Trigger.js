@@ -79,7 +79,11 @@ class Trigger {
         switch (this.type) {
             case "TIME_INTERVAL": {
                 for(let val in this.settings) {
-                    if(validator.isEmpty(this.settings[val]))
+                    if(
+                        validator.isEmpty(this.settings[val]) ||
+                        parseInt(this.settings[val]) < 0 ||
+                        (isNaN(parseInt(this.settings[val])) && this.settings[val] !== "*")
+                    )
                         return false;
                 }
             }

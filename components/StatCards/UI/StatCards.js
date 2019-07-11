@@ -14,20 +14,23 @@ type Props = {
 
 class StatCards extends React.Component<Props> {
     render() {
-        const {C2_URL} = publicRuntimeConfig;
+        const {C2_URL, AE_ENABLED} = publicRuntimeConfig;
         const c2 = url.parse(C2_URL);
+        const ae_enabled = AE_ENABLED === "true";
+        console.log(publicRuntimeConfig);
         return (
             <React.Fragment>
-                <Card
+                {ae_enabled && <Card
                     white
                     large
                     title={'C2'}
                     desc={c2.host}
-                />
+                />}
                 <Link href={routes.clients.path}>
                     <a>
                         <Card
                             red
+                            medium={!ae_enabled}
                             title={this.props.clientsCount}
                             desc="Clients"
                             icon={Icon.d.CLIENT}/>
@@ -37,12 +40,13 @@ class StatCards extends React.Component<Props> {
                     <a>
                         <Card
                             darkBlue
+                            medium={!ae_enabled}
                             title={this.props.topicsCount}
                             desc="Topics"
                             icon={Icon.d.TOPIC}/>
                     </a>
                 </Link>
-                <Link href={routes.ae.path}>
+                {ae_enabled && <Link href={routes.ae.path}>
                     <a>
                         <Card
                             blue
@@ -51,7 +55,7 @@ class StatCards extends React.Component<Props> {
                             faIcon={routes.ae.icon}
                         />
                     </a>
-                </Link>
+                </Link>}
             </React.Fragment>
         )
     }

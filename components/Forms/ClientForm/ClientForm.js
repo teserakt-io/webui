@@ -59,6 +59,7 @@ class ClientForm extends React.Component<Props, State> {
         let key = this.state[ClientForm.formKeys.KEY];
         if(key.length === 0)
             key = generateKey();
+
         this.props.submit(client, key, this.state.selectedTopics)
     };
 
@@ -80,6 +81,7 @@ class ClientForm extends React.Component<Props, State> {
                         placeholder="Key"
                         label="Key"
                         id={ClientForm.formKeys.KEY}
+                        info={'Empty or 64 hexadecimals'}
                         onChange={this.updateField}/>
                     <div className="btn-control">
                         <Button type={'button'} small secondary onClick={this.onCancel}>

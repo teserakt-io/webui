@@ -27,8 +27,11 @@ class ClientsTableProvider extends React.Component<Props> {
     }
     addClient = (client: string, key: string) => {
         this.props.store.view.modal.hide();
-        this.props.store.domain.clients.add(client, key);
-        NotificationManager.success(AppStrings.CLIENT_ADDED);
+        this.props.store.domain.clients.add(client, key).then(() => {
+            NotificationManager.success(AppStrings.CLIENT_ADDED);
+        }).catch(e => {
+            NotificationManager.error(AppStrings.CLIENT_ADDING_ERROR);
+        });
     };
 
     removeClient = (name: string) => {
@@ -90,7 +93,7 @@ class ClientsTableProvider extends React.Component<Props> {
             showCancelButton: true,
         }).then((res) => {
             if(res.value) {
-                this.props.store.domain.clients.reset();
+                this.props.store.domain.clients.resetAll();
             }
         })
     };
@@ -104,6 +107,7 @@ class ClientsTableProvider extends React.Component<Props> {
                 clients={this.props.store.domain.clients.getClients()}
                 joinedTopicsCounts={this.props.store.domain.clients.joinedTopicsCounts}
                 count={this.props.store.domain.clients.getCount()}
+                onPage={this.props.store.domain.clients.onPage}
                 handlePageChange={this.handlePageChange}
                 handleOnPage={this.handleOnPage}
                 page={this.props.store.domain.clients.getPage()}
