@@ -78,8 +78,9 @@ class Clients {
     async add(name, key) {
         const { data, status } = await api.clients.post(name, key);
 
-        this.clients.push(name);
         this.count++;
+        if(this.clients.length < this.onPage)
+            this.clients.push(name);
 
         this.addLog("add_client", {name: name});
     }
