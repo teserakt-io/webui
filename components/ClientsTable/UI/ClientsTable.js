@@ -72,7 +72,6 @@ class ClientsTable extends React.Component<Props> {
                     onPage={this.props.onPage}
                     onPageChange={this.props.handlePageChange}
                     forcePage={this.props.page}
-                    className={'f-l'}
                 />
                     <div className={'f-r'}>
                         <Button

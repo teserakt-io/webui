@@ -78,7 +78,6 @@ class TopicsTable extends React.Component<Props> {
                     onPageChange={this.props.onPageChange}
                     onPage={this.props.onPage}
                     forcePage={this.props.page}
-                    className={'f-l'}
                 />
             </React.Fragment>
         )

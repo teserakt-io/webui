@@ -70,10 +70,7 @@ function RulesTable(props: Props) {
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
                                 <TableCell label={'Description'} small>
-                                    <ReadMoreReact text={rule.description || ""} max={60} ideal={40} min={10} />
-                                    {/*<Truncate>*/}
-                                    {/*    {rule.description}*/}
-                                    {/*</Truncate>*/}
+                                    <ReadMoreReact text={rule.description || ""} max={30} ideal={20} min={10} />
                                 </TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
@@ -96,7 +93,6 @@ function RulesTable(props: Props) {
                 onPage={props.onPage}
                 onPageChange={props.onPageChange}
                 forcePage={props.currentPage}
-                className={'f-l'}
             />
         </div>
     );
