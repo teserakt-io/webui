@@ -12,11 +12,12 @@ import FontAwesome from "react-fontawesome";
 import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
-import Truncate from 'react-truncate';
+// import Truncate from 'react-truncate';
 import ReadMoreReact from 'read-more-react';
 import moment from "moment";
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Rule from '../../../state/view/stores/Forms/Rule';
+import {spacedLongString} from "../../../utils/helpers";
 
 type Props = {
     rules: Array,
@@ -70,7 +71,7 @@ function RulesTable(props: Props) {
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
                                 <TableCell label={'Description'} small>
-                                    <ReadMoreReact text={rule.description || ""} max={30} ideal={20} min={10} />
+                                    <ReadMoreReact text={spacedLongString(rule.description || "", 30)} max={30} ideal={20} min={10} />
                                 </TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
