@@ -13,6 +13,7 @@ import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
 import Truncate from 'react-truncate';
+import ReadMoreReact from 'read-more-react';
 import moment from "moment";
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Rule from '../../../state/view/stores/Forms/Rule';
@@ -69,9 +70,10 @@ function RulesTable(props: Props) {
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
                                 <TableCell label={'Description'} small>
-                                    <Truncate>
-                                        {rule.description}
-                                    </Truncate>
+                                    <ReadMoreReact text={rule.description || ""} max={60} ideal={40} min={10} />
+                                    {/*<Truncate>*/}
+                                    {/*    {rule.description}*/}
+                                    {/*</Truncate>*/}
                                 </TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
