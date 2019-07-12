@@ -12,6 +12,7 @@ import FontAwesome from "react-fontawesome";
 import Button from "../../common/Buttons/Button/Button";
 import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
+import Truncate from 'react-truncate';
 import moment from "moment";
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Rule from '../../../state/view/stores/Forms/Rule';
@@ -67,7 +68,11 @@ function RulesTable(props: Props) {
                             <TableRow key={rule.id}>
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
-                                <TableCell label={'Description'} small>{rule.description}</TableCell>
+                                <TableCell label={'Description'} small>
+                                    <Truncate>
+                                        {rule.description}
+                                    </Truncate>
+                                </TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
                                 </TableCell>

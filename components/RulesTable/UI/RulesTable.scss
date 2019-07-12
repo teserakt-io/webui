@@ -3,11 +3,27 @@
     min-width: 0;
   }
   .rules__table {
+    max-width: 100%;
+
     .table__header {
       padding: 7px 14px;
     }
     .table__cell {
+      max-width: 300px;
       padding: 7px 14px;
+      overflow-wrap: break-word;
+      //word-wrap: break-word;
+      //hyphens: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .rules {
+    .rules__table {
+      .table__cell {
+        max-width: 600px;
+      }
     }
   }
 }

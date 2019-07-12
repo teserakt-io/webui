@@ -46,6 +46,7 @@
     "react-scroll-into-view-if-needed": "^2.1.7",
     "react-select": "^2.4.4",
     "react-timeago": "^4.4.0",
+    "react-truncate": "^2.4.0",
     "sass-loader": "^7.1.0",
     "sweetalert2": "^8.13.4",
     "sweetalert2-react-content": "^1.1.0",
