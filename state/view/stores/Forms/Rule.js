@@ -72,7 +72,7 @@ class Rule {
         this.id = id;
         this.type = Rule.types.find(t => t.value === action).label;
         this.description = description;
-        this.triggers = triggers.map(trigger => {
+        this.triggers = !triggers ? [] : triggers.map(trigger => {
             if(typeof trigger.settings === 'string' && isBase64(trigger.settings))
                 trigger.settings = JSON.parse(atob(trigger.settings));
             return trigger;
