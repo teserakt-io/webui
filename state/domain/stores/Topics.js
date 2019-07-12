@@ -22,7 +22,6 @@ class Topics {
         this.loadCount()
             .catch(e => {
                 this.count = 0;
-                console.log(e.response);
             });
     }
 

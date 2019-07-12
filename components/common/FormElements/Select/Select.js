@@ -28,7 +28,7 @@ class CustomSelect extends React.Component<Props> {
             })
         }
 
-        const options = Array.isArray(this.props.options[0]) ?
+        const options = this.props.options.length > 0 && typeof this.props.options[0] === "string" ?
             this.props.options.map(item => ({value: item, label: item}))
             : this.props.options;
         const value = typeof this.props.value === "object" ? this.props.value : {

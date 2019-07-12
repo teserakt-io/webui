@@ -7,6 +7,7 @@ import Settings from "./Settings";
 import dynamic from 'next/dynamic';
 import FontAwesome from "react-fontawesome";
 import Icon from "../common/Icon/Icon";
+import ActionButtons from "../ActionButtons/ActionButtons";
 const ReactJson = dynamic(import('react-json-view'), {
     ssr: false
 });
@@ -54,12 +55,10 @@ function TriggersTable(props: Props) {
                                     src={trigger.settings}/>
                                 </TableCell>
                                 <TableCell small label={'Actions'}>
-                                    <span onClick={() => props.edit(index)}>
-                                        <FontAwesome name={'file'} className={'pointer'}/>
-                                    </span>
-                                    <span onClick={() => props.remove(index)} role="presentation">
-                                        <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-                                    </span>
+                                    <ActionButtons
+                                        edit={() => props.edit(index)}
+                                        remove={() => props.remove(index)}
+                                    />
                                 </TableCell>
                             </TableRow>
                         );

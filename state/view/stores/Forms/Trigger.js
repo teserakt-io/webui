@@ -1,5 +1,7 @@
 import {observable, action} from "mobx";
-import validator from 'validator'
+import validator from 'validator';
+import regex from '../../../../utils/regex';
+import {toCronString} from "../../../../utils/helpers";
 
 class Trigger {
     @observable type = Trigger.types;
@@ -19,6 +21,7 @@ class Trigger {
         switch (this.getType()) {
             case "TIME_INTERVAL": {
                 return  {
+                    seconds: "*",
                     minutes: "*",
                     hours: "*",
                     days: "*",
@@ -61,12 +64,13 @@ class Trigger {
                 const expr = trigger.settings.expr.split(" ");
                 this.settings = {
                     ...trigger.settings,
-                    minutes: expr[0],
-                    hours: expr[1],
-                    days: expr[2],
-                    month: expr[3],
-                    weeks: expr[4],
-                    years: expr[5],
+                    seconds: expr[0],
+                    minutes: expr[1],
+                    hours: expr[2],
+                    days: expr[3],
+                    month: expr[4],
+                    weeks: expr[5],
+                    years: expr[6],
                 };
                 break;
             }
@@ -78,14 +82,9 @@ class Trigger {
     isValid() {
         switch (this.type) {
             case "TIME_INTERVAL": {
-                for(let val in this.settings) {
-                    if(
-                        validator.isEmpty(this.settings[val]) ||
-                        parseInt(this.settings[val]) < 0 ||
-                        (isNaN(parseInt(this.settings[val])) && this.settings[val] !== "*")
-                    )
-                        return false;
-                }
+                const cron = toCronString(this.settings);
+                if(!regex.cron.test(cron))
+                    return false;
             }
         }
 
@@ -96,12 +95,7 @@ class Trigger {
         const settings = {};
         switch (this.type) {
             case "TIME_INTERVAL": {
-                settings["expr"] = this.settings.minutes + " " +
-                    this.settings.hours + " " +
-                    this.settings.days + " " +
-                    this.settings.month + " " +
-                    this.settings.weeks + " " +
-                    this.settings.years;
+                settings["expr"] = toCronString(this.settings);
                 break;
             }
             default:

@@ -5,7 +5,11 @@ function TimeIntervalSettings(props) {
     return (
         <Fragment>
             <div className={'cron'}>
-                <Input label={'minutes'}
+                <Input label={'seconds'}
+                       onChange={props.onSettingChange}
+                       value={props.data.seconds}
+                       id={'seconds'}/>
+                   <Input label={'minutes'}
                        onChange={props.onSettingChange}
                        value={props.data.minutes}
                        id={'minutes'}/>

@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import FontAwesome from "react-fontawesome";
 import Icon from "../common/Icon/Icon";
 import Input from "../common/FormElements/Input/Input";
+import ActionButtons from "../ActionButtons/ActionButtons";
 const Reacttarget = dynamic(import('react-json-view'), {
     ssr: false
 });
@@ -46,12 +47,10 @@ function TargetsTable(props: Props) {
                                 <TableCell label={'Type'}>{target.type}</TableCell>
                                 <TableCell label={'Expression'}>{target.expr}</TableCell>
                                 <TableCell small label={'Actions'}>
-                                    <span onClick={() => props.edit(index)}>
-                                        <FontAwesome name={'file'} className={'pointer'}/>
-                                    </span>
-                                    <span onClick={() => props.remove(index)} role="presentation">
-                                        <Icon color="black" className="pointer" d={Icon.d.BIN}/>
-                                    </span>
+                                    <ActionButtons
+                                        edit={() => props.edit(index)}
+                                        remove={() => props.remove(index)}
+                                    />
                                 </TableCell>
                             </TableRow>
                         );
