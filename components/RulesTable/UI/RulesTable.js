@@ -19,7 +19,7 @@ import Rule from '../../../state/view/stores/Forms/Rule';
 
 type Props = {
     rules: Array,
-    createModal: Function,
+    addRule: Function,
     editRule: Function,
     removeRule: Function,
     currentPage: number,
@@ -34,7 +34,7 @@ function RulesTable(props: Props) {
                 uppercase
                 medium
                 className="mb-20"
-                onClick={props.createModal}>
+                onClick={props.addRule}>
                 Add Rule
             </Button>
             <Button

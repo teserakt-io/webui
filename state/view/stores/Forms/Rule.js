@@ -19,6 +19,15 @@ class Rule {
     getTargets = () => this.targets;
 
     @action
+    clear() {
+        this.id = null;
+        this.type = Rule.types[0].label;
+        this.description = "";
+        this.triggers = [];
+        this.targets = [];
+    }
+
+    @action
     setType(value) {
         this.type = value;
     }

@@ -16,12 +16,16 @@ class RulesTableProvider extends Component{
         this.props.store.domain.ae.rules.load();
     }
 
-    createModal = () => {
+    openModal = () => {
         this.props.store.view.modal.open(ModalProvider.types.RULE_FORM, {
             submit: this.submitRule,
         });
     };
 
+    addRule = () => {
+        this.props.store.view.forms.getRule().clear();
+        this.openModal();
+    };
     submitRule = (rule) => {
         const {id, type, description, triggers, targets} = rule;
         if(id === 'undefined' || id === null) {
@@ -49,7 +53,7 @@ class RulesTableProvider extends Component{
     editRule = (id) => {
         const data = this.props.store.domain.ae.rules.get(parseInt(id));
         this.props.store.view.forms.getRule().parse(data);
-        this.createModal();
+        this.openModal();
     };
 
     removeRule = (id) => {
@@ -77,7 +81,7 @@ class RulesTableProvider extends Component{
        return (
            <RulesTable
                rules={this.props.store.domain.ae.rules.get()}
-               createModal={this.createModal}
+               addRule={this.addRule}
                editRule={this.editRule}
                removeRule={this.removeRule}
                count={this.props.store.domain.ae.rules.rules.length}
