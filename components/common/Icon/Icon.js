@@ -41,14 +41,15 @@ class Icon extends React.Component<Props> {
             color,
             className,
             viewBoxX,
-            viewBoxY
-        } = this.props
+            viewBoxY,
+            marginBottom
+        } = this.props;
 
         return (
             <svg
                 className={className}
                 viewBox={`0 0 ${viewBoxX} ${viewBoxY}`}
-                style={{ maxWidth: maxWidth, minWidth: minWidth, height: height, marginBottom: '-12px' }}>
+                style={{ maxWidth: maxWidth, minWidth: minWidth, height: height, marginBottom }}>
                 <path d={d} fill={color}/>
             </svg>
         )

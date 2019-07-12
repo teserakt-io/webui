@@ -6,7 +6,7 @@ import Link from 'next/link'
 // import type { RouteConfig } from '..//routes'
 
 type Props = {
-    // routes: Array<RouteConfig>,
+    routes: Array,
     history: Object
 }
 
@@ -49,7 +49,7 @@ class Navigation extends Component<Props> {
                 <div className="sidenav__nav">
                     <ul>{this.renderLinks()}</ul>
                 </div>
-                {/*<div style={{ top: this.getIndicatorPosition() }} className="sidenav__indicator"></div>*/}
+                {/*<div style={{ top: this.getIndicatorPosition() }} className="sidenav__indicator"/>*/}
             </nav>
         )
     }

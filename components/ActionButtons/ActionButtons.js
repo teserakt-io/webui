@@ -17,7 +17,7 @@ function ActionButtons(props: Props) {
                 <Info text={'Edit'}/>
             </span>}
             {props.remove && <span className={'info-container'} onClick={props.remove} role="presentation">
-                <Icon color="black" className="pointer" d={Icon.d.BIN}/>
+                <Icon color="black" className="pointer" d={Icon.d.BIN} marginBottom={-12}/>
                 <Info text={'Delete'}/>
             </span>}
         </Fragment>
