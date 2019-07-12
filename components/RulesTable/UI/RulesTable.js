@@ -67,8 +67,7 @@ function RulesTable(props: Props) {
                             <TableRow key={rule.id}>
                                 <TableCell label={'#'} small center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
-                                {/*<TableCell label={'Description'} small>{rule.description}</TableCell>*/}
-                                <TableCell label={'Description'} small></TableCell>
+                                <TableCell label={'Description'} small>{rule.description}</TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
                                 </TableCell>
