@@ -5,6 +5,13 @@ image: golang:1.12
 stages:
   - build-docker
 
+
+before_script:
+  # Packages
+  - PACKAGES="bash"
+  - command -v apt >/dev/null 2>&1 && (apt-get update && apt-get install -y ${PACKAGES}) || (apk update && apk add ${PACKAGES})
+
+
 build-docker:
   image: docker:stable
   stage: build-docker
