@@ -4,10 +4,12 @@ async function get(offset = 0, count = 0) {
 }
 
 async function post(name) {
+    name = encodeURIComponent(name)
     return await c2.post(`/e4/topic/${name}`);
 }
 
 async function remove(name) {
+    name = encodeURIComponent(name)
     return await c2.delete(`/e4/topic/${name}`);
 }
 
@@ -16,10 +18,12 @@ async function count() {
 }
 
 async function joinedClientsCount(topic) {
+    topic = encodeURIComponent(topic)
     return await c2.get(`/e4/topic/${topic}/clients/count`);
 }
 
 async function joinedClients(topic, offset = 0, count = 1) {
+    topic = encodeURIComponent(topic)
     return await c2.get(`/e4/topic/${topic}/clients?offset=${offset}&count=${count}`);
 }
 
