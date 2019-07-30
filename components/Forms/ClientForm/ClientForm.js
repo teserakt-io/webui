@@ -1,12 +1,11 @@
 // @flow
-import * as React from 'react'
-import Button from '../../common/Buttons/Button/Button'
-import Input from '../../common/FormElements/Input/Input'
-import CustomSelect from '../../common/FormElements/Select/Select'
+import * as React from 'react';
 import validator from 'validator';
+import { generateKey } from "../../../utils/generator";
+import Button from '../../common/Buttons/Button/Button';
+import Input from '../../common/FormElements/Input/Input';
 import type { Topic } from '../../../state/domain/stores/Topics'
 import type { SelectOption } from '../../common/FormElements/Select/Select'
-import {generateKey} from "../../../utils/generator";
 
 type Props = {
     cancel: Function,
@@ -43,7 +42,7 @@ class ClientForm extends React.Component<Props, State> {
         const client = this.state[ClientForm.formKeys.CLIENT];
         const key = this.state[ClientForm.formKeys.KEY];
         return !validator.isEmpty(client) &&
-            (validator.isLength(client, {min: 1, max: 64})) &&
+            (validator.isLength(client, { min: 1, max: 64 })) &&
             (key.length === 0 || (key.length === 64 && validator.isHexadecimal(key)));
     }
 
@@ -57,9 +56,10 @@ class ClientForm extends React.Component<Props, State> {
         if (!this.isValid()) return;
         const client = this.state[ClientForm.formKeys.CLIENT];
         let key = this.state[ClientForm.formKeys.KEY];
-        if(key.length === 0)
+        if (key.length === 0)
             key = generateKey();
 
+        key = Buffer.from(key, 'hex').toString('base64')
         this.props.submit(client, key, this.state.selectedTopics)
     };
 
@@ -76,13 +76,13 @@ class ClientForm extends React.Component<Props, State> {
                         id={ClientForm.formKeys.CLIENT}
                         placeholder="Client"
                         label="Client"
-                        onChange={this.updateField}/>
+                        onChange={this.updateField} />
                     <Input
                         placeholder="Key"
                         label="Key"
                         id={ClientForm.formKeys.KEY}
                         info={'Empty or 64 hexadecimals'}
-                        onChange={this.updateField}/>
+                        onChange={this.updateField} />
                     <div className="btn-control">
                         <Button type={'button'} small secondary onClick={this.onCancel}>
                             Cancel
