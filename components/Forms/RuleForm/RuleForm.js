@@ -1,18 +1,18 @@
 //@flow
-import React, {Component} from 'react';
-import {Store} from '../../../state/Store';
-import CustomSelect from "../../common/FormElements/Select/Select";
-import Input from "../../common/FormElements/Input/Input";
-import Button from "../../common/Buttons/Button/Button";
-import TriggersTable from "../../TriggersTable/TriggersTable";
+import { observer } from "mobx-react";
+import React, { Component } from 'react';
+import { Store } from '../../../state/Store';
 import Rule from '../../../state/view/stores/Forms/Rule';
-import {observer} from "mobx-react";
+import Button from "../../common/Buttons/Button/Button";
+import Input from "../../common/FormElements/Input/Input";
+import CustomSelect from "../../common/FormElements/Select/Select";
 import TargetsTable from "../../TargetsTable/TargetsTable";
+import TriggersTable from "../../TriggersTable/TriggersTable";
 require('./RuleForm.scss');
 
 @Store.inject
 @observer
-class RuleForm extends Component{
+class RuleForm extends Component {
     static formKeys = {
         TYPE: "type",
         DESCRIPTION: "description",
@@ -66,6 +66,11 @@ class RuleForm extends Component{
         this.triggerForm.setSetting(e.target.id, e.target.value);
         this.forceUpdate();
     };
+
+    handleSettingEventTypeChange = (selected) => {
+        this.triggerForm.setSettingEventType(selected.value);
+        this.forceUpdate();
+    }
 
     handleEditTrigger = (id) => {
         const trigger = this.ruleForm.triggers[id];
@@ -125,16 +130,16 @@ class RuleForm extends Component{
         return (
             <div className="modal__form rule__form">
                 <CustomSelect label={'Type'}
-                              name={RuleForm.formKeys.TYPE}
-                              onChange={this.onSelectChange}
-                              options={Rule.types}
-                              value={this.ruleForm.getType()}
+                    name={RuleForm.formKeys.TYPE}
+                    onChange={this.onSelectChange}
+                    options={Rule.types}
+                    value={this.ruleForm.getType()}
                 />
                 <Input label={'Description'}
-                       id={RuleForm.formKeys.DESCRIPTION}
-                       name={'description'}
-                       value={this.ruleForm[RuleForm.formKeys.DESCRIPTION]}
-                       onChange={this.onChange}/>
+                    id={RuleForm.formKeys.DESCRIPTION}
+                    name={'description'}
+                    value={this.ruleForm[RuleForm.formKeys.DESCRIPTION]}
+                    onChange={this.onChange} />
 
                 <TriggersTable
                     triggers={triggers}
@@ -146,8 +151,9 @@ class RuleForm extends Component{
                     types={this.triggerForm.getTypes()}
                     onTypeChange={this.handleTriggerTypeChange}
                     onSettingChange={this.handleSettingsChange}
+                    onSettingEventTypeChange={this.handleSettingEventTypeChange}
                     onSave={this.handleTriggerSave}
-                    onCancel={() => this.setState({triggerEdit: false})}
+                    onCancel={() => this.setState({ triggerEdit: false })}
                     isValid={this.triggerForm.isValid()}
                 />
 
@@ -162,7 +168,7 @@ class RuleForm extends Component{
                     onTypeChange={this.handleTargetTypeChange}
                     onExpressionChange={this.handleExpressionChange}
                     onSave={this.handleTargetSave}
-                    onCancel={() => this.setState({targetEdit: false})}
+                    onCancel={() => this.setState({ targetEdit: false })}
                 />
                 <div className="btn-control">
                     <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit} className={'mb-10'}>

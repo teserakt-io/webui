@@ -1,9 +1,9 @@
 import React from 'react';
+import EventSettings from "./EventSettings";
 import TimeIntervalSettings from "./TimeIntervalSettings";
-import SubscribeSettings from "./SubscribeSettings";
 import UndefinedSettings from "./UndefinedSettings";
 
-type TriggerType = 'UNDEFINED_ACTION' | 'TIME_INTERVAL' | 'CLIENT_SUBSCRIBED';
+type TriggerType = 'UNDEFINED_ACTION' | 'TIME_INTERVAL' | 'EVENT';
 type Props = {
     type: TriggerType,
 };
@@ -11,11 +11,11 @@ type Props = {
 function Settings(props: Props) {
     switch (props.type) {
         case 'TIME_INTERVAL':
-            return <TimeIntervalSettings {...props}/>;
-        case 'CLIENT_SUBSCRIBED':
-            return <SubscribeSettings {...props}/>;
+            return <TimeIntervalSettings {...props} />;
+        case 'EVENT':
+            return <EventSettings {...props} />;
         default:
-            return <UndefinedSettings {...props}/>;
+            return <UndefinedSettings {...props} />;
     }
 }
 

@@ -1,7 +1,6 @@
-import {observable, action} from "mobx";
-import validator from 'validator';
+import { action, observable } from "mobx";
+import { toCronString } from "../../../../utils/helpers";
 import regex from '../../../../utils/regex';
-import {toCronString} from "../../../../utils/helpers";
 
 class Trigger {
     @observable type = Trigger.types;
@@ -10,8 +9,7 @@ class Trigger {
 
     static types = [
         "TIME_INTERVAL",
-        "CLIENT_SUBSCRIBED",
-        "CLIENT_UNSUBSCRIBED",
+        "EVENT",
     ];
 
     getTypes = () => Trigger.types;
@@ -20,7 +18,7 @@ class Trigger {
     getBaseSettings() {
         switch (this.getType()) {
             case "TIME_INTERVAL": {
-                return  {
+                return {
                     seconds: "*",
                     minutes: "*",
                     hours: "*",
@@ -28,6 +26,12 @@ class Trigger {
                     month: "*",
                     weeks: "*",
                     years: "*",
+                }
+            }
+            case "EVENT": {
+                return {
+                    maxOccurence: 1,
+                    eventType: "CLIENT_SUBSCRIBED",
                 }
             }
             default:
@@ -44,7 +48,7 @@ class Trigger {
 
     @action
     setType(value) {
-        if(this.type !== value) {
+        if (this.type !== value) {
             this.type = value;
             this.settings = this.getBaseSettings();
         }
@@ -53,6 +57,11 @@ class Trigger {
     @action
     setSetting(name, value) {
         this.settings[name] = value;
+    }
+
+    @action
+    setSettingEventType(eventType) {
+        this.settings["eventType"] = eventType;
     }
 
     @action
@@ -75,6 +84,7 @@ class Trigger {
                 break;
             }
             default:
+                this.settings = trigger.settings;
                 break;
         }
     }
@@ -83,8 +93,17 @@ class Trigger {
         switch (this.type) {
             case "TIME_INTERVAL": {
                 const cron = toCronString(this.settings);
-                if(!regex.cron.test(cron))
+                if (!regex.cron.test(cron)) {
                     return false;
+                }
+                break;
+            }
+            case "EVENT": {
+                const maxOccurence = parseInt(this.settings["maxOccurence"], 10) || 0;
+                if (maxOccurence <= 0) {
+                    return false;
+                }
+                break;
             }
         }
 
@@ -99,6 +118,8 @@ class Trigger {
                 break;
             }
             default:
+                settings["maxOccurence"] = parseInt(this.settings["maxOccurence"], 10);
+                settings["eventType"] = this.settings["eventType"];
                 break;
         }
 

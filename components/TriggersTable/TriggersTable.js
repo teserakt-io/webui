@@ -1,13 +1,11 @@
 //@flow
+import dynamic from 'next/dynamic';
 import React from 'react';
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../common/Table";
+import ActionButtons from "../ActionButtons/ActionButtons";
 import Button from "../common/Buttons/Button/Button";
 import CustomSelect from "../common/FormElements/Select/Select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../common/Table";
 import Settings from "./Settings";
-import dynamic from 'next/dynamic';
-import FontAwesome from "react-fontawesome";
-import Icon from "../common/Icon/Icon";
-import ActionButtons from "../ActionButtons/ActionButtons";
 const ReactJson = dynamic(import('react-json-view'), {
     ssr: false
 });
@@ -22,6 +20,7 @@ type Props = {
     remove: Function,
     onTypeChange: Function,
     onSettingChange: Function,
+    onSettingEventTypeChange: Function,
     onSave: Function,
     onCancel: Function,
     isValid: Function,
@@ -48,11 +47,11 @@ function TriggersTable(props: Props) {
                                 <TableCell label={'Type'}>{trigger.type}</TableCell>
                                 <TableCell label={'Settings'}>
                                     <ReactJson
-                                    name="payload"
-                                    enableClipboard={false}
-                                    displayObjectSize={false}
-                                    displayDataTypes={false}
-                                    src={trigger.settings}/>
+                                        name="payload"
+                                        enableClipboard={false}
+                                        displayObjectSize={false}
+                                        displayDataTypes={false}
+                                        src={trigger.settings} />
                                 </TableCell>
                                 <TableCell small label={'Actions'}>
                                     <ActionButtons
@@ -77,6 +76,7 @@ function TriggersTable(props: Props) {
                 <Settings
                     type={props.current.getType()}
                     onSettingChange={props.onSettingChange}
+                    onSettingEventTypeChange={props.onSettingEventTypeChange}
                     data={props.current.settings}
                 />
                 <div>
