@@ -1,5 +1,6 @@
-import {action, observable} from 'mobx';
-import {isBase64} from "../../../../utils/helpers";
+import { action, observable } from 'mobx';
+import { isBase64 } from "../../../../utils/helpers";
+
 class Rule {
     static types = [
         {
@@ -39,8 +40,8 @@ class Rule {
 
     @action
     saveTrigger(trigger) {
-        if(trigger.id !== null && trigger.id !== 'undefined') {
-            this.triggers[trigger.id] = trigger;
+        if (trigger.index !== null && trigger.index !== 'undefined') {
+            this.triggers[trigger.index] = trigger;
         }
         else
             this.triggers.push(trigger);
@@ -53,8 +54,9 @@ class Rule {
 
     @action
     saveTarget(target) {
-        if(target.id !== null && target.id !== 'undefined') {
-            this.targets[target.id] = target;
+        if (target.id !== null && target.id !== 'undefined') {
+            const index = this.targets.findIndex((t) => t.id === target.id)
+            this.targets[index] = target;
         }
         else
             this.targets.push(target);
@@ -66,7 +68,7 @@ class Rule {
     }
 
     serialize() {
-        const {id, type, description, targets, triggers} = this;
+        const { id, type, description, targets, triggers } = this;
         return {
             id,
             type: Rule.types.find(t => t.label === type).value,
@@ -77,12 +79,12 @@ class Rule {
     }
 
     parse(rule) {
-        const {id, action, description, triggers, targets} = rule;
+        const { id, action, description, triggers, targets } = rule;
         this.id = id;
         this.type = Rule.types.find(t => t.value === action).label;
         this.description = description;
         this.triggers = !triggers ? [] : triggers.map(trigger => {
-            if(typeof trigger.settings === 'string' && isBase64(trigger.settings))
+            if (typeof trigger.settings === 'string' && isBase64(trigger.settings))
                 trigger.settings = JSON.parse(atob(trigger.settings));
             return trigger;
         });

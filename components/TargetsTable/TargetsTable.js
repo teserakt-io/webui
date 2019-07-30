@@ -1,13 +1,11 @@
 //@flow
-import React from 'react';
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../common/Table";
-import Button from "../common/Buttons/Button/Button";
-import CustomSelect from "../common/FormElements/Select/Select";
 import dynamic from 'next/dynamic';
-import FontAwesome from "react-fontawesome";
-import Icon from "../common/Icon/Icon";
-import Input from "../common/FormElements/Input/Input";
+import React from 'react';
 import ActionButtons from "../ActionButtons/ActionButtons";
+import Button from "../common/Buttons/Button/Button";
+import Input from "../common/FormElements/Input/Input";
+import CustomSelect from "../common/FormElements/Select/Select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../common/Table";
 const Reacttarget = dynamic(import('react-json-view'), {
     ssr: false
 });
@@ -66,9 +64,9 @@ function TargetsTable(props: Props) {
                     value={props.current.type}
                 />
                 <Input id={'expression'}
-                       onChange={props.onExpressionChange}
-                       value={props.current.expr}
-                       placeholder={'This field expect a valid regular expression'}
+                    onChange={props.onExpressionChange}
+                    value={props.current.expr}
+                    placeholder={'This field expect a valid regular expression'}
                 />
                 <div>
                     <Button small uppercase danger onClick={props.onSave}>Save</Button>

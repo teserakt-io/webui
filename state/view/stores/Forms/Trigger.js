@@ -6,6 +6,7 @@ class Trigger {
     @observable type = Trigger.types;
     @observable settings = {};
     id = null;
+    index = null;
 
     static types = [
         "TIME_INTERVAL",
@@ -42,6 +43,7 @@ class Trigger {
     @action
     clear() {
         this.id = null;
+        this.index = null;
         this.type = Trigger.types[0];
         this.settings = this.getBaseSettings();
     }
@@ -60,13 +62,9 @@ class Trigger {
     }
 
     @action
-    setSettingEventType(eventType) {
-        this.settings["eventType"] = eventType;
-    }
-
-    @action
-    parse(trigger, id = null) {
-        this.id = id;
+    parse(trigger, index) {
+        this.index = index
+        this.id = trigger.id;
         this.type = trigger.type;
         switch (this.type) {
             case "TIME_INTERVAL": {
@@ -122,8 +120,8 @@ class Trigger {
                 settings["eventType"] = this.settings["eventType"];
                 break;
         }
-
         return {
+            index: this.index,
             id: this.id,
             type: this.type,
             settings,

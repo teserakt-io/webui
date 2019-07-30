@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import { action, observable } from "mobx";
 
 class Target {
     static types = [
@@ -6,6 +6,7 @@ class Target {
         "TOPIC",
     ];
     id = null;
+    index = null;
     @observable type = Target.types[0];
     @observable expr = "";
 
@@ -13,6 +14,7 @@ class Target {
     @action
     clear() {
         this.id = null;
+        this.index = null;
         this.type = Target.types[0];
         this.expr = "";
     }
@@ -23,13 +25,14 @@ class Target {
     }
 
     @action
-    setExpression(value){
+    setExpression(value) {
         this.expr = value;
     }
 
     serialize() {
-        const {id, type, expr} = this;
+        const { index, id, type, expr } = this;
         return {
+            index,
             id,
             type,
             expr
@@ -37,10 +40,11 @@ class Target {
     }
 
     @action
-    parse(target, id = null) {
-        this.id = id;
+    parse(target, index) {
+        this.index = index;
+        this.id = target.id;
         this.type = target.type;
-        this.expression = target.expression;
+        this.expr = target.expr;
     }
 }
 

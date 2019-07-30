@@ -68,13 +68,13 @@ class RuleForm extends Component {
     };
 
     handleSettingEventTypeChange = (selected) => {
-        this.triggerForm.setSettingEventType(selected.value);
+        this.triggerForm.setSetting("eventType", selected.value);
         this.forceUpdate();
     }
 
-    handleEditTrigger = (id) => {
-        const trigger = this.ruleForm.triggers[id];
-        this.triggerForm.parse(trigger, id);
+    handleEditTrigger = (index) => {
+        const trigger = this.ruleForm.triggers[index];
+        this.triggerForm.parse(trigger, index);
         this.setState({ triggerEdit: true });
     };
 
@@ -118,9 +118,9 @@ class RuleForm extends Component {
         this.setState({ targetEdit: false });
     };
 
-    handleEditTarget = (id) => {
-        const target = this.ruleForm.targets[id];
-        this.targetForm.parse(target, id);
+    handleEditTarget = (index) => {
+        const target = this.ruleForm.targets[index];
+        this.targetForm.parse(target, index);
         this.setState({ targetEdit: true });
     };
 
