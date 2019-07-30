@@ -1,14 +1,11 @@
-# E4 C2 Backend gitlab ci file
-
-image: golang:1.12
+# E4 WebUI gitlab ci file
 
 stages:
   - build-docker
 
-
 before_script:
   # Packages
-  - PACKAGES="bash python"
+  - PACKAGES="bash"
   - command -v apt >/dev/null 2>&1 && (apt-get update && apt-get install -y ${PACKAGES}) || (apk update && apk add ${PACKAGES})
 
 
