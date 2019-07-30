@@ -2,8 +2,6 @@ FROM node:12-alpine
 
 WORKDIR /app/
 
-RUN apk add --no-cache python
-
 COPY package*.json ./
 
 RUN npm install
