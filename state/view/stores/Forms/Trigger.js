@@ -31,7 +31,7 @@ class Trigger {
             }
             case "EVENT": {
                 return {
-                    maxOccurence: 1,
+                    maxOccurrence: 1,
                     eventType: "CLIENT_SUBSCRIBED",
                 }
             }
@@ -97,8 +97,8 @@ class Trigger {
                 break;
             }
             case "EVENT": {
-                const maxOccurence = parseInt(this.settings["maxOccurence"], 10) || 0;
-                if (maxOccurence <= 0) {
+                const maxOccurrence = parseInt(this.settings["maxOccurrence"], 10) || 0;
+                if (maxOccurrence <= 0) {
                     return false;
                 }
                 break;
@@ -116,7 +116,7 @@ class Trigger {
                 break;
             }
             default:
-                settings["maxOccurence"] = parseInt(this.settings["maxOccurence"], 10);
+                settings["maxOccurrence"] = parseInt(this.settings["maxOccurrence"], 10);
                 settings["eventType"] = this.settings["eventType"];
                 break;
         }
