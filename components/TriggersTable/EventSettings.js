@@ -6,12 +6,12 @@ function EventSettings(props) {
     return (
         <Fragment>
             <div className={'eventSettings'}>
-                <Input label={'max occurence'}
+                <Input label={'max occurrence'}
                     type="number"
                     min="1"
                     onChange={props.onSettingChange}
-                    value={props.data.maxOccurence}
-                    id={'maxOccurence'} />
+                    value={props.data.maxOccurrence}
+                    id={'maxOccurrence'} />
                 <CustomSelect label={'event type'}
                     onChange={props.onSettingEventTypeChange}
                     value={props.data.eventType}
