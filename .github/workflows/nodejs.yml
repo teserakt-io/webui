@@ -6,8 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: teserakt-io/gh-actions/docker-build@master
         with:
-          node-version: "12.x"
-      - run: npm install
-      - run: npm run build
+          branch: ${{ github.ref }}
+          image_name: "webui"
+          dockerfile: "./docker/Dockerfile"
+          registry_endpoint: "eu.gcr.io"
+          registry_name: "${{ secrets.GCR_PROJECT }}"
+          registry_username: _json_key
+          registry_password: ${{ secrets.GCR_TOKEN }}
