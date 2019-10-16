@@ -12,16 +12,16 @@ const devProxy = {
         target: process.env.C2_URL,
         pathRewrite: { '^/c2': '' },
         changeOrigin: true,
-        secure: process.env.C2_SECURE_CNX,
+        secure: process.env.C2_SECURE_CNX === 'true',
     }
 };
 
-if (process.env.AE_ENABLED === "true") {
+if (process.env.AE_ENABLED === 'true') {
     devProxy['/ae'] = {
         target: process.env.AE_URL,
         pathRewrite: { '^/ae': '' },
         changeOrigin: true,
-        secure: process.env.AE_SECURE_CNX,
+        secure: process.env.AE_SECURE_CNX === 'true',
     };
 }
 
@@ -55,7 +55,7 @@ app
         });
 
         let httpServer;
-        if (process.env.HTTPS_ENABLED === "true") {
+        if (process.env.HTTPS_ENABLED === 'true') {
             console.log("> starting https server using cert " + process.env.HTTPS_CERTIFICATE + " and key " + process.env.HTTPS_CERTIFICATE_KEY)
             var privateKey = fs.readFileSync(process.env.HTTPS_CERTIFICATE_KEY, 'utf8');
             var certificate = fs.readFileSync(process.env.HTTPS_CERTIFICATE, 'utf8');
