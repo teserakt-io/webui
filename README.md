@@ -14,6 +14,8 @@ The CI automatically push docker images of the WebUI after each successful build
 
 List of available WebUI images: https://console.cloud.google.com/gcr/images/windy-ripsaw-220209/EU/webui?project=windy-ripsaw-220209&authuser=1&folder&organizationId&gcrImageListsize=30
 
+or with gcloud: `gcloud container images list-tags eu.gcr.io/windy-ripsaw-220209/webui`
+
 To run the webUI container:
 
 ```
