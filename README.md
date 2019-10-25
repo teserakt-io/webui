@@ -12,14 +12,14 @@ npm run dev
 
 The CI automatically push docker images of the WebUI after each successful builds and for each branches.
 
-List of available WebUI images: https://console.cloud.google.com/gcr/images/windy-ripsaw-220209/EU/webui?project=windy-ripsaw-220209&authuser=1&folder&organizationId&gcrImageListsize=30
+List of available WebUI images: https://console.cloud.google.com/gcr/images/teserakt-dev/EU/webui?project=teserakt-dev&authuser=1&folder&organizationId&gcrImageListsize=30
 
-or with gcloud: `gcloud container images list-tags eu.gcr.io/windy-ripsaw-220209/webui`
+or with gcloud: `gcloud container images list-tags eu.gcr.io/teserakt-dev/webui`
 
 To run the webUI container:
 
 ```
-docker run -it --rm -v $(pwd)/.env:/app/.env -p 3000:3000 eu.gcr.io/windy-ripsaw-220209/webui:<BRANCH_NAME>
+docker run -it --rm -v $(pwd)/.env:/app/.env -p 3000:3000 eu.gcr.io/teserakt-dev/webui:<BRANCH_NAME>
 ```
 
 The targeted C2 and C2AE can be configured by providing a custom `.env` file.
