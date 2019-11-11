@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 const express = require('express');
 const next = require('next');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
 require('dotenv').config();
 
 const devProxy = {
@@ -8,16 +12,16 @@ const devProxy = {
         target: process.env.C2_URL,
         pathRewrite: { '^/c2': '' },
         changeOrigin: true,
-        secure: false,
+        secure: process.env.C2_SECURE_CNX === 'true',
     }
 };
 
-if(process.env.AE_ENABLED === "true") {
+if (process.env.AE_ENABLED === 'true') {
     devProxy['/ae'] = {
         target: process.env.AE_URL,
         pathRewrite: { '^/ae': '' },
         changeOrigin: true,
-        secure: false,
+        secure: process.env.AE_SECURE_CNX === 'true',
     };
 }
 
@@ -49,7 +53,20 @@ app
         server.all('*', (req, res) => {
             handle(req, res)
         });
-        server.listen(port, err => {
+
+        let httpServer;
+        if (process.env.HTTPS_ENABLED === 'true') {
+            console.log("> starting https server using cert " + process.env.HTTPS_CERTIFICATE + " and key " + process.env.HTTPS_CERTIFICATE_KEY)
+            var privateKey = fs.readFileSync(process.env.HTTPS_CERTIFICATE_KEY, 'utf8');
+            var certificate = fs.readFileSync(process.env.HTTPS_CERTIFICATE, 'utf8');
+            var credentials = { key: privateKey, cert: certificate };
+            httpServer = https.createServer(credentials, server);
+        } else {
+            console.log("> starting http server")
+            httpServer = http.createServer(server);
+        }
+
+        httpServer.listen(port, err => {
             if (err) {
                 throw err
             }
