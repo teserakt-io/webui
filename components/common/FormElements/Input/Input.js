@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react'
 import cx from 'classnames'
+import * as React from 'react'
 
 type Props = {
     id: string,
@@ -9,6 +9,7 @@ type Props = {
     placeholder?: string,
     error?: string,
     inline?: boolean,
+    disabled?: boolean,
     onChange: Function
 }
 
@@ -35,7 +36,9 @@ class Input extends React.Component<Props> {
                     placeholder={this.props.placeholder}
                     onChange={this.props.onChange}
                     value={this.props.value}
-                    type={this.props.type}/>
+                    type={this.props.type}
+                    disabled={this.props.disabled}
+                />
                 <span className="input__info">{this.props.info}</span>
                 <span className="input__error">{this.props.error}</span>
             </div>

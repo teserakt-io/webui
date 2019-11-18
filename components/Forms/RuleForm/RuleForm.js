@@ -134,7 +134,8 @@ class RuleForm extends Component {
                     onChange={this.onSelectChange}
                     options={Rule.types}
                     value={this.ruleForm.getType()}
-                />
+                    disabled={true} />
+
                 <Input label={'Description'}
                     id={RuleForm.formKeys.DESCRIPTION}
                     name={'description'}
