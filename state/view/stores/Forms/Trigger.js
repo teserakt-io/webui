@@ -20,7 +20,6 @@ class Trigger {
         switch (this.getType()) {
             case "TIME_INTERVAL": {
                 return {
-                    seconds: "*",
                     minutes: "*",
                     hours: "*",
                     days: "*",
@@ -71,13 +70,12 @@ class Trigger {
                 const expr = trigger.settings.expr.split(" ");
                 this.settings = {
                     ...trigger.settings,
-                    seconds: expr[0],
-                    minutes: expr[1],
-                    hours: expr[2],
-                    days: expr[3],
-                    month: expr[4],
-                    weeks: expr[5],
-                    years: expr[6],
+                    minutes: expr[0],
+                    hours: expr[1],
+                    days: expr[2],
+                    month: expr[3],
+                    weeks: expr[4],
+                    years: expr[5],
                 };
                 break;
             }
