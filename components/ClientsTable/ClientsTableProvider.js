@@ -1,16 +1,14 @@
 // @flow
-import React from 'react'
 import { observer } from 'mobx-react'
-import ClientsTable from './UI/ClientsTable'
-import ModalProvider from '../common/Modal/ModalProvider'
-import CommandHandler from '../../services/handlers/CommandHandler'
-// import Services from '../../services/Services'
-import { Store } from '../../state/Store'
-import api from '../../api/api';
-import AppStrings from '../../utils/AppStrings'
+import React from 'react'
 import { NotificationManager } from 'react-notifications'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+// import Services from '../../services/Services'
+import { Store } from '../../state/Store'
+import AppStrings from '../../utils/AppStrings'
+import ModalProvider from '../common/Modal/ModalProvider'
+import ClientsTable from './UI/ClientsTable'
 
 type Props = {
     store: Store,
@@ -36,7 +34,7 @@ class ClientsTableProvider extends React.Component<Props> {
 
     removeClient = (name: string) => {
         this.props.store.domain.clients.deleteClient(name).then(() => {
-                NotificationManager.success(AppStrings.CLIENT_REMOVED)
+            NotificationManager.success(AppStrings.CLIENT_REMOVED)
         }).catch(() => {
             NotificationManager.error(AppStrings.CLIENT_REMOVED_ERROR);
         });
@@ -52,6 +50,7 @@ class ClientsTableProvider extends React.Component<Props> {
     storeTopics = (topics: Array) => {
         this.props.store.domain.clients.setTopics(topics.map(topic => topic.label))
             .then(() => {
+                topics.map(topic => this.props.store.domain.topics.updateJoinedClientsCount(topic, false))
                 this.props.store.view.modal.hide();
                 NotificationManager.success(AppStrings.TOPICS_ASSOCIATION_SUCCESS);
             })
@@ -73,8 +72,8 @@ class ClientsTableProvider extends React.Component<Props> {
                     count: this.props.store.domain.topics.getCount(),
                 })
             }).catch((e) => {
-            console.log(e);
-        });
+                console.log(e);
+            });
     };
 
     handlePageChange = (page) => {
@@ -92,9 +91,10 @@ class ClientsTableProvider extends React.Component<Props> {
             title: 'Reset all clients?',
             showCancelButton: true,
         }).then((res) => {
-            if(res.value) {
+            if (res.value) {
                 this.props.store.domain.clients.resetAll();
             }
+            clientModified = false;
         })
     };
 

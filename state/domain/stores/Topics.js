@@ -136,7 +136,7 @@ class Topics {
     }
 
     @action
-    async updateJoinedClientCount(topic, cache = true) {
+    async updateJoinedClientsCount(topic, cache = true) {
         if (cache && this.joinedClientsCounts[topic] !== undefined) return;
         const count = await this.loadJoinedClientsCount(topic);
 
@@ -146,7 +146,7 @@ class Topics {
     @action
     async updateJoinedClientsCounts() {
         this.topics.map((topic) => {
-            this.updateJoinedClientCount(topic);
+            this.updateJoinedClientsCount(topic);
         });
     }
 
