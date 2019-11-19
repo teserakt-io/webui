@@ -1,7 +1,6 @@
 import getConfig from "next/config";
 import Router from 'next/router';
 import React, { Component } from 'react';
-import Layout from "../components/layouts/Layout";
 import RulesTableProvider from "../components/RulesTable/RulesTableProvider";
 
 const { publicRuntimeConfig } = getConfig();
@@ -20,10 +19,10 @@ class AutomaticEngine extends Component {
     }
     render() {
         return (
-            <Layout>
+            <React.Fragment>
                 <h1>Automation Engine</h1>
                 <RulesTableProvider />
-            </Layout>
+            </React.Fragment>
         );
     }
 }

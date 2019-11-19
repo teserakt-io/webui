@@ -1,10 +1,10 @@
+import getConfig from "next/config"
+import Link from 'next/link'
 import React from 'react'
+import url from "url"
+import routes from '../../../routes'
 import Card from '../../common/Card/Card'
 import Icon from '../../common/Icon/Icon'
-import Link from 'next/link'
-import routes from '../../../routes'
-import url from "url";
-import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 
 class StatCards extends React.Component<Props> {
     render() {
-        const {C2_URL, AE_ENABLED} = publicRuntimeConfig;
+        const { C2_URL, AE_ENABLED } = publicRuntimeConfig;
         const c2 = url.parse(C2_URL);
         const ae_enabled = AE_ENABLED === "true";
         return (
@@ -32,7 +32,7 @@ class StatCards extends React.Component<Props> {
                             medium={!ae_enabled}
                             title={this.props.clientsCount}
                             desc="Clients"
-                            icon={Icon.d.CLIENT}/>
+                            icon={Icon.d.CLIENT} />
                     </a>
                 </Link>
                 <Link href={routes.topics.path}>
@@ -42,7 +42,7 @@ class StatCards extends React.Component<Props> {
                             medium={!ae_enabled}
                             title={this.props.topicsCount}
                             desc="Topics"
-                            icon={Icon.d.TOPIC}/>
+                            icon={Icon.d.TOPIC} />
                     </a>
                 </Link>
                 {ae_enabled && <Link href={routes.ae.path}>
