@@ -149,7 +149,7 @@ class RuleForm extends Component {
                     editable={this.state.triggerEdit}
                     edit={this.handleEditTrigger}
                     remove={this.handleRemoveTrigger}
-                    types={this.triggerForm.getTypes()}
+                    options={this.triggerForm.getOptions()}
                     onTypeChange={this.handleTriggerTypeChange}
                     onSettingChange={this.handleSettingsChange}
                     onSettingEventTypeChange={this.handleSettingEventTypeChange}

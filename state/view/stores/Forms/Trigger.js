@@ -13,6 +13,12 @@ class Trigger {
         "EVENT",
     ];
 
+    static options = [
+        { "value": "TIME_INTERVAL", "label": "TIME INTERVAL" },
+        { "value": "EVENT", "label": "EVENT" },
+    ]
+
+    getOptions = () => Trigger.options;
     getTypes = () => Trigger.types;
     getType = () => this.type;
     getSettings = () => this.settings;

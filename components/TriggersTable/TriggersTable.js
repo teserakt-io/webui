@@ -14,7 +14,7 @@ type Props = {
     triggers: Array,
     new: Function,
     current?: Object,
-    types: Array,
+    options: Array,
     editable: boolean,
     edit: Function,
     remove: Function,
@@ -44,7 +44,7 @@ function TriggersTable(props: Props) {
                         return (
                             <TableRow border key={index}>
                                 <TableCell label={'#'}>{index + 1}</TableCell>
-                                <TableCell label={'Type'}>{trigger.type}</TableCell>
+                                <TableCell label={'Type'}>{props.options.find(elt => elt.value == trigger.type).label}</TableCell>
                                 <TableCell label={'Settings'}>
                                     <ReactJson
                                         name="payload"
@@ -69,7 +69,7 @@ function TriggersTable(props: Props) {
                 <CustomSelect
                     name={'triggerType'}
                     onChange={props.onTypeChange}
-                    options={props.types}
+                    options={props.options}
                     value={props.current.type}
                 />
 
