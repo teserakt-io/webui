@@ -9,21 +9,15 @@ class Trigger {
     index = null;
 
     static types = [
-        "TIME_INTERVAL",
-        "EVENT",
+        { value: "TIME_INTERVAL", label: "PERIOD" },
+        { value: "EVENT", label: "EVENT" },
     ];
 
-    static options = [
-        { "value": "TIME_INTERVAL", "label": "TIME INTERVAL" },
-        { "value": "EVENT", "label": "EVENT" },
-    ]
-
-    getOptions = () => Trigger.options;
     getTypes = () => Trigger.types;
     getType = () => this.type;
     getSettings = () => this.settings;
     getBaseSettings() {
-        switch (this.getType()) {
+        switch (this.getType().value) {
             case "TIME_INTERVAL": {
                 return {
                     minutes: "*",
@@ -55,8 +49,8 @@ class Trigger {
 
     @action
     setType(value) {
-        if (this.type !== value) {
-            this.type = value;
+        if (this.type.value !== value) {
+            this.type = Trigger.types.find((elt) => elt.value == value);
             this.settings = this.getBaseSettings();
         }
     }
@@ -71,7 +65,7 @@ class Trigger {
         this.index = index
         this.id = trigger.id;
         this.type = trigger.type;
-        switch (this.type) {
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 const expr = trigger.settings.expr.split(" ");
                 this.settings = {
@@ -92,7 +86,7 @@ class Trigger {
     }
 
     isValid() {
-        switch (this.type) {
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 const cron = toCronString(this.settings);
                 if (!regex.cron.test(cron)) {
@@ -100,7 +94,7 @@ class Trigger {
                 }
                 break;
             }
-            case "EVENT": {
+            case "TIME_INTERVAL": {
                 const maxOccurrence = parseInt(this.settings["maxOccurrence"], 10) || 0;
                 if (maxOccurrence <= 0) {
                     return false;
@@ -114,7 +108,7 @@ class Trigger {
 
     serialize() {
         const settings = {};
-        switch (this.type) {
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 settings["expr"] = toCronString(this.settings);
                 break;
@@ -127,7 +121,7 @@ class Trigger {
         return {
             index: this.index,
             id: this.id,
-            type: this.type,
+            type: this.type.value,
             settings,
         };
     }
