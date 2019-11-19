@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
-import Icon from '../components/common/Icon/Icon'
 import FontAwesome from 'react-fontawesome'
+import Icon from '../components/common/Icon/Icon'
 
 export type RouteConfig = {
     path: string,
@@ -50,9 +50,15 @@ const routes: {
         path: '/automation-engine',
         exact: true,
         iconType: 'fa',
-        icon: <FontAwesome name={'cogs'} size="2x" tag={'i'}/>
+        icon: <FontAwesome name={'cogs'} size="2x" tag={'i'} />
+    },
+    about: {
+        name: 'About',
+        path: '/about',
+        exact: true,
+        iconType: 'fa',
+        icon: <FontAwesome name={'question-circle-o'} size="2x" tag={'i'} />
     }
 }
 
 export default routes
-
