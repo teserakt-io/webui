@@ -1,15 +1,12 @@
 // @flow
-import React from 'react'
 import { observer } from 'mobx-react'
-import TopicsTable from './UI/TopicsTable'
-import { Store } from '../../state/Store'
+import React from 'react'
 import { NotificationManager } from 'react-notifications'
+import { Store } from '../../state/Store'
 import AppStrings from '../../utils/AppStrings'
 import ModalProvider from '../common/Modal/ModalProvider'
+import TopicsTable from './UI/TopicsTable'
 import type { SelectOption } from 'components/common/FormElements/Select/Select'
-import ClientsTable from "../ClientsTable/UI/ClientsTable";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
 
 type Props = {
     store: Store,
@@ -23,8 +20,8 @@ class TopicsTableProvider extends React.Component<Props> {
             .then(() => {
                 NotificationManager.success(AppStrings.TOPIC_ADDED);
             }).catch(() => {
-            NotificationManager.error(AppStrings.TOPIC_ADDED_ERROR);
-        });
+                NotificationManager.error(AppStrings.TOPIC_ADDED_ERROR);
+            });
         this.props.store.view.modal.hide();
     };
 
@@ -34,7 +31,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 NotificationManager.success(AppStrings.TOPIC_REMOVED);
             }).catch(() => {
                 NotificationManager.error(AppStrings.TOPIC_REMOVED_ERROR);
-        });
+            });
     };
 
     openAddTopicForm = () => {
@@ -71,7 +68,7 @@ class TopicsTableProvider extends React.Component<Props> {
                 })
             }).catch((e) => {
                 console.log(e);
-        });
+            });
     };
 
     storeClients = (clients: Array) => {
@@ -83,19 +80,6 @@ class TopicsTableProvider extends React.Component<Props> {
             .catch(() => {
                 NotificationManager.error(AppStrings.CLIENT_ASSOCIATION_ERROR);
             });
-    };
-
-    handleReset = () => {
-        const ResetSwal = withReactContent(Swal);
-        ResetSwal.fire({
-            type: 'warning',
-            title: 'Reset all topics?',
-            showCancelButton: true,
-        }).then((res) => {
-            if(res.value) {
-                this.props.store.domain.topics.reset();
-            }
-        })
     };
 
     render() {
@@ -111,7 +95,6 @@ class TopicsTableProvider extends React.Component<Props> {
                 handleOnPageChange={this.handleOnPageChange}
                 page={this.props.store.domain.topics.getPage()}
                 openModalClients={this.openModalClients}
-                handleReset={this.handleReset}
             />
         )
     }
