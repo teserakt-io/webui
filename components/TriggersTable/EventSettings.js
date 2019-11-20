@@ -1,12 +1,8 @@
 import React, { Fragment } from 'react';
+import Trigger from "../../state/view/stores/Forms/Trigger";
 import Input from "../common/FormElements/Input/Input";
 import CustomSelect from "../common/FormElements/Select/Select";
 
-
-const eventTypeOptions = [
-    { value: "CLIENT_SUBSCRIBED", label: "CLIENT SUBSCRIBED" },
-    { value: "CLIENT_UNSUBSCRIBED", label: "CLIENT UNSUBSCRIBED" },
-]
 
 function EventSettings(props) {
     return (
@@ -21,7 +17,7 @@ function EventSettings(props) {
                 <CustomSelect label={'event type'}
                     onChange={props.onSettingEventTypeChange}
                     value={props.data.eventType}
-                    options={eventTypeOptions}
+                    options={Trigger.eventTypeOptions}
                     id={'eventType'}
                 />
             </div>

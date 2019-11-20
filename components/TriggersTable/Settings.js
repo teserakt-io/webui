@@ -8,7 +8,7 @@ type Props = {
 };
 
 function Settings(props: Props) {
-    switch (props.type) {
+    switch (props.type.value) {
         case 'EVENT':
             return <EventSettings {...props} />;
         case 'TIME_INTERVAL':

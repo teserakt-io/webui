@@ -42,7 +42,7 @@ function TargetsTable(props: Props) {
                         return (
                             <TableRow border key={index}>
                                 <TableCell label={'#'}>{index + 1}</TableCell>
-                                <TableCell label={'Type'}>{target.type}</TableCell>
+                                <TableCell label={'Type'}>{props.types.find((elt) => elt.value === target.type).label}</TableCell>
                                 <TableCell label={'Expression'}>{target.expr}</TableCell>
                                 <TableCell small label={'Actions'}>
                                     <ActionButtons

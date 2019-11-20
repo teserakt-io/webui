@@ -9,9 +9,14 @@ class Trigger {
     index = null;
 
     static types = [
-        { value: "TIME_INTERVAL", label: "PERIOD" },
-        { value: "EVENT", label: "EVENT" },
+        { value: "TIME_INTERVAL", label: "Period" },
+        { value: "EVENT", label: "Event" },
     ];
+
+    static eventTypeOptions = [
+        { value: "CLIENT_SUBSCRIBED", label: "Client subscribed" },
+        { value: "CLIENT_UNSUBSCRIBED", label: "Client unsubscribed" },
+    ]
 
     getTypes = () => Trigger.types;
     getType = () => this.type;
@@ -31,7 +36,7 @@ class Trigger {
             case "EVENT": {
                 return {
                     maxOccurrence: 1,
-                    eventType: "CLIENT_SUBSCRIBED",
+                    eventType: Trigger.eventTypeOptions[0],
                 }
             }
             default:
@@ -50,7 +55,7 @@ class Trigger {
     @action
     setType(value) {
         if (this.type.value !== value) {
-            this.type = Trigger.types.find((elt) => elt.value == value);
+            this.type = Trigger.types.find((elt) => elt.value === value);
             this.settings = this.getBaseSettings();
         }
     }
@@ -64,7 +69,7 @@ class Trigger {
     parse(trigger, index) {
         this.index = index
         this.id = trigger.id;
-        this.type = trigger.type;
+        this.type = Trigger.types.find((elt) => elt.value === trigger.type);
         switch (this.type.value) {
             case "TIME_INTERVAL": {
                 const expr = trigger.settings.expr.split(" ");
@@ -80,7 +85,10 @@ class Trigger {
                 break;
             }
             default:
-                this.settings = trigger.settings;
+                this.settings = {
+                    maxOccurrence: trigger.settings.maxOccurrence,
+                    eventType: Trigger.eventTypeOptions.find((elt) => elt.value === trigger.settings.eventType),
+                };
                 break;
         }
     }
@@ -115,7 +123,7 @@ class Trigger {
             }
             default:
                 settings["maxOccurrence"] = parseInt(this.settings["maxOccurrence"], 10);
-                settings["eventType"] = this.settings["eventType"];
+                settings["eventType"] = this.settings["eventType"].value;
                 break;
         }
         return {

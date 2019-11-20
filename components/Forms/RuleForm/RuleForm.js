@@ -68,7 +68,7 @@ class RuleForm extends Component {
     };
 
     handleSettingEventTypeChange = (selected) => {
-        this.triggerForm.setSetting("eventType", selected.value);
+        this.triggerForm.setSetting("eventType", selected);
         this.forceUpdate();
     }
 
