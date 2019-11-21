@@ -14,16 +14,23 @@ type Props = {
 
 class StatCards extends React.Component<Props> {
     render() {
-        const { C2_URL, AE_ENABLED } = publicRuntimeConfig;
+        const { C2_URL, MQTT_URL, AE_ENABLED } = publicRuntimeConfig;
         const c2 = url.parse(C2_URL);
+        const mqtt = url.parse(MQTT_URL);
         const ae_enabled = AE_ENABLED === "true";
         return (
             <React.Fragment>
                 <Card
                     white
-                    large
+                    medium
                     title={'C2'}
                     desc={c2.host}
+                />
+                <Card
+                    white
+                    medium
+                    title={'MQTT'}
+                    desc={mqtt.host}
                 />
                 <Link href={routes.clients.path}>
                     <a>
