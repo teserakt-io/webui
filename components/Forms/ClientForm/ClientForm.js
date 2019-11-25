@@ -42,7 +42,7 @@ class ClientForm extends React.Component<Props, State> {
         const key = this.state[ClientForm.formKeys.KEY];
         return !validator.isEmpty(client) &&
             (validator.isLength(client, { min: 1, max: 64 })) &&
-            (key.length === 0 || (key.length === 64 && validator.isHexadecimal(key)));
+            (key.length === 64 && validator.isHexadecimal(key));
     }
 
     updateField = (e: Object) =>
