@@ -40,7 +40,6 @@ class Clients {
         const { data } = await api.clients.count();
 
         this.count = data.count || 0;
-        this.addLog("clients_count");
     }
     @action
     addClients(clients) {
@@ -54,10 +53,6 @@ class Clients {
         const { data } = await api.clients.get(offset, count);
         this.clients = data.clients.map(({ name }) => name) || [];
 
-        this.addLog("load_clients", {
-            offset: offset,
-            count: count
-        });
         if (withCounts) this.updateJoinedTopicsCounts();
     }
 
@@ -125,7 +120,6 @@ class Clients {
         const { data } = await api.clients.joinedTopicsCount(client || this.current);
         const count = data.count || 0;
         this.joinedTopicsCount = count;
-        this.addLog("joined_topics_count", { client: client || this.current });
 
         return count;
     }
@@ -139,12 +133,6 @@ class Clients {
 
             const topics = data.topics || [];
             this.joinedTopics.push(...topics);
-
-            this.addLog("get_joined_topics", {
-                client: this.current,
-                offset: i,
-                count: onRequest,
-            })
         }
     }
 

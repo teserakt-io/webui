@@ -1,14 +1,10 @@
 //@flow
-import dynamic from 'next/dynamic';
 import React from 'react';
 import ActionButtons from "../ActionButtons/ActionButtons";
 import Button from "../common/Buttons/Button/Button";
 import Input from "../common/FormElements/Input/Input";
 import CustomSelect from "../common/FormElements/Select/Select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../common/Table";
-const Reacttarget = dynamic(import('react-json-view'), {
-    ssr: false
-});
 
 type Props = {
     targets: Array,
