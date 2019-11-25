@@ -41,3 +41,11 @@
 .input-inline {
   display: inline-block;
 }
+
+.generate-btn {
+  margin-left: 5px;
+  font-size: 1em;
+  &:hover {
+    font-size: 0.9em;
+  }
+}

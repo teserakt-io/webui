@@ -1,6 +1,8 @@
 // @flow
-import cx from 'classnames'
-import * as React from 'react'
+import cx from 'classnames';
+import * as React from 'react';
+import FontAwesome from "react-fontawesome";
+import Info from "../../../common/Info/Info";
 
 type Props = {
     id: string,
@@ -10,7 +12,9 @@ type Props = {
     error?: string,
     inline?: boolean,
     disabled?: boolean,
-    onChange: Function
+    onChange: Function,
+    autogen: Function,
+
 }
 
 class Input extends React.Component<Props> {
@@ -29,6 +33,12 @@ class Input extends React.Component<Props> {
             <div className={this.props.inline ? 'input-inline' : 'input'}>
                 {this.props.label && <label className={classes.label} htmlFor={this.props.id}>
                     {this.props.label}
+                    {this.props.autogen &&
+                        <span className={'info-container generate-btn'} onClick={this.props.autogen.onClick}>
+                            <FontAwesome name={this.props.autogen.icon} className={'pointer'} />
+                            <Info text={this.props.autogen.infoMsg} />
+                        </span>
+                    }
                 </label>}
                 <input
                     id={this.props.id}
@@ -39,9 +49,12 @@ class Input extends React.Component<Props> {
                     type={this.props.type}
                     disabled={this.props.disabled}
                 />
-                <span className="input__info">{this.props.info}</span>
-                <span className="input__error">{this.props.error}</span>
-            </div>
+
+                <div>
+                    <span className="input__info">{this.props.info}</span>
+                    <span className="input__error">{this.props.error}</span>
+                </div>
+            </div >
         )
     }
 }
