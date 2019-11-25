@@ -22,6 +22,10 @@ class LogTable extends React.Component<Props> {
         'remove_topic': (payload) => (<i>Removed topic <i className="topic">{payload.name}</i></i>),
         'join_client': (payload) => (<i>Client <i className="client">{payload.client}</i> joined topic <i className="topic">{payload.topic}</i></i>),
         'split_client': (payload) => (<i>Client <i className="client">{payload.client}</i> left topic <i className="topic">{payload.topic}</i></i>),
+
+        'add_rule': (payload) => (<i>Created automation rule <i className="rule">#{payload.id}</i></i>),
+        'edit_rule': (payload) => (<i>Edited automation rule <i className="rule">#{payload.id}</i></i>),
+        'remove_rule': (payload) => (<i>Removed automation rule <i className="rule">#{payload.id}</i></i>),
     }
 
     renderLogs() {
