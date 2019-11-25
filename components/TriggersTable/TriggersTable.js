@@ -47,7 +47,7 @@ function TriggersTable(props: Props) {
                                 <TableCell label={'Type'}>{props.types.find((elt) => elt.value == trigger.type).label}</TableCell>
                                 <TableCell label={'Settings'}>
                                     <ReactJson
-                                        name="payload"
+                                        name="settings"
                                         enableClipboard={false}
                                         displayObjectSize={false}
                                         displayDataTypes={false}
