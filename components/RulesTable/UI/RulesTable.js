@@ -45,7 +45,7 @@ function RulesTable(props: Props) {
                     <TableRow border>
                         <TableHeader small center>#</TableHeader>
                         <TableHeader small>Type</TableHeader>
-                        <TableHeader>Description</TableHeader>
+                        <TableHeader small>Description</TableHeader>
                         <TableHeader small>Last executed</TableHeader>
                         <TableHeader small>#Triggers</TableHeader>
                         <TableHeader small>#Targets</TableHeader>
