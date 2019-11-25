@@ -19,6 +19,7 @@
     "@kenshooui/react-multi-select": "^1.1.5",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "access-log": "^0.4.1",
     "axios": "^0.18.1",
     "babel-preset-env": "^1.7.0",
     "classnames": "^2.2.6",
