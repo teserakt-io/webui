@@ -134,7 +134,7 @@ class Topics {
     @action
     async updateJoinedClientsCounts() {
         this.topics.map((topic) => {
-            this.updateJoinedClientsCount(topic);
+            this.updateJoinedClientsCount(topic, false);
         });
     }
 

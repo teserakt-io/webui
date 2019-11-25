@@ -49,7 +49,7 @@ class TopicsTable extends React.Component<Props> {
                             <TableRow key={index}>
                                 <TableCell label="#" small center>{offset + index + 1}</TableCell>
                                 <TableCell label="Topic">{topic}</TableCell>
-                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || "-"}</TableCell>
+                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || 0}</TableCell>
                                 <TableCell label="Actions" small center>
                                     <ActionButtons
                                         edit={() => this.props.openModalClients(topic)}

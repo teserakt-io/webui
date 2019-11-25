@@ -50,7 +50,7 @@ class ClientsTableProvider extends React.Component<Props> {
     storeTopics = (topics: Array) => {
         this.props.store.domain.clients.setTopics(topics.map(topic => topic.label))
             .then(() => {
-                topics.map(topic => this.props.store.domain.topics.updateJoinedClientsCount(topic, false))
+                topics.map(topic => this.props.store.domain.topics.updateJoinedClientsCount(topic.label, false))
                 this.props.store.view.modal.hide();
                 NotificationManager.success(AppStrings.TOPICS_ASSOCIATION_SUCCESS);
             })

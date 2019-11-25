@@ -111,7 +111,7 @@ class Clients {
     @action
     async updateJoinedTopicsCounts() {
         this.clients.map((client) => {
-            this.updateJoinedTopicsCount(client);
+            this.updateJoinedTopicsCount(client, false);
         });
     }
 
@@ -126,7 +126,7 @@ class Clients {
     @action
     async loadJoinedTopics() {
         this.joinedTopics = [];
-        await this.loadJoinedTopicsCount(this.current);
+        await this.updateJoinedTopicsCount(this.current, false);
         const onRequest = 100;
         for (let i = 0; i < this.joinedTopicsCount; i += onRequest) {
             const { data } = await api.clients.joinedTopics(this.current, i, onRequest);
