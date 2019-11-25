@@ -1,23 +1,16 @@
 //@flow
-import React, {Fragment} from 'react';
-import {
-    Table,
-    TableHeader,
-    TableRow,
-    TableHead,
-    TableCell,
-    TableBody
-} from "../../common/Table";
+import moment from "moment";
+import React from 'react';
 import FontAwesome from "react-fontawesome";
-import Button from "../../common/Buttons/Button/Button";
-import Pagination from "../../Pagination/Pagination";
 import TimeAgo from "react-timeago";
 // import Truncate from 'react-truncate';
 import ReadMoreReact from 'read-more-react';
-import moment from "moment";
-import ActionButtons from "../../ActionButtons/ActionButtons";
 import Rule from '../../../state/view/stores/Forms/Rule';
-import {spacedLongString} from "../../../utils/helpers";
+import { spacedLongString } from "../../../utils/helpers";
+import ActionButtons from "../../ActionButtons/ActionButtons";
+import Button from "../../common/Buttons/Button/Button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../common/Table";
+import Pagination from "../../Pagination/Pagination";
 
 type Props = {
     rules: Array,
@@ -45,7 +38,7 @@ function RulesTable(props: Props) {
                 medium
                 className="mb-20 ml-10"
                 onClick={props.refresh}>
-                <FontAwesome name={'refresh'}/>
+                <FontAwesome name={'refresh'} />
             </Button>
             <Table className={'rules__table'}>
                 <TableHead>
@@ -60,7 +53,7 @@ function RulesTable(props: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.rules.map((rule) => {
+                    {props.rules.length > 0 && props.rules.map((rule) => {
                         const triggerCount = rule.triggers ? rule.triggers.length : 0;
                         const targetCount = rule.targets ? rule.targets.length : 0;
                         const ago = moment(rule.lastExecuted).year() === 1 ? "Never" :
@@ -78,7 +71,7 @@ function RulesTable(props: Props) {
                                 </TableCell>
                                 <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
                                 <TableCell label={'#Targets'} small>{targetCount}</TableCell>
-                                <TableCell  label={'Actions'} small center className={'actions'}>
+                                <TableCell label={'Actions'} small center className={'actions'}>
                                     <ActionButtons
                                         edit={() => props.editRule(rule.id)}
                                         remove={() => props.removeRule(rule.id)}
@@ -87,6 +80,13 @@ function RulesTable(props: Props) {
                             </TableRow>
                         );
                     })}
+                    {props.rules.length === 0 && (
+                        <TableRow>
+                            <TableCell center colSpan="7">
+                                <i>Nothing yet !</i>
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
             <Pagination

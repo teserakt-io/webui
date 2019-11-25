@@ -1,21 +1,11 @@
 // @flow
-import React from 'react'
-import {
-    Table,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableBody,
-    TableCell
-} from '../../common/Table'
-import Button from '../../common/Buttons/Button/Button'
-import Icon from '../../common/Icon/Icon'
-import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
-import Pagination from "../../Pagination/Pagination";
-import FontAwesome from 'react-fontawesome';
-import OnPage from "../../Pagination/OnPage";
-import Info from "../../common/Info/Info";
+import React from 'react';
 import ActionButtons from "../../ActionButtons/ActionButtons";
+import Button from '../../common/Buttons/Button/Button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../common/Table';
+import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
+import OnPage from "../../Pagination/OnPage";
+import Pagination from "../../Pagination/Pagination";
 
 type Props = {
     clients: Array<String>,
@@ -36,12 +26,12 @@ class ClientsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add client
                 </Button>
-                <div style={{float: 'left'}} className={'mr-20'}>
-                    <ClientNameForm submit={this.props.removeClient} submitText={'DELETE CLIENT'}/>
+                <div style={{ float: 'left' }} className={'mr-20'}>
+                    <ClientNameForm submit={this.props.removeClient} submitText={'DELETE CLIENT'} />
                 </div>
 
                 <div className={'f-r'}>
-                    <OnPage onChange={this.props.handleOnPage} options={[10, 50, 100]}/>
+                    <OnPage onChange={this.props.handleOnPage} options={[10, 50, 100]} />
                 </div>
                 <Table>
                     <TableHead>
@@ -53,7 +43,7 @@ class ClientsTable extends React.Component<Props> {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.clients.map((client, index) => (
+                        {this.props.clients.length > 0 && this.props.clients.map((client, index) => (
                             <TableRow key={index}>
                                 <TableCell label="#" small center>{offset + index + 1}</TableCell>
                                 <TableCell label="Client">{client}</TableCell>
@@ -64,7 +54,15 @@ class ClientsTable extends React.Component<Props> {
                                         remove={() => this.props.removeClient(client)}
                                     />
                                 </TableCell>
-                            </TableRow>))}
+                            </TableRow>
+                        ))}
+                        {this.props.clients.length === 0 && (
+                            <TableRow>
+                                <TableCell center colSpan="4">
+                                    <i>Nothing yet !</i>
+                                </TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
                 <Pagination
@@ -73,16 +71,16 @@ class ClientsTable extends React.Component<Props> {
                     onPageChange={this.props.handlePageChange}
                     forcePage={this.props.page}
                 />
-                    <div className={'f-r'}>
-                        <Button
-                            danger
-                            uppercase
-                            medium
-                            className="mt-15"
-                            onClick={this.props.handleReset}>
-                            Reset
+                <div className={'f-r'}>
+                    <Button
+                        danger
+                        uppercase
+                        medium
+                        className="mt-15"
+                        onClick={this.props.handleReset}>
+                        Reset
                         </Button>
-                    </div>
+                </div>
             </React.Fragment>
         )
     }

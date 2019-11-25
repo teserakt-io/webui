@@ -35,7 +35,7 @@ function TargetsTable(props: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.targets.map((target, index) => {
+                    {props.targets.length > 0 && props.targets.map((target, index) => {
                         return (
                             <TableRow border key={index}>
                                 <TableCell label={'#'}>{index + 1}</TableCell>
@@ -50,6 +50,13 @@ function TargetsTable(props: Props) {
                             </TableRow>
                         );
                     })}
+                    {props.targets.length === 0 && (
+                        <TableRow>
+                            <TableCell center colSpan="4">
+                                <i>Nothing yet !</i>
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
             <Button small uppercase onClick={props.new} className={'button__new'}>New target</Button>
