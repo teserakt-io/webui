@@ -71,7 +71,7 @@ function TargetsTable(props: Props) {
                 <Input id={'expression'}
                     onChange={props.onExpressionChange}
                     value={props.current.expr}
-                    placeholder={'This field expect a valid ' + props.current.type.label.toLowerCase() + ' name'}
+                    placeholder={'This field expects a valid ' + props.current.type.label.toLowerCase() + ' name'}
                 />
                 <div>
                     <Button small uppercase danger disabled={!props.isValid} onClick={props.onSave}>Save</Button>
