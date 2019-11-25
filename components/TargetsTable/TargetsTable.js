@@ -22,6 +22,7 @@ type Props = {
     onExpressionChange: Function,
     onSave: Function,
     onCancel: Function,
+    isValid: Function,
 };
 
 function TargetsTable(props: Props) {
@@ -33,7 +34,7 @@ function TargetsTable(props: Props) {
                     <TableRow>
                         <TableHeader>#</TableHeader>
                         <TableHeader>Type</TableHeader>
-                        <TableHeader>Expression</TableHeader>
+                        <TableHeader>Name</TableHeader>
                         <TableHeader>Actions</TableHeader>
                     </TableRow>
                 </TableHead>
@@ -43,7 +44,7 @@ function TargetsTable(props: Props) {
                             <TableRow border key={index}>
                                 <TableCell label={'#'}>{index + 1}</TableCell>
                                 <TableCell label={'Type'}>{props.types.find((elt) => elt.value === target.type).label}</TableCell>
-                                <TableCell label={'Expression'}>{target.expr}</TableCell>
+                                <TableCell label={'Name'}>{target.expr}</TableCell>
                                 <TableCell small label={'Actions'}>
                                     <ActionButtons
                                         edit={() => props.edit(index)}
@@ -63,13 +64,14 @@ function TargetsTable(props: Props) {
                     options={props.types}
                     value={props.current.type}
                 />
+                {/* TODO: autocomplete clients / topics here ? */}
                 <Input id={'expression'}
                     onChange={props.onExpressionChange}
                     value={props.current.expr}
-                    placeholder={'This field expect a valid regular expression'}
+                    placeholder={'This field expect a valid ' + props.current.type.label.toLowerCase() + ' name'}
                 />
                 <div>
-                    <Button small uppercase danger onClick={props.onSave}>Save</Button>
+                    <Button small uppercase danger disabled={!props.isValid} onClick={props.onSave}>Save</Button>
                     <Button small uppercase danger onClick={props.onCancel} className={'ml-10'}>Cancel</Button>
                 </div>
             </div>}

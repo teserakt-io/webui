@@ -40,6 +40,15 @@ class Target {
         };
     }
 
+    isValid() {
+        if (this.expr.length === 0) {
+            return false
+        }
+
+        return true;
+    }
+
+
     @action
     parse(target, index) {
         this.index = index;

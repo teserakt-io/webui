@@ -170,6 +170,7 @@ class RuleForm extends Component {
                     onExpressionChange={this.handleExpressionChange}
                     onSave={this.handleTargetSave}
                     onCancel={() => this.setState({ targetEdit: false })}
+                    isValid={this.targetForm.isValid()}
                 />
                 <div className="btn-control">
                     <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit} className={'mb-10'}>
