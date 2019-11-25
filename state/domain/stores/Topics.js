@@ -80,7 +80,7 @@ class Topics {
         await api.topics.post(name);
 
         this.count++;
-        if (this.topics.length < this.onPage)
+        if (this.topics.length < this.onPage && !this.topics.includes(name))
             this.topics.push(name);
 
         this.addLog("add_topic", { name: name });
