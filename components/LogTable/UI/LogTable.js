@@ -50,7 +50,7 @@ class LogTable extends React.Component<Props> {
                     <TableCell label="Date">
                         <span>{moment(log.date).format("YYYY-MM-DD HH:MM:SS")}</span>
                     </TableCell>
-                    <TableCell label="Message">
+                    <TableCell label="Event">
                         {this.messageMap[log.cmd](log.payload)}
                     </TableCell>
                 </TableRow>
@@ -65,7 +65,7 @@ class LogTable extends React.Component<Props> {
                     <TableHead>
                         <TableRow border>
                             <TableHeader small>Date-time</TableHeader>
-                            <TableHeader>Message</TableHeader>
+                            <TableHeader>Event</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
