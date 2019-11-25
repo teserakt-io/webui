@@ -14,14 +14,14 @@ class LogTable extends React.Component<Props> {
 
     // Convert raw payload to user friendly messages
     messageMap = {
-        'add_client': (payload) => (<i>Created client <i class="client">{payload.name}</i></i>),
-        'remove_client': (payload) => (<i>Removed client <i class="client">{payload.name}</i></i>),
-        'join_topic': (payload) => (<i>Client <i class="client">{payload.client}</i> joined topic <i class="topic">{payload.topic}</i></i>),
-        'split_topic': (payload) => (<i>Client <i class="client">{payload.client}</i> left topic <i class="topic">{payload.topic}</i></i>),
-        'add_topic': (payload) => (<i>Created topic <i class="topic">{payload.name}</i></i>),
-        'remove_topic': (payload) => (<i>Removed topic <i class="topic">{payload.name}</i></i>),
-        'join_client': (payload) => (<i>Client <i class="client">{payload.client}</i> joined topic <i class="topic">{payload.topic}</i></i>),
-        'split_client': (payload) => (<i>Client <i class="client">{payload.client}</i> left topic <i class="topic">{payload.topic}</i></i>),
+        'add_client': (payload) => (<i>Created client <i className="client">{payload.name}</i></i>),
+        'remove_client': (payload) => (<i>Removed client <i className="client">{payload.name}</i></i>),
+        'join_topic': (payload) => (<i>Client <i className="client">{payload.client}</i> joined topic <i className="topic">{payload.topic}</i></i>),
+        'split_topic': (payload) => (<i>Client <i className="client">{payload.client}</i> left topic <i className="topic">{payload.topic}</i></i>),
+        'add_topic': (payload) => (<i>Created topic <i className="topic">{payload.name}</i></i>),
+        'remove_topic': (payload) => (<i>Removed topic <i className="topic">{payload.name}</i></i>),
+        'join_client': (payload) => (<i>Client <i className="client">{payload.client}</i> joined topic <i className="topic">{payload.topic}</i></i>),
+        'split_client': (payload) => (<i>Client <i className="client">{payload.client}</i> left topic <i className="topic">{payload.topic}</i></i>),
     }
 
     renderLogs() {
