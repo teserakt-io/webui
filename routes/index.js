@@ -21,8 +21,8 @@ const routes = {
         icon: Icon.d.TOPIC
     },
     ae: {
-        name: 'Automation Engine',
-        path: '/automation-engine',
+        name: 'Automation',
+        path: '/automation',
         iconType: 'fa',
         icon: <FontAwesome name={'cogs'} size="2x" tag={'i'} />
     },

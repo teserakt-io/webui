@@ -6,7 +6,7 @@ import RulesTableProvider from "../components/RulesTable/RulesTableProvider";
 const { publicRuntimeConfig } = getConfig();
 
 
-class AutomaticEngine extends Component {
+class Automation extends Component {
     static getInitialProps(ctx) {
         if (publicRuntimeConfig.AE_ENABLED === 'false')
             if (ctx && ctx.req) {
@@ -20,11 +20,11 @@ class AutomaticEngine extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Automation Engine</h1>
+                <h1>Automation</h1>
                 <RulesTableProvider />
             </React.Fragment>
         );
     }
 }
 
-export default AutomaticEngine;
+export default Automation;
