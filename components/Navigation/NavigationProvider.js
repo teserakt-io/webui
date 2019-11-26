@@ -5,6 +5,7 @@ import routes from '../../routes';
 import Navigation from './UI/Navigation';
 
 const { publicRuntimeConfig } = getConfig();
+const { AE_ENABLED } = publicRuntimeConfig;
 
 type Props = {
     history?: Object
@@ -17,7 +18,8 @@ class NavigationProvider extends React.Component<Props> {
             routes.clients,
             routes.topics,
         ];
-        if (publicRuntimeConfig.AE_ENABLED === "true")
+
+        if (AE_ENABLED === "true")
             links.push(routes.ae);
 
         links.push(routes.about);

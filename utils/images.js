@@ -1,4 +1,4 @@
-let logo = 'static/images/logo.png';
+let logo = 'images/logo.png';
 export default {
     logo
 }

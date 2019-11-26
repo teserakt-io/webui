@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 import RulesTableProvider from "../components/RulesTable/RulesTableProvider";
 
 const { publicRuntimeConfig } = getConfig();
+const { AE_ENABLED } = publicRuntimeConfig;
 
 
 class Automation extends Component {
     static getInitialProps(ctx) {
-        if (publicRuntimeConfig.AE_ENABLED === 'false')
+        if (AE_ENABLED === 'false')
             if (ctx && ctx.req) {
                 ctx.res.writeHead(302, { Location: '/' })
                 ctx.res.end()

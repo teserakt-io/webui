@@ -5,19 +5,21 @@ import url from "url"
 import routes from '../../../routes'
 import Card from '../../common/Card/Card'
 import Icon from '../../common/Icon/Icon'
+
 const { publicRuntimeConfig } = getConfig();
+const { C2_URL, MQTT_URL, AE_ENABLED } = publicRuntimeConfig;
 
 type Props = {
     clientsCount: number,
-    topicsCount: number
+    topicsCount: number,
 }
 
 class StatCards extends React.Component<Props> {
     render() {
-        const { C2_URL, MQTT_URL, AE_ENABLED } = publicRuntimeConfig;
         const c2 = url.parse(C2_URL);
         const mqtt = url.parse(MQTT_URL);
         const ae_enabled = AE_ENABLED === "true";
+
         return (
             <React.Fragment>
                 <Card
