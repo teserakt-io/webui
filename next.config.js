@@ -29,7 +29,11 @@ module.exports = withSass(withCss({
 
         return config
     },
+    // Don't put sensible stuff in here, this is sent to browsers in __NEXT_DATA__
     publicRuntimeConfig: {
-        ...process.env,
+        C2_URL: process.env.C2_URL,
+        MQTT_URL: process.env.MQTT_URL,
+        AE_ENABLED: process.env.AE_ENABLED,
+        AE_URL: process.env.AE_URL,
     },
 }));
