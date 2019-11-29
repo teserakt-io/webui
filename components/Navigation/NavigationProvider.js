@@ -1,10 +1,11 @@
 // @flow
-import * as React from 'react'
-import Navigation from './UI/Navigation'
-import routes from '../../routes'
 import getConfig from "next/config";
+import * as React from 'react';
+import routes from '../../routes';
+import Navigation from './UI/Navigation';
 
 const { publicRuntimeConfig } = getConfig();
+const { AE_ENABLED } = publicRuntimeConfig;
 
 type Props = {
     history?: Object
@@ -17,12 +18,15 @@ class NavigationProvider extends React.Component<Props> {
             routes.clients,
             routes.topics,
         ];
-        if(publicRuntimeConfig.AE_ENABLED === "true")
+
+        if (AE_ENABLED === "true")
             links.push(routes.ae);
+
+        links.push(routes.about);
 
         return <Navigation
             history={this.props.history}
-            routes={links}/>
+            routes={links} />
     }
 }
 

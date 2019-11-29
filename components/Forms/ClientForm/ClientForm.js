@@ -4,9 +4,8 @@ import validator from 'validator';
 import { generateKey } from "../../../utils/generator";
 import Button from '../../common/Buttons/Button/Button';
 import Input from '../../common/FormElements/Input/Input';
-import type { Topic } from '../../../state/domain/stores/Topics'
-import type { SelectOption } from '../../common/FormElements/Select/Select'
-
+import type { Topic } from '../../../state/domain/stores/Topics';
+import type { SelectOption } from '../../common/FormElements/Select/Select';
 type Props = {
     cancel: Function,
     submit: Function,
@@ -43,7 +42,7 @@ class ClientForm extends React.Component<Props, State> {
         const key = this.state[ClientForm.formKeys.KEY];
         return !validator.isEmpty(client) &&
             (validator.isLength(client, { min: 1, max: 64 })) &&
-            (key.length === 0 || (key.length === 64 && validator.isHexadecimal(key)));
+            (key.length === 64 && validator.isHexadecimal(key));
     }
 
     updateField = (e: Object) =>
@@ -68,6 +67,10 @@ class ClientForm extends React.Component<Props, State> {
         this.props.cancel()
     };
 
+    generateKey = () => {
+        this.setState({ [ClientForm.formKeys.KEY]: generateKey() });
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -81,8 +84,15 @@ class ClientForm extends React.Component<Props, State> {
                         placeholder="Key"
                         label="Key"
                         id={ClientForm.formKeys.KEY}
-                        info={'Empty or 64 hexadecimals'}
-                        onChange={this.updateField} />
+                        info={'Key must be 32 bytes long and hex encoded'}
+                        onChange={this.updateField}
+                        value={this.state[ClientForm.formKeys.KEY]}
+                        autogen={{
+                            onClick: this.generateKey,
+                            icon: "refresh",
+                            infoMsg: "Generate a key"
+                        }}
+                    />
                     <div className="btn-control">
                         <Button type={'button'} small secondary onClick={this.onCancel}>
                             Cancel

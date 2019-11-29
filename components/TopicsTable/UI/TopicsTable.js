@@ -1,24 +1,12 @@
 // @flow
 import * as React from 'react'
-import {
-    Table,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableBody,
-    TableCell
-} from '../../common/Table'
+import ActionButtons from "../../ActionButtons/ActionButtons"
 import Button from '../../common/Buttons/Button/Button'
-import Icon from '../../common/Icon/Icon'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../common/Table'
+import TopicNameForm from "../../Forms/TopicForm/TopicNameForm.js"
+import OnPage from "../../Pagination/OnPage"
+import Pagination from "../../Pagination/Pagination"
 import type { Topic } from '../../../state/domain/stores/Topics'
-import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
-import TopicForm from "../../Forms/TopicForm/TopicForm";
-import TopicNameForm from "../../Forms/TopicForm/TopicNameForm.js";
-import Pagination from "../../Pagination/Pagination";
-import FontAwesome from "react-fontawesome";
-import OnPage from "../../Pagination/OnPage";
-import Info from "../../common/Info/Info";
-import ActionButtons from "../../ActionButtons/ActionButtons";
 
 type Props = {
     topics: Array<String>,
@@ -41,11 +29,11 @@ class TopicsTable extends React.Component<Props> {
                     Add topic
                 </Button>
                 <div className={'f-l mr-20'}>
-                    <TopicNameForm submit={this.props.removeTopic} submitText={'DELETE TOPIC'}/>
+                    <TopicNameForm submit={this.props.removeTopic} submitText={'DELETE TOPIC'} />
                 </div>
 
                 <div className="f-r">
-                    <OnPage onChange={this.props.handleOnPageChange} options={[10, 50, 100]}/>
+                    <OnPage onChange={this.props.handleOnPageChange} options={[10, 50, 100]} />
                 </div>
                 <Table>
                     <TableHead>
@@ -57,11 +45,11 @@ class TopicsTable extends React.Component<Props> {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.topics.map((topic: Topic, index) => (
+                        {this.props.topics.length > 0 && this.props.topics.map((topic: Topic, index) => (
                             <TableRow key={index}>
                                 <TableCell label="#" small center>{offset + index + 1}</TableCell>
                                 <TableCell label="Topic">{topic}</TableCell>
-                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || "-"}</TableCell>
+                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || 0}</TableCell>
                                 <TableCell label="Actions" small center>
                                     <ActionButtons
                                         edit={() => this.props.openModalClients(topic)}
@@ -70,6 +58,13 @@ class TopicsTable extends React.Component<Props> {
                                 </TableCell>
                             </TableRow>
                         ))}
+                        {this.props.topics.length === 0 && (
+                            <TableRow>
+                                <TableCell center colSpan="4">
+                                    <i>Nothing yet !</i>
+                                </TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
 

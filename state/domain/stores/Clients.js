@@ -40,7 +40,6 @@ class Clients {
         const { data } = await api.clients.count();
 
         this.count = data.count || 0;
-        this.addLog("clients_count");
     }
     @action
     addClients(clients) {
@@ -54,10 +53,6 @@ class Clients {
         const { data } = await api.clients.get(offset, count);
         this.clients = data.clients.map(({ name }) => name) || [];
 
-        this.addLog("load_clients", {
-            offset: offset,
-            count: count
-        });
         if (withCounts) this.updateJoinedTopicsCounts();
     }
 
@@ -78,7 +73,7 @@ class Clients {
         await api.clients.post(name, key);
 
         this.count++;
-        if(this.clients.length < this.onPage)
+        if (this.clients.length < this.onPage && !this.clients.includes(name))
             this.clients.push(name);
 
         this.addLog("add_client", { name: name });
@@ -116,7 +111,7 @@ class Clients {
     @action
     async updateJoinedTopicsCounts() {
         this.clients.map((client) => {
-            this.updateJoinedTopicsCount(client);
+            this.updateJoinedTopicsCount(client, false);
         });
     }
 
@@ -125,26 +120,19 @@ class Clients {
         const { data } = await api.clients.joinedTopicsCount(client || this.current);
         const count = data.count || 0;
         this.joinedTopicsCount = count;
-        this.addLog("joined_topics_count", { client: client || this.current });
 
         return count;
     }
     @action
     async loadJoinedTopics() {
         this.joinedTopics = [];
-        await this.loadJoinedTopicsCount(this.current);
+        await this.updateJoinedTopicsCount(this.current, false);
         const onRequest = 100;
         for (let i = 0; i < this.joinedTopicsCount; i += onRequest) {
             const { data } = await api.clients.joinedTopics(this.current, i, onRequest);
 
             const topics = data.topics || [];
             this.joinedTopics.push(...topics);
-
-            this.addLog("get_joined_topics", {
-                client: this.current,
-                offset: i,
-                count: onRequest,
-            })
         }
     }
 

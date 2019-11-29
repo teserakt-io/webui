@@ -9,18 +9,22 @@ class Trigger {
     index = null;
 
     static types = [
-        "TIME_INTERVAL",
-        "EVENT",
+        { value: "TIME_INTERVAL", label: "Period" },
+        { value: "EVENT", label: "Event" },
     ];
+
+    static eventTypeOptions = [
+        { value: "CLIENT_SUBSCRIBED", label: "Client subscribed" },
+        { value: "CLIENT_UNSUBSCRIBED", label: "Client unsubscribed" },
+    ]
 
     getTypes = () => Trigger.types;
     getType = () => this.type;
     getSettings = () => this.settings;
     getBaseSettings() {
-        switch (this.getType()) {
+        switch (this.getType().value) {
             case "TIME_INTERVAL": {
                 return {
-                    seconds: "*",
                     minutes: "*",
                     hours: "*",
                     days: "*",
@@ -32,7 +36,7 @@ class Trigger {
             case "EVENT": {
                 return {
                     maxOccurrence: 1,
-                    eventType: "CLIENT_SUBSCRIBED",
+                    eventType: Trigger.eventTypeOptions[0],
                 }
             }
             default:
@@ -50,8 +54,8 @@ class Trigger {
 
     @action
     setType(value) {
-        if (this.type !== value) {
-            this.type = value;
+        if (this.type.value !== value) {
+            this.type = Trigger.types.find((elt) => elt.value === value);
             this.settings = this.getBaseSettings();
         }
     }
@@ -65,30 +69,32 @@ class Trigger {
     parse(trigger, index) {
         this.index = index
         this.id = trigger.id;
-        this.type = trigger.type;
-        switch (this.type) {
+        this.type = Trigger.types.find((elt) => elt.value === trigger.type);
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 const expr = trigger.settings.expr.split(" ");
                 this.settings = {
                     ...trigger.settings,
-                    seconds: expr[0],
-                    minutes: expr[1],
-                    hours: expr[2],
-                    days: expr[3],
-                    month: expr[4],
-                    weeks: expr[5],
-                    years: expr[6],
+                    minutes: expr[0],
+                    hours: expr[1],
+                    days: expr[2],
+                    month: expr[3],
+                    weeks: expr[4],
+                    years: expr[5],
                 };
                 break;
             }
             default:
-                this.settings = trigger.settings;
+                this.settings = {
+                    maxOccurrence: trigger.settings.maxOccurrence,
+                    eventType: Trigger.eventTypeOptions.find((elt) => elt.value === trigger.settings.eventType),
+                };
                 break;
         }
     }
 
     isValid() {
-        switch (this.type) {
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 const cron = toCronString(this.settings);
                 if (!regex.cron.test(cron)) {
@@ -96,7 +102,7 @@ class Trigger {
                 }
                 break;
             }
-            case "EVENT": {
+            case "TIME_INTERVAL": {
                 const maxOccurrence = parseInt(this.settings["maxOccurrence"], 10) || 0;
                 if (maxOccurrence <= 0) {
                     return false;
@@ -110,20 +116,20 @@ class Trigger {
 
     serialize() {
         const settings = {};
-        switch (this.type) {
+        switch (this.type.value) {
             case "TIME_INTERVAL": {
                 settings["expr"] = toCronString(this.settings);
                 break;
             }
             default:
                 settings["maxOccurrence"] = parseInt(this.settings["maxOccurrence"], 10);
-                settings["eventType"] = this.settings["eventType"];
+                settings["eventType"] = this.settings["eventType"].value;
                 break;
         }
         return {
             index: this.index,
             id: this.id,
-            type: this.type,
+            type: this.type.value,
             settings,
         };
     }

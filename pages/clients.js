@@ -1,14 +1,13 @@
-import React from 'react'
-import Layout from "../components/layouts/Layout";
-import ClientsTableProvider from '../components/ClientsTable/ClientsTableProvider'
+import React from 'react';
+import ClientsTableProvider from '../components/ClientsTable/ClientsTableProvider';
 
 class Clients extends React.Component<{}> {
     render() {
         return (
-            <Layout>
+            <React.Fragment>
                 <h1>Clients</h1>
-                <ClientsTableProvider/>
-            </Layout>
+                <ClientsTableProvider />
+            </React.Fragment>
         )
     }
 }

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import Layout from "../components/layouts/Layout";
 
 class Error extends Component {
     render() {
         return (
-            <Layout>
+            <React.Fragment>
                 <h1>
                     Error!
                 </h1>
-            </Layout>
+            </React.Fragment>
         );
     }
 }

@@ -45,7 +45,6 @@ class Topics {
         const { data } = await api.topics.count();
 
         this.count = data.count ? data.count : 0;
-        this.addLog("topics_count");
     }
 
     @action
@@ -56,11 +55,6 @@ class Topics {
 
         this.topics = data.topics ? data.topics : [];
         if (withCounts) this.updateJoinedClientsCounts();
-
-        this.addLog("get_topics", {
-            offset: offset,
-            count: count,
-        });
     }
 
     @action
@@ -86,7 +80,7 @@ class Topics {
         await api.topics.post(name);
 
         this.count++;
-        if (this.topics.length < this.onPage)
+        if (this.topics.length < this.onPage && !this.topics.includes(name))
             this.topics.push(name);
 
         this.addLog("add_topic", { name: name });
@@ -113,7 +107,6 @@ class Topics {
         const { data } = await api.topics.joinedClientsCount(topic || this.current);
 
         this.joinedClientsCount = data.count || 0;
-        this.addLog("joined_clients_count", { topic: topic || this.current });
 
         return this.joinedClientsCount;
     }
@@ -127,16 +120,11 @@ class Topics {
 
             const clients = data.clients.map(({ name }) => name) || [];
             this.joinedClients.push(...clients);
-            this.addLog("get_joined_clients", {
-                topic: this.current,
-                offset: i,
-                count: onRequest,
-            })
         }
     }
 
     @action
-    async updateJoinedClientCount(topic, cache = true) {
+    async updateJoinedClientsCount(topic, cache = true) {
         if (cache && this.joinedClientsCounts[topic] !== undefined) return;
         const count = await this.loadJoinedClientsCount(topic);
 
@@ -146,7 +134,7 @@ class Topics {
     @action
     async updateJoinedClientsCounts() {
         this.topics.map((topic) => {
-            this.updateJoinedClientCount(topic);
+            this.updateJoinedClientsCount(topic, false);
         });
     }
 

@@ -4,6 +4,7 @@ const next = require('next');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var accesslog = require('access-log');
 
 require('dotenv').config();
 
@@ -51,6 +52,7 @@ app
 
         // Default catch-all handler to allow Next.js to handle all other routes
         server.all('*', (req, res) => {
+            accesslog(req, res);
             handle(req, res)
         });
 

@@ -1,7 +1,7 @@
 // @flow
+import cx from 'classnames'
 import * as React from 'react'
 import Select from 'react-select'
-import cx from 'classnames'
 
 export type SelectOption = {
     value: any,
@@ -14,6 +14,7 @@ type Props = {
     className?: string,
     value: ?any,
     label?: string,
+    disabled?: boolean,
     options: Array<{
         value: any,
         label: string
@@ -29,7 +30,7 @@ class CustomSelect extends React.Component<Props> {
         }
 
         const options = this.props.options.length > 0 && typeof this.props.options[0] === "string" ?
-            this.props.options.map(item => ({value: item, label: item}))
+            this.props.options.map(item => ({ value: item, label: item }))
             : this.props.options;
         const value = typeof this.props.value === "object" ? this.props.value : {
             label: this.props.value,
@@ -44,9 +45,10 @@ class CustomSelect extends React.Component<Props> {
                     {...this.props}
                     className={classes.root}
                     name={this.props.name}
+                    isDisabled={this.props.disabled}
                     value={value}
                     onChange={this.props.onChange}
-                    options={options}/>
+                    options={options} />
             </div>
         )
     }

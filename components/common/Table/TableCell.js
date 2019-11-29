@@ -1,12 +1,13 @@
 // @flow
-import * as React from 'react'
 import cx from 'classnames'
+import * as React from 'react'
 
 type Props = {
     children: any,
     small?: ?boolean,
     center?: ?boolean,
-    label: ?string
+    label: ?string,
+    colSpan: ?string
 }
 
 class TableCell extends React.Component<Props> {
@@ -19,7 +20,7 @@ class TableCell extends React.Component<Props> {
         }
 
         return (
-            <td className={classes.root} data-label={this.props.label}>
+            <td colSpan={this.props.colSpan} className={classes.root} data-label={this.props.label}>
                 {this.props.children}
             </td>
         )

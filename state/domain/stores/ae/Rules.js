@@ -1,18 +1,29 @@
-import {observable, action, computed} from "mobx";
+import { action, observable } from "mobx";
 import api from '../../../../api/api';
-import moment from "moment";
-import {isBase64} from "../../../../utils/helpers";
+import { Store } from "../../../Store";
 
 class Rules {
     @observable rules = [];
     @observable current = 0;
     @observable onPage = 10;
     @observable page = 0;
+    logger = null;
+
+    addLog(cmd, payload = {}) {
+        if (this.logger === null)
+            this.logger = Store.getInstance().domain.log;
+
+        this.logger.addLog({
+            cmd: cmd,
+            payload: payload,
+        });
+    }
+
 
     get = (id = null) => {
-        if(id === null) {
+        if (id === null) {
             const start = this.page * this.onPage;
-            return this.rules.slice(start, start+this.onPage);
+            return this.rules.slice(start, start + this.onPage);
         }
 
         return this.rules.find(rule => rule.id === id);
@@ -23,7 +34,7 @@ class Rules {
 
     @action
     async load() {
-        const {data} = await api.rules.get();
+        const { data } = await api.rules.get();
 
         const rules = data.rules || [];
 
@@ -50,13 +61,15 @@ class Rules {
             target.settings = btoa(JSON.stringify(target.settings));
             return target;
         });
-        const {data} = await api.rules.post(
+        const { data } = await api.rules.post(
             action,
             description,
             b64triggers,
             b64targets,
         );
         this.rules.push(data.rule);
+
+        this.addLog("add_rule", { id: data.rule.id })
     }
 
     @action
@@ -66,7 +79,7 @@ class Rules {
             return trigger;
         });
 
-        const {data} = await api.rules.put(
+        const { data } = await api.rules.put(
             id,
             action,
             description,
@@ -76,16 +89,21 @@ class Rules {
 
         const index = this.rules.findIndex(rule => rule.id === data.rule.id);
         this.rules.splice(index, 1, data.rule);
+
+        this.addLog("edit_rule", { id: id })
     }
 
     @action
     async remove(id) {
-        const {data} = await api.rules.remove(id);
+        await api.rules.remove(id);
 
         this.rules = this.rules.filter(item => item.id !== id);
 
-        if(this.page * this.onPage >= this.rules.length && this.page > 0)
+        if (this.page * this.onPage >= this.rules.length && this.page > 0)
             this.setPage(this.page - 1);
+
+        this.addLog("remove_rule", { id: id })
+
     }
 }
 

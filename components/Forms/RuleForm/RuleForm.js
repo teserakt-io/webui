@@ -68,7 +68,7 @@ class RuleForm extends Component {
     };
 
     handleSettingEventTypeChange = (selected) => {
-        this.triggerForm.setSetting("eventType", selected.value);
+        this.triggerForm.setSetting("eventType", selected);
         this.forceUpdate();
     }
 
@@ -134,7 +134,8 @@ class RuleForm extends Component {
                     onChange={this.onSelectChange}
                     options={Rule.types}
                     value={this.ruleForm.getType()}
-                />
+                    disabled={true} />
+
                 <Input label={'Description'}
                     id={RuleForm.formKeys.DESCRIPTION}
                     name={'description'}
@@ -169,6 +170,7 @@ class RuleForm extends Component {
                     onExpressionChange={this.handleExpressionChange}
                     onSave={this.handleTargetSave}
                     onCancel={() => this.setState({ targetEdit: false })}
+                    isValid={this.targetForm.isValid()}
                 />
                 <div className="btn-control">
                     <Button small danger uppercase disabled={!this.isValid()} onClick={this.onSubmit} className={'mb-10'}>

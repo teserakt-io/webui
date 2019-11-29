@@ -2,9 +2,10 @@ import { action, observable } from "mobx";
 
 class Target {
     static types = [
-        "CLIENT",
-        "TOPIC",
+        { value: "CLIENT", label: "Client" },
+        { value: "TOPIC", label: "Topic" },
     ];
+
     id = null;
     index = null;
     @observable type = Target.types[0];
@@ -21,7 +22,7 @@ class Target {
 
     @action
     setType(value) {
-        this.type = value;
+        this.type = Target.types.find((elt) => elt.value === value);
     }
 
     @action
@@ -32,18 +33,27 @@ class Target {
     serialize() {
         const { index, id, type, expr } = this;
         return {
-            index,
-            id,
-            type,
-            expr
+            index: index,
+            id: id,
+            type: type.value,
+            expr: expr
         };
     }
+
+    isValid() {
+        if (this.expr.length === 0) {
+            return false
+        }
+
+        return true;
+    }
+
 
     @action
     parse(target, index) {
         this.index = index;
         this.id = target.id;
-        this.type = target.type;
+        this.type = Target.types.find((elt) => elt.value === target.type);
         this.expr = target.expr;
     }
 }

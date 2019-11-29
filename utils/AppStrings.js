@@ -7,21 +7,21 @@ class AppStrings {
     static CLIENT_ADDED = 'Client successfully added!';
     static CLIENT_ADDING_ERROR = "Client wasn't added!";
     static CLIENT_REMOVED = 'Client successfully removed!';
-    static CLIENT_REMOVED_ERROR = 'Client removal failure!';
+    static CLIENT_REMOVED_ERROR = 'Failed to remove client!';
 
     static TOPIC_ADDED = 'Topic successfully added!';
     static TOPIC_REMOVED = 'Topic successfully removed!'
-    static TOPIC_REMOVED_ERROR = 'Topic removal failure!';
-    static TOPIC_ADDED_ERROR = "Topic adding failure!";
+    static TOPIC_REMOVED_ERROR = 'Failed to remove topic!';
+    static TOPIC_ADDED_ERROR = "Failed to add topic!";
 
-    static TOPICS_ASSOCIATION_SUCCESS = "Topics were set!";
-    static TOPICS_ASSOCIATION_ERROR = "Topics weren't set!";
+    static TOPICS_ASSOCIATION_SUCCESS = "Topics successfully set on client!";
+    static TOPICS_ASSOCIATION_ERROR = "Failed to set topics on client!";
 
-    static CLIENT_ASSOCIATION_SUCCESS = "Clients were set!";
-    static CLIENT_ASSOCIATION_ERROR = "Clients weren't set!";
+    static CLIENT_ASSOCIATION_SUCCESS = "Clients successfully set on topic!";
+    static CLIENT_ASSOCIATION_ERROR = "Failed to set clients on topic!";
 
     static RULE_ADDED = 'Rule successfully added!';
-    static RULE_ERROR = "Rule wasn't added!";
+    static RULE_ERROR = "Failed to add rule!";
 
     static RULE_UPDATED = 'Rule successfully updated!';
 }
