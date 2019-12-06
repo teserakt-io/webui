@@ -6,6 +6,7 @@ const Dotenv = require('dotenv-webpack')
 const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 module.exports = withSass(withCss({
+    poweredByHeader: false,
     webpack: (config, options) => {
         config.module.rules.push({
             test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,

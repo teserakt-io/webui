@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const helmet = require('helmet')
 const next = require('next');
 var fs = require('fs');
 var http = require('http');
@@ -30,7 +31,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const app = next({
-    dir: '.', // base directory where everything is, could move to src later
+    dir: '.',
     dev
 });
 
@@ -42,11 +43,50 @@ app
     .then(() => {
         server = express();
 
+        server.use(helmet());
+
+        // Extra security headers not provided by helmet:
+        server.use((req, res, next) => {
+            res.setHeader('Referrer-Policy', 'no-referrer');
+            res.setHeader('Feature-Policy', "layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'");
+            next();
+        });
+
+        // Configure CSP
+        let directives = {}
+        directives.scriptSrc = ["'self'"];
+
+        if (dev) {
+            directives.scriptSrc = ["'self'", "'unsafe-eval'", "'unsafe-inline'"]; // unsafe-* for hot reload stuff on dev server
+            directives.reportUri = '/report-violation'
+        }
+
+        server.use(helmet.contentSecurityPolicy({
+            directives: directives,
+        }));
+
         // Set up the proxy.
         if (devProxy) {
             const proxyMiddleware = require('http-proxy-middleware');
             Object.keys(devProxy).forEach(function (context) {
                 server.use(proxyMiddleware(context, devProxy[context]))
+            })
+        }
+
+        if (dev) {
+            // Debug CSP violations
+            var bodyParser = require('body-parser')
+            server.use(bodyParser.json({
+                type: ['json', 'application/csp-report']
+            }))
+            server.post('/report-violation', (req, res) => {
+                if (req.body) {
+                    console.log('CSP Violation: ', req.body)
+                } else {
+                    console.log('CSP Violation: No data received!')
+                }
+
+                res.status(204).end()
             })
         }
 

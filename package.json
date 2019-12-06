@@ -29,6 +29,7 @@
     "file-loader": "^3.0.1",
     "flow-bin": "^0.98.1",
     "font-awesome": "^4.7.0",
+    "helmet": "^3.21.2",
     "http-proxy-middleware": "^0.19.1",
     "mini-css-extract-plugin": "^0.7.0",
     "mobx": "^5.15.0",
