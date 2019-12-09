@@ -21,7 +21,7 @@ class CustomApp extends App {
         return <React.Fragment>
             <Head>
                 <title>Teserakt</title>
-                <link rel="shortcut icon" href="/static/favicon.ico" type="image/png" />
+                <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
             </Head>
             <NavigationProvider />
             <main>
