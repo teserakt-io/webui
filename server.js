@@ -118,7 +118,7 @@ app
             httpServer = http.createServer(server);
         }
 
-        httpServer.listen(port, err => {
+        httpServer.listen(port, "0.0.0.0", err => {
             if (err) {
                 throw err
             }
