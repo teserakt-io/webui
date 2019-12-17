@@ -57,6 +57,19 @@ app
             next();
         });
 
+        // Access logs
+        server.use((req, res, next) => {
+            accesslog(req, res, function (data) {
+                data["application"] = "webui";
+                log = JSON.stringify(data);
+                if (!dev) {
+                    log_file.write(log + '\n');
+                }
+                console.log(log);
+            });
+            next();
+        });
+
         // Configure CSP
         let directives = {}
         directives.scriptSrc = ["'self'"];
@@ -97,14 +110,6 @@ app
 
         // Default catch-all handler to allow Next.js to handle all other routes
         server.all('*', (req, res) => {
-            accesslog(req, res, function (data) {
-                data["application"] = "webui";
-                log = JSON.stringify(data);
-                if (!dev) {
-                    log_file.write(log + '\n');
-                }
-                console.log(log);
-            });
             handle(req, res)
         });
 
