@@ -15,7 +15,9 @@ class About extends React.Component<{}> {
                     E4 consists of the:
                     <ul>
                     <li>
-                    <b>E4 client library</b>, available on <a href="https://github.com/teserakt-io">our GitHub</a> under APLv2 license
+                    <b>E4 client library</b>, available on <a
+                    href="https://github.com/teserakt-io">our GitHub</a>
+                    under the APLv2 license.
                     </li>
                     <li>
                     <b>Command-and-control (C2) server</b>, offered
@@ -28,21 +30,21 @@ class About extends React.Component<{}> {
                     site</a>.
                 </p>
                 <p>
-                    Please feel free to contact us at <a
-                    href="mailto:contact@teserakt.io">contact@teserakt.io</a> for any inquiry.
+                    For all enquiries, please contact us at <a
+                    href="mailto:contact@teserakt.io">contact@teserakt.io</a>.
                 </p>
                 <h2>Using the console</h2>
                 <p>
                     You can create an MQTT client supporting E4 by
                     following the instructions in our <a
-                    href="https://github.com/teserakt-io/e4go">client software repository</a>.
+                    href="https://github.com/teserakt-io/e4go"> client software repository</a>.
                     The client must use the broker mqtt.demo.teserakt.io:1883, and
                     must subscribe to its control topic (<code>e4/devicename</code>).
                 </p>
                 <p>
                     After registering your client in the console ("Add
-                    Client" button) you can use the consol to assign
-                    topic keys to your device, and to define key
+                    Client" button) you can use the console to assign
+                    topic keys to your device and to define key
                     rotation policies.
                 </p>
                 <h2>Disclaimer</h2>
