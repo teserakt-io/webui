@@ -37,6 +37,11 @@ const app = next({
 
 const handle = app.getRequestHandler();
 
+let log_file;
+if (!dev) {
+    log_file = fs.createWriteStream('/var/log/e4_webui.log', { flags: 'w' });
+}
+
 let server;
 app
     .prepare()
@@ -92,7 +97,12 @@ app
 
         // Default catch-all handler to allow Next.js to handle all other routes
         server.all('*', (req, res) => {
-            accesslog(req, res);
+            accesslog(req, res, false, function (log) {
+                if (!dev) {
+                    log_file.write(log + '\n');
+                }
+                console.log(log);
+            });
             handle(req, res)
         });
 
