@@ -38,18 +38,18 @@ class TopicsTable extends React.Component<Props> {
                 <Table>
                     <TableHead>
                         <TableRow border>
-                            <TableHeader small>#</TableHeader>
-                            <TableHeader>Topic</TableHeader>
-                            <TableHeader>Clients</TableHeader>
-                            <TableHeader small>Actions</TableHeader>
+                            <TableHeader style={{ width: '5%' }} center>#</TableHeader>
+                            <TableHeader medium>Topic</TableHeader>
+                            <TableHeader center>#Clients</TableHeader>
+                            <TableHeader small center>Actions</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.props.topics.length > 0 && this.props.topics.map((topic: Topic, index) => (
                             <TableRow key={index}>
-                                <TableCell label="#" small center>{offset + index + 1}</TableCell>
-                                <TableCell label="Topic">{topic}</TableCell>
-                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || 0}</TableCell>
+                                <TableCell label="#" style={{ width: '5%' }} center>{offset + index + 1}</TableCell>
+                                <TableCell label="Topic" medium>{topic}</TableCell>
+                                <TableCell label="Clients" center>{this.props.joinedClientsCounts[topic] || 0}</TableCell>
                                 <TableCell label="Actions" small center>
                                     <ActionButtons
                                         edit={() => this.props.openModalClients(topic)}

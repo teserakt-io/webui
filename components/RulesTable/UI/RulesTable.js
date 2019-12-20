@@ -3,10 +3,7 @@ import moment from "moment";
 import React from 'react';
 import FontAwesome from "react-fontawesome";
 import TimeAgo from "react-timeago";
-// import Truncate from 'react-truncate';
-import ReadMoreReact from 'read-more-react';
 import Rule from '../../../state/view/stores/Forms/Rule';
-import { spacedLongString } from "../../../utils/helpers";
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Button from "../../common/Buttons/Button/Button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../common/Table";
@@ -43,13 +40,13 @@ function RulesTable(props: Props) {
             <Table className={'rules__table'}>
                 <TableHead>
                     <TableRow border>
-                        <TableHeader small center>#</TableHeader>
+                        <TableHeader center style={{ width: '5%' }} center>#</TableHeader>
                         <TableHeader small>Type</TableHeader>
-                        <TableHeader small>Description</TableHeader>
+                        <TableHeader style={{ width: '30%' }}>Description</TableHeader>
                         <TableHeader small>Last executed</TableHeader>
-                        <TableHeader small>#Triggers</TableHeader>
-                        <TableHeader small>#Targets</TableHeader>
-                        <TableHeader small>Actions</TableHeader>
+                        <TableHeader style={{ width: '6%' }} center>#Triggers</TableHeader>
+                        <TableHeader style={{ width: '6%' }} center>#Targets</TableHeader>
+                        <TableHeader style={{ width: '6%' }} center>Actions</TableHeader>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -61,17 +58,17 @@ function RulesTable(props: Props) {
                         const action = Rule.types.find(r => r.value === rule.action).label;
                         return (
                             <TableRow key={rule.id}>
-                                <TableCell label={'#'} small center>{rule.id}</TableCell>
+                                <TableCell label={'#'} style={{ width: '5%' }} center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
-                                <TableCell label={'Description'} small>
-                                    <ReadMoreReact text={spacedLongString(rule.description || "", 30)} max={30} ideal={20} min={10} />
+                                <TableCell label={'Description'} style={{ width: '30%' }}>
+                                    {rule.description}
                                 </TableCell>
                                 <TableCell label={'Last executed'} small>
                                     {ago}
                                 </TableCell>
-                                <TableCell label={'#Triggers'} small>{triggerCount}</TableCell>
-                                <TableCell label={'#Targets'} small>{targetCount}</TableCell>
-                                <TableCell label={'Actions'} small center className={'actions'}>
+                                <TableCell label={'#Triggers'} style={{ width: '6%' }} center>{triggerCount}</TableCell>
+                                <TableCell label={'#Targets'} style={{ width: '6%' }} center>{targetCount}</TableCell>
+                                <TableCell label={'Actions'} style={{ width: '6%' }} center className={'actions'}>
                                     <ActionButtons
                                         edit={() => props.editRule(rule.id)}
                                         remove={() => props.removeRule(rule.id)}
@@ -95,7 +92,7 @@ function RulesTable(props: Props) {
                 onPageChange={props.onPageChange}
                 forcePage={props.currentPage}
             />
-        </div>
+        </div >
     );
 }
 
