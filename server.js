@@ -5,7 +5,7 @@ const next = require('next');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var accesslog = require('access-log');
+var accesslog = require('./utils/accesslog');
 
 require('dotenv').config();
 
@@ -37,6 +37,11 @@ const app = next({
 
 const handle = app.getRequestHandler();
 
+let log_file;
+if (!dev) {
+    log_file = fs.createWriteStream('/var/log/e4_webui.log', { flags: 'w' });
+}
+
 let server;
 app
     .prepare()
@@ -49,6 +54,19 @@ app
         server.use((req, res, next) => {
             res.setHeader('Referrer-Policy', 'no-referrer');
             res.setHeader('Feature-Policy', "layout-animations 'none'; unoptimized-images 'none'; oversized-images 'none'; sync-script 'none'; sync-xhr 'none'; unsized-media 'none'");
+            next();
+        });
+
+        // Access logs
+        server.use((req, res, next) => {
+            accesslog(req, res, function (data) {
+                data["application"] = "webui";
+                log = JSON.stringify(data);
+                if (!dev) {
+                    log_file.write(log + '\n');
+                }
+                console.log(log);
+            });
             next();
         });
 
@@ -92,7 +110,6 @@ app
 
         // Default catch-all handler to allow Next.js to handle all other routes
         server.all('*', (req, res) => {
-            accesslog(req, res);
             handle(req, res)
         });
 
@@ -108,7 +125,7 @@ app
             httpServer = http.createServer(server);
         }
 
-        httpServer.listen(port, err => {
+        httpServer.listen(port, "0.0.0.0", err => {
             if (err) {
                 throw err
             }
