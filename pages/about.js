@@ -15,14 +15,13 @@ class About extends React.Component<{}> {
                     E4 consists of the:
                     <ul>
                         <li>
-                            <b>E4 client library</b>, available on <a
-                                href="https://github.com/teserakt-io">our GitHub</a> under the APLv2 license.
-                        </li>
+                            <b>E4 client library</b>, available on <a href="https://github.com/teserakt-io">our GitHub</a> under the APLv2 license.
+                    </li>
                         <li>
                             <b>Command-and-control (C2) server</b>, offered
                             under commercial terms including maintenance and
                             support.
-                        </li>
+                    </li>
                     </ul>
                     Detailed information about E4 is available on our <a
                         href="https://e4.teserakt.io">documentation
@@ -37,7 +36,7 @@ class About extends React.Component<{}> {
                     You can create an MQTT client supporting E4 by
                     following the instructions in our <a
                         href="https://github.com/teserakt-io/e4go"> client software repository</a>.
-    The client must use the broker mqtt.demo.teserakt.io:1883, and
+                The client must use the broker mqtt.demo.teserakt.io:1883, and
                     must subscribe to its control topic (<code>e4/devicename</code>).
                 </p>
                 <p>
