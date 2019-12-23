@@ -4,6 +4,8 @@ import Input from "../common/FormElements/Input/Input";
 function TimeIntervalSettings(props) {
        return (
               <Fragment>
+                     <div className={'help'}>Execute the rule repeatedly at configured time interval</div>
+
                      <div className={'cron'}>
                             <Input label={'minutes'}
                                    onChange={props.onSettingChange}

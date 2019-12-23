@@ -7,6 +7,8 @@ import CustomSelect from "../common/FormElements/Select/Select";
 function EventSettings(props) {
     return (
         <Fragment>
+            <div className={'help'}>Execute the rule each time the number of events has been seen</div>
+
             <div className={'eventSettings'}>
                 <Input label={'max occurrence'}
                     type="number"
