@@ -1,7 +1,6 @@
 //@flow
 import moment from "moment";
 import React from 'react';
-import FontAwesome from "react-fontawesome";
 import TimeAgo from "react-timeago";
 import Rule from '../../../state/view/stores/Forms/Rule';
 import ActionButtons from "../../ActionButtons/ActionButtons";
@@ -30,14 +29,6 @@ function RulesTable(props: Props) {
                 className="mb-20"
                 onClick={props.addRule}>
                 Add Rule
-            </Button>
-            <Button
-                danger
-                uppercase
-                medium
-                className="mb-20 ml-10"
-                onClick={props.refresh}>
-                <FontAwesome name={'refresh'} />
             </Button>
             <div className="f-r">
                 <OnPage onChange={props.handleOnPage} options={[10, 50, 100]} />
