@@ -73,6 +73,10 @@ class RulesTableProvider extends Component {
         this.props.store.domain.ae.rules.setPage(page.selected);
     };
 
+    handleOnPage = (onPage) => {
+        this.props.store.domain.ae.rules.setOnPage(onPage);
+    };
+
     handleRefresh = () => {
         this.props.store.domain.ae.rules.load();
     };
@@ -89,6 +93,7 @@ class RulesTableProvider extends Component {
                 onPageChange={this.onPageChange}
                 currentPage={this.props.store.domain.ae.rules.page}
                 refresh={this.handleRefresh}
+                handleOnPage={this.handleOnPage}
             />
         );
     }

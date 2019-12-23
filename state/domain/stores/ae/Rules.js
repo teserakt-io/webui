@@ -94,6 +94,12 @@ class Rules {
     }
 
     @action
+    async setOnPage(onPage) {
+        this.onPage = onPage;
+        this.setPage(0);
+    }
+
+    @action
     async remove(id) {
         await api.rules.remove(id);
 

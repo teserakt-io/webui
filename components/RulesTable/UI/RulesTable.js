@@ -7,6 +7,7 @@ import Rule from '../../../state/view/stores/Forms/Rule';
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Button from "../../common/Buttons/Button/Button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../common/Table";
+import OnPage from "../../Pagination/OnPage";
 import Pagination from "../../Pagination/Pagination";
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
     removeRule: Function,
     currentPage: number,
     refresh: Function,
+    handleOnPage: Function,
 };
 
 function RulesTable(props: Props) {
@@ -37,6 +39,9 @@ function RulesTable(props: Props) {
                 onClick={props.refresh}>
                 <FontAwesome name={'refresh'} />
             </Button>
+            <div className="f-r">
+                <OnPage onChange={props.handleOnPage} options={[10, 50, 100]} />
+            </div>
             <Table className={'rules__table'}>
                 <TableHead>
                     <TableRow border>
