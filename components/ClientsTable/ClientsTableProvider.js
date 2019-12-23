@@ -4,7 +4,6 @@ import React from 'react'
 import { NotificationManager } from 'react-notifications'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-// import Services from '../../services/Services'
 import { Store } from '../../state/Store'
 import AppStrings from '../../utils/AppStrings'
 import ModalProvider from '../common/Modal/ModalProvider'
@@ -33,11 +32,20 @@ class ClientsTableProvider extends React.Component<Props> {
     };
 
     removeClient = (name: string) => {
-        this.props.store.domain.clients.deleteClient(name).then(() => {
-            NotificationManager.success(AppStrings.CLIENT_REMOVED)
-        }).catch(() => {
-            NotificationManager.error(AppStrings.CLIENT_REMOVED_ERROR);
-        });
+        const RemoveSwal = withReactContent(Swal);
+        RemoveSwal.fire({
+            type: 'error',
+            title: 'Delete client?',
+            showCancelButton: true,
+        }).then((res) => {
+            if (res.value) {
+                this.props.store.domain.clients.deleteClient(name).then(() => {
+                    NotificationManager.success(AppStrings.CLIENT_REMOVED)
+                }).catch(() => {
+                    NotificationManager.error(AppStrings.CLIENT_REMOVED_ERROR);
+                });
+            }
+        })
     };
 
     openModal = () => {

@@ -2,6 +2,8 @@
 import { observer } from 'mobx-react'
 import React from 'react'
 import { NotificationManager } from 'react-notifications'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { Store } from '../../state/Store'
 import AppStrings from '../../utils/AppStrings'
 import ModalProvider from '../common/Modal/ModalProvider'
@@ -26,12 +28,21 @@ class TopicsTableProvider extends React.Component<Props> {
     };
 
     removeTopic = (topic: string) => {
-        this.props.store.domain.topics.remove(topic)
-            .then(() => {
-                NotificationManager.success(AppStrings.TOPIC_REMOVED);
-            }).catch(() => {
-                NotificationManager.error(AppStrings.TOPIC_REMOVED_ERROR);
-            });
+        const RemoveSwal = withReactContent(Swal);
+        RemoveSwal.fire({
+            type: 'error',
+            title: 'Delete topic?',
+            showCancelButton: true,
+        }).then((res) => {
+            if (res.value) {
+                this.props.store.domain.topics.remove(topic)
+                    .then(() => {
+                        NotificationManager.success(AppStrings.TOPIC_REMOVED);
+                    }).catch(() => {
+                        NotificationManager.error(AppStrings.TOPIC_REMOVED_ERROR);
+                    });
+            }
+        })
     };
 
     openAddTopicForm = () => {
