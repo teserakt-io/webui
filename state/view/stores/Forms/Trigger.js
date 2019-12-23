@@ -98,7 +98,7 @@ class Trigger {
                 }
                 break;
             }
-            case "TIME_INTERVAL": {
+            case "EVENT": {
                 const maxOccurrence = parseInt(this.settings["maxOccurrence"], 10) || 0;
                 if (maxOccurrence <= 0) {
                     return false;
