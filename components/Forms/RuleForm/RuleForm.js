@@ -72,6 +72,11 @@ class RuleForm extends Component {
         this.forceUpdate();
     }
 
+    handleSettingTimeIntervalChange = (selected) => {
+        this.triggerForm.setSetting("", selected);
+        this.forceUpdate();
+    }
+
     handleEditTrigger = (index) => {
         const trigger = this.ruleForm.triggers[index];
         this.triggerForm.parse(trigger, index);
@@ -153,6 +158,7 @@ class RuleForm extends Component {
                     onTypeChange={this.handleTriggerTypeChange}
                     onSettingChange={this.handleSettingsChange}
                     onSettingEventTypeChange={this.handleSettingEventTypeChange}
+                    onSettingTimeIntervalChange={this.handleSettingTimeIntervalChange}
                     onSave={this.handleTriggerSave}
                     onCancel={() => this.setState({ triggerEdit: false })}
                     isValid={this.triggerForm.isValid()}

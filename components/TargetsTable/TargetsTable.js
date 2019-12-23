@@ -28,20 +28,20 @@ function TargetsTable(props: Props) {
             <Table className={'table__targets'}>
                 <TableHead>
                     <TableRow>
-                        <TableHeader>#</TableHeader>
-                        <TableHeader>Type</TableHeader>
+                        <TableHeader style={{ width: '10%' }} center>#</TableHeader>
+                        <TableHeader style={{ width: '20%' }}>Type</TableHeader>
                         <TableHeader>Name</TableHeader>
-                        <TableHeader>Actions</TableHeader>
+                        <TableHeader style={{ width: '15%' }} center>Actions</TableHeader>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {props.targets.length > 0 && props.targets.map((target, index) => {
                         return (
                             <TableRow border key={index}>
-                                <TableCell label={'#'}>{index + 1}</TableCell>
-                                <TableCell label={'Type'}>{props.types.find((elt) => elt.value === target.type).label}</TableCell>
+                                <TableCell style={{ width: '10%' }} center label={'#'}>{index + 1}</TableCell>
+                                <TableCell style={{ width: '20%' }} label={'Type'}>{props.types.find((elt) => elt.value === target.type).label}</TableCell>
                                 <TableCell label={'Name'}>{target.expr}</TableCell>
-                                <TableCell small label={'Actions'}>
+                                <TableCell style={{ width: '15%' }} center label={'Actions'}>
                                     <ActionButtons
                                         edit={() => props.edit(index)}
                                         remove={() => props.remove(index)}

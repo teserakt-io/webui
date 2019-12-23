@@ -1,5 +1,4 @@
 import { action, observable } from "mobx";
-import { toCronString } from "../../../../utils/helpers";
 import regex from '../../../../utils/regex';
 
 class Trigger {
@@ -13,6 +12,16 @@ class Trigger {
         { value: "EVENT", label: "Event" },
     ];
 
+    static timeIntervalOptions = [
+        { label: 'Every minute', value: '0 0/1 * 1/1 * ? *' },
+        { label: 'Every hour', value: '0 0 0/1 1/1 * ? *' },
+        { label: 'Every 6 hours', value: '0 */6 * * *' },
+        { label: 'Every 12 hours', value: '0 0 0/12 1/1 * ? *' },
+        { label: 'Every day', value: '0 0 0 1/1 * ? *' },
+        { label: 'Every week', value: '0 0 0 ? * MON *' },
+        { label: 'Every month', value: '0 0 0 1 1/1 ? *' },
+    ];
+
     static eventTypeOptions = [
         { value: "CLIENT_SUBSCRIBED", label: "Client subscribed" },
         { value: "CLIENT_UNSUBSCRIBED", label: "Client unsubscribed" },
@@ -24,14 +33,7 @@ class Trigger {
     getBaseSettings() {
         switch (this.getType().value) {
             case "TIME_INTERVAL": {
-                return {
-                    minutes: "*",
-                    hours: "*",
-                    days: "*",
-                    month: "*",
-                    weeks: "*",
-                    years: "*",
-                }
+                return Trigger.timeIntervalOptions[0];
             }
             case "EVENT": {
                 return {
@@ -62,7 +64,11 @@ class Trigger {
 
     @action
     setSetting(name, value) {
-        this.settings[name] = value;
+        if (name.length > 0) {
+            this.settings[name] = value;
+        } else {
+            this.settings = value;
+        }
     }
 
     @action
@@ -72,16 +78,7 @@ class Trigger {
         this.type = Trigger.types.find((elt) => elt.value === trigger.type);
         switch (this.type.value) {
             case "TIME_INTERVAL": {
-                const expr = trigger.settings.expr.split(" ");
-                this.settings = {
-                    ...trigger.settings,
-                    minutes: expr[0],
-                    hours: expr[1],
-                    days: expr[2],
-                    month: expr[3],
-                    weeks: expr[4],
-                    years: expr[5],
-                };
+                this.settings = Trigger.timeIntervalOptions.find((elt) => elt.value === trigger.settings.expr);
                 break;
             }
             default:
@@ -96,8 +93,7 @@ class Trigger {
     isValid() {
         switch (this.type.value) {
             case "TIME_INTERVAL": {
-                const cron = toCronString(this.settings);
-                if (!regex.cron.test(cron)) {
+                if (!regex.cron.test(this.settings.value)) {
                     return false;
                 }
                 break;
@@ -118,7 +114,7 @@ class Trigger {
         const settings = {};
         switch (this.type.value) {
             case "TIME_INTERVAL": {
-                settings["expr"] = toCronString(this.settings);
+                settings["expr"] = this.settings.value;
                 break;
             }
             default:

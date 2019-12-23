@@ -21,6 +21,7 @@ type Props = {
     onTypeChange: Function,
     onSettingChange: Function,
     onSettingEventTypeChange: Function,
+    onSettingTimeIntervalChange: Function,
     onSave: Function,
     onCancel: Function,
     isValid: Function,
@@ -33,18 +34,18 @@ function TriggersTable(props: Props) {
             <Table className={'table__triggers'}>
                 <TableHead>
                     <TableRow>
-                        <TableHeader>#</TableHeader>
-                        <TableHeader>Type</TableHeader>
+                        <TableHeader style={{ width: '10%' }} center>#</TableHeader>
+                        <TableHeader style={{ width: '20%' }}>Type</TableHeader>
                         <TableHeader>Settings</TableHeader>
-                        <TableHeader>Actions</TableHeader>
+                        <TableHeader style={{ width: '15%' }} center>Actions</TableHeader>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {props.triggers.length > 0 && props.triggers.map((trigger, index) => {
                         return (
                             <TableRow border key={index}>
-                                <TableCell label={'#'}>{index + 1}</TableCell>
-                                <TableCell label={'Type'}>{props.types.find((elt) => elt.value == trigger.type).label}</TableCell>
+                                <TableCell label={'#'} style={{ width: '10%' }} center>{index + 1}</TableCell>
+                                <TableCell label={'Type'} style={{ width: '20%' }}>{props.types.find((elt) => elt.value == trigger.type).label}</TableCell>
                                 <TableCell label={'Settings'}>
                                     <ReactJson
                                         name="settings"
@@ -53,7 +54,7 @@ function TriggersTable(props: Props) {
                                         displayDataTypes={false}
                                         src={trigger.settings} />
                                 </TableCell>
-                                <TableCell small label={'Actions'}>
+                                <TableCell label={'Actions'} style={{ width: '15%' }} center>
                                     <ActionButtons
                                         edit={() => props.edit(index)}
                                         remove={() => props.remove(index)}
@@ -85,6 +86,7 @@ function TriggersTable(props: Props) {
                         type={props.current.getType()}
                         onSettingChange={props.onSettingChange}
                         onSettingEventTypeChange={props.onSettingEventTypeChange}
+                        onSettingTimeIntervalChange={props.onSettingTimeIntervalChange}
                         data={props.current.settings}
                     />
                     <div>
