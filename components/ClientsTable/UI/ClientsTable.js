@@ -3,7 +3,6 @@ import React from 'react';
 import ActionButtons from "../../ActionButtons/ActionButtons";
 import Button from '../../common/Buttons/Button/Button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../common/Table';
-import ClientNameForm from "../../Forms/ClientForm/ClientNameForm";
 import OnPage from "../../Pagination/OnPage";
 import Pagination from "../../Pagination/Pagination";
 
@@ -26,9 +25,6 @@ class ClientsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add client
                 </Button>
-                <div style={{ float: 'left' }} className={'mr-20'}>
-                    <ClientNameForm submit={this.props.removeClient} submitText={'DELETE CLIENT'} />
-                </div>
 
                 <div className={'f-r'}>
                     <OnPage onChange={this.props.handleOnPage} options={[10, 50, 100]} />
