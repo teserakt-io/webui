@@ -23,9 +23,8 @@ class About extends React.Component<{}> {
                             support.
                     </li>
                     </ul>
-                    Detailed information about E4 is available on our <a
-                        href="https://e4.teserakt.io">documentation
-                    site</a>.
+                    More information about E4 is available on the <a
+                        href="https://teserakt.io/e4.html">product page</a> and <a href="https://teserakt.io/doc/teserakt-product.pdf">PDF brochure</a>.
                 </p>
                 <p>
                     For all enquiries, please contact us at <a
