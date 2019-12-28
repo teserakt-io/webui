@@ -32,6 +32,7 @@ class RulesTableProvider extends Component {
             this.props.store.domain.ae.rules.add(type, description, triggers, targets)
                 .then(() => {
                     NotificationManager.success(AppStrings.RULE_ADDED);
+                    this.handleRefresh();
                     this.forceUpdate();
                 }).catch((e) => {
                     NotificationManager.error(capitalize(e.response.data.message));
@@ -44,6 +45,8 @@ class RulesTableProvider extends Component {
                 }).catch((e) => {
                     NotificationManager.error(capitalize(e.response.data.message));
                 });
+
+            this.handleRefresh();
             this.forceUpdate();
         }
 
@@ -73,6 +76,10 @@ class RulesTableProvider extends Component {
         this.props.store.domain.ae.rules.setPage(page.selected);
     };
 
+    handleOnPage = (onPage) => {
+        this.props.store.domain.ae.rules.setOnPage(onPage);
+    };
+
     handleRefresh = () => {
         this.props.store.domain.ae.rules.load();
     };
@@ -88,7 +95,7 @@ class RulesTableProvider extends Component {
                 onPage={this.props.store.domain.ae.rules.onPage}
                 onPageChange={this.onPageChange}
                 currentPage={this.props.store.domain.ae.rules.page}
-                refresh={this.handleRefresh}
+                handleOnPage={this.handleOnPage}
             />
         );
     }

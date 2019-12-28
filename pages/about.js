@@ -10,7 +10,7 @@ class About extends React.Component<{}> {
                     console of <a href="https://teserakt.io/#e4">E4</a>,
                     Teserakt's IoT data protection solution.
                 </p>
-                <p>
+                <div>
 
                     E4 consists of the:
                     <ul>

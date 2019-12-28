@@ -3,7 +3,6 @@ import * as React from 'react'
 import ActionButtons from "../../ActionButtons/ActionButtons"
 import Button from '../../common/Buttons/Button/Button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../common/Table'
-import TopicNameForm from "../../Forms/TopicForm/TopicNameForm.js"
 import OnPage from "../../Pagination/OnPage"
 import Pagination from "../../Pagination/Pagination"
 import type { Topic } from '../../../state/domain/stores/Topics'
@@ -28,28 +27,24 @@ class TopicsTable extends React.Component<Props> {
                     onClick={this.props.openModal}>
                     Add topic
                 </Button>
-                <div className={'f-l mr-20'}>
-                    <TopicNameForm submit={this.props.removeTopic} submitText={'DELETE TOPIC'} />
-                </div>
-
                 <div className="f-r">
                     <OnPage onChange={this.props.handleOnPageChange} options={[10, 50, 100]} />
                 </div>
                 <Table>
                     <TableHead>
                         <TableRow border>
-                            <TableHeader small>#</TableHeader>
-                            <TableHeader>Topic</TableHeader>
-                            <TableHeader>Clients</TableHeader>
-                            <TableHeader small>Actions</TableHeader>
+                            <TableHeader style={{ width: '5%' }} center>#</TableHeader>
+                            <TableHeader medium>Topic</TableHeader>
+                            <TableHeader center>#Clients</TableHeader>
+                            <TableHeader small center>Actions</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.props.topics.length > 0 && this.props.topics.map((topic: Topic, index) => (
                             <TableRow key={index}>
-                                <TableCell label="#" small center>{offset + index + 1}</TableCell>
-                                <TableCell label="Topic">{topic}</TableCell>
-                                <TableCell label="Clients">{this.props.joinedClientsCounts[topic] || 0}</TableCell>
+                                <TableCell label="#" style={{ width: '5%' }} center>{offset + index + 1}</TableCell>
+                                <TableCell label="Topic" medium>{topic}</TableCell>
+                                <TableCell label="Clients" center>{this.props.joinedClientsCounts[topic] || 0}</TableCell>
                                 <TableCell label="Actions" small center>
                                     <ActionButtons
                                         edit={() => this.props.openModalClients(topic)}

@@ -24,13 +24,13 @@ const routes = {
         name: 'Automation',
         path: '/automation',
         iconType: 'fa',
-        icon: <FontAwesome name={'cogs'} size="2x" tag={'i'} />
+        icon: <FontAwesome fixedWidth={true} name={'cogs'} tag={'i'} />
     },
     about: {
         name: 'About',
         path: '/about',
         iconType: 'fa',
-        icon: <FontAwesome name={'question-circle-o'} size="2x" tag={'i'} />
+        icon: <FontAwesome fixedWidth={true} name={'question-circle-o'} tag={'i'} />
     }
 }
 
