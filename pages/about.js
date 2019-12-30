@@ -25,7 +25,7 @@ class About extends React.Component<{}> {
                     </ul>
                     More information about E4 is available on the <a
                         href="https://teserakt.io/e4.html">product page</a> and <a href="https://teserakt.io/doc/teserakt-product.pdf">PDF brochure</a>.
-                </p>
+                </div>
                 <p>
                     For all enquiries, please contact us at <a
                         href="mailto:contact@teserakt.io">contact@teserakt.io</a>.
@@ -35,7 +35,7 @@ class About extends React.Component<{}> {
                     You can create an MQTT client supporting E4 by
                     following the instructions in our <a
                         href="https://github.com/teserakt-io/e4go"> client software repository</a>.
-                The client must use the broker mqtt.demo.teserakt.io:1883, and
+            The client must use the broker mqtt.demo.teserakt.io:1883, and
                     must subscribe to its control topic (<code>e4/devicename</code>).
                 </p>
                 <p>
