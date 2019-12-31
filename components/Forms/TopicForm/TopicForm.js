@@ -1,9 +1,8 @@
 // @flow
-import * as React from 'react'
-import Button from '../../common/Buttons/Button/Button'
-import Input from '../../common/FormElements/Input/Input'
-import CustomSelect from '../../common/FormElements/Select/Select'
+import * as React from 'react';
 import * as validator from "validator";
+import Button from '../../common/Buttons/Button/Button';
+import Input from '../../common/FormElements/Input/Input';
 
 type Props = {
     cancel: Function,
@@ -65,9 +64,10 @@ class TopicForm extends React.Component<Props, State> {
                 <form className="modal__form">
                     <Input
                         id={TopicForm.formKeys.TOPIC}
+                        autoFocus={true}
                         placeholder="Topic"
                         label="Topic"
-                        onChange={this.updateField}/>
+                        onChange={this.updateField} />
                     <div className="btn-control">
                         <Button type={'button'} small secondary onClick={this.onCancel}>
                             Cancel

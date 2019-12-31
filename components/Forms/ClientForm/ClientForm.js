@@ -77,6 +77,7 @@ class ClientForm extends React.Component<Props, State> {
                 <form className="modal__form">
                     <Input
                         id={ClientForm.formKeys.CLIENT}
+                        autoFocus={true}
                         placeholder="Client"
                         label="Client"
                         onChange={this.updateField} />

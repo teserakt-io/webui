@@ -69,6 +69,7 @@ function TargetsTable(props: Props) {
                 />
                 {/* TODO: autocomplete clients / topics here ? */}
                 <Input id={'expression'}
+                    autoFocus={true}
                     onChange={props.onExpressionChange}
                     value={props.current.expr}
                     placeholder={'This field expects a valid ' + props.current.type.label.toLowerCase() + ' name'}

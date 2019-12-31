@@ -142,6 +142,7 @@ class RuleForm extends Component {
                     disabled={true} />
 
                 <Input label={'Description'}
+                    autoFocus={true}
                     id={RuleForm.formKeys.DESCRIPTION}
                     name={'description'}
                     value={this.ruleForm[RuleForm.formKeys.DESCRIPTION]}
