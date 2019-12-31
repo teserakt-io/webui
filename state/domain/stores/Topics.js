@@ -78,10 +78,7 @@ class Topics {
     @action
     async add(name) {
         await api.topics.post(name);
-
-        this.count++;
-        if (this.topics.length < this.onPage && !this.topics.includes(name))
-            this.topics.push(name);
+        await this.load()
 
         this.addLog("add_topic", { name: name });
     }
@@ -91,9 +88,9 @@ class Topics {
         await api.topics.delete(name);
         await this.load();
 
-        this.count--;
         if (this.topics.length === 0 && this.page !== 0)
             this.changePage(this.page - 1)
+
         this.addLog("remove_topic", { name: name })
     }
 
