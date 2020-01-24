@@ -36,7 +36,7 @@ function RulesTable(props: Props) {
             <Table className={'rules__table'}>
                 <TableHead>
                     <TableRow border>
-                        <TableHeader center style={{ width: '5%' }} center>#</TableHeader>
+                        <TableHeader center style={{ width: '8%' }} center>#</TableHeader>
                         <TableHeader small>Type</TableHeader>
                         <TableHeader style={{ width: '30%' }}>Description</TableHeader>
                         <TableHeader small>Last executed</TableHeader>
@@ -54,7 +54,7 @@ function RulesTable(props: Props) {
                         const action = Rule.types.find(r => r.value === rule.action).label;
                         return (
                             <TableRow key={rule.id}>
-                                <TableCell label={'#'} style={{ width: '5%' }} center>{rule.id}</TableCell>
+                                <TableCell label={'#'} style={{ width: '8%' }} center>{rule.id}</TableCell>
                                 <TableCell label={'Type'} small>{action}</TableCell>
                                 <TableCell label={'Description'} style={{ width: '30%' }}>
                                     {rule.description}

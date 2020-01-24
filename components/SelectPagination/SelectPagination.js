@@ -1,7 +1,7 @@
-import React from 'react';
 import MultiSelect from "@kenshooui/react-multi-select";
-require("@kenshooui/react-multi-select/dist/style.css");
+import React from 'react';
 import Pagination from "../Pagination/Pagination";
+require("@kenshooui/react-multi-select/dist/style.css");
 
 type Props = {
     count: number,
@@ -20,11 +20,12 @@ function SelectPagination(props: Props) {
     return (
         <React.Fragment>
             <MultiSelect
+                showSearch={false} // Search removed until backend support it
                 items={items}
                 selectedItems={props.value}
-                onChange={props.onSelect}/>
+                onChange={props.onSelect} />
             <Pagination count={props.count}
-                        onPageChange={props.onPageChange}/>
+                onPageChange={props.onPageChange} />
         </React.Fragment>
     );
 }

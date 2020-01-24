@@ -1,8 +1,8 @@
 //@flow
-import React, {Component} from 'react';
-import Input from "../../common/FormElements/Input/Input";
-import Button from "../../common/Buttons/Button/Button";
+import React, { Component } from 'react';
 import validator from "validator";
+import Button from "../../common/Buttons/Button/Button";
+import Input from "../../common/FormElements/Input/Input";
 
 type Props = {
     submit: Function,
@@ -42,7 +42,7 @@ class ClientNameForm extends Component<Props, State> {
     render() {
         return (
             <React.Fragment>
-                <Input onChange={this.updateField} id={ClientNameForm.formKeys.NAME} inline={true}/>
+                <Input autoFocus={true} onChange={this.updateField} id={ClientNameForm.formKeys.NAME} inline={true} />
                 <Button disabled={!this.isValid()} onClick={this.onSubmit} medium={true} className={'ml-20'}>
                     {this.props.submitText || 'DELETE CLIENT'}
                 </Button>

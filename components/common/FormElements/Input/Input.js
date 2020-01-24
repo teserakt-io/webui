@@ -12,6 +12,7 @@ type Props = {
     error?: string,
     inline?: boolean,
     disabled?: boolean,
+    autoFocus?: boolean,
     onChange: Function,
     autogen: Function,
 
@@ -41,6 +42,7 @@ class Input extends React.Component<Props> {
                     }
                 </label>}
                 <input
+                    autoFocus={this.props.autoFocus}
                     id={this.props.id}
                     className="input__elem"
                     placeholder={this.props.placeholder}

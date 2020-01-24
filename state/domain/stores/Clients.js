@@ -71,17 +71,14 @@ class Clients {
     @action
     async add(name, key) {
         await api.clients.post(name, key);
-
-        this.count++;
-        if (this.clients.length < this.onPage && !this.clients.includes(name))
-            this.clients.push(name);
+        await this.load();
 
         this.addLog("add_client", { name: name });
     }
 
     @action
     async reset(client) {
-        const { data } = api.clients.put(client);
+        api.clients.put(client);
     }
 
     @action
@@ -89,7 +86,6 @@ class Clients {
         await api.clients.delete(name);
         await this.load();
 
-        this.count--;
         if (this.clients.length === 0 && this.page !== 0)
             this.changePage(this.page - 1)
 
