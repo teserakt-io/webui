@@ -3,7 +3,12 @@
 ## Development
 
 ```
+# Create config
 cp .env.example .env
+
+# Generate certs
+openssl req -nodes -newkey rsa:2048 -keyout certs/webui-key.pem -x509 -sha256 -days 365 -out certs/webui-cert.pem -subj "/CN=localhost" -addext "subjectAltName = 'IP:127.0.0.1'"
+
 npm install
 npm run dev
 ```
