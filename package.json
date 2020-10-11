@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:Teserakt/e4/webui.git"
+    "url": "git+ssh://git@github.com:teserakt-io/webui.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://gitlab.com/Teserakt/e4/webui/blob/master/README.md",
+  "homepage": "https://github.com/teserakt-io/webui",
   "dependencies": {
     "@kenshooui/react-multi-select": "^1.1.5",
     "@zeit/next-css": "^1.0.1",
